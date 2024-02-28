@@ -223,3 +223,39 @@ ggsave(
   filename = "output/aula-3-histograma_densidade_provas.png",
   plot = histograma_densidade_provas
 )
+
+
+
+# Calculando outras medidas descritivas:-------------------------------------
+# amplitude
+# coeficiente de variacao
+# coeficiente de dispersao relativa
+
+descritiva_varias_provas_pt2 <- descritiva_varias_provas |>
+  mutate(
+    amplitude = max - min,
+    coeficiente_variacao = (desvio_padrao / media),
+    coeficiente_variacao_perc = scales::percent(coeficiente_variacao),
+    coeficiente_dispersao_relativa = desvio_padrao / (amplitude / 2),
+    coeficiente_dispersao_relativa_perc =
+      scales::percent(coeficiente_dispersao_relativa)
+  ) 
+
+View(descritiva_varias_provas_pt2)
+
+
+# Boxplot
+
+boxplot_notas <- dados_cfa_longo |> 
+  ggplot() +
+  aes(x = prova, y = nota) +
+  geom_boxplot(fill = "lightblue") +
+  theme_light() +
+  labs(title = "Distribuição das notas das provas",
+       x = "Prova",
+       y = "Nota")
+
+ggsave(
+  filename = "output/aula-3-boxplot_notas.png",
+  plot = boxplot_notas
+)
