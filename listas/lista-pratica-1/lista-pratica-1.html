@@ -80,7 +80,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#exercício-1" id="toc-exercício-1" class="nav-link active" data-scroll-target="#exercício-1">Exercício 1</a></li>
+  <li><a href="#instruções" id="toc-instruções" class="nav-link active" data-scroll-target="#instruções">Instruções:</a></li>
+  <li><a href="#exercício-1" id="toc-exercício-1" class="nav-link" data-scroll-target="#exercício-1">Exercício 1</a></li>
   <li><a href="#exercício-2" id="toc-exercício-2" class="nav-link" data-scroll-target="#exercício-2">Exercício 2</a>
   <ul class="collapse">
   <li><a href="#estado-civil" id="toc-estado-civil" class="nav-link" data-scroll-target="#estado-civil">Estado Civil</a></li>
@@ -101,6 +102,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#chi-quadrado-com-o-pacote-infer" id="toc-chi-quadrado-com-o-pacote-infer" class="nav-link" data-scroll-target="#chi-quadrado-com-o-pacote-infer">Chi-quadrado com o pacote infer</a></li>
   <li><a href="#teste-exato-de-fisher" id="toc-teste-exato-de-fisher" class="nav-link" data-scroll-target="#teste-exato-de-fisher">Teste exato de Fisher</a></li>
   </ul></li>
+  <li><a href="#exercício-7" id="toc-exercício-7" class="nav-link" data-scroll-target="#exercício-7">Exercício 7</a></li>
+  <li><a href="#exercício-8" id="toc-exercício-8" class="nav-link" data-scroll-target="#exercício-8">Exercício 8</a></li>
+  <li><a href="#exercício-9" id="toc-exercício-9" class="nav-link" data-scroll-target="#exercício-9">Exercício 9</a></li>
   </ul>
 </nav>
 </div>
@@ -132,6 +136,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="instruções" class="level2">
+<h2 class="anchored" data-anchor-id="instruções">Instruções:</h2>
 <p>A tabela <code>lista de exercícios.sta</code> apresenta os dados de 36 trabalhadores de uma empresa.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregando pacotes</span></span>
@@ -142,9 +148,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregando os dados</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"dados.sav"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Observações:</p>
+<p>1- Verifique a normalidade das variáveis antes de escolher o teste. Justifique a escolha de cada um dos testes que você for utilizar.</p>
+<p>2- Não se esqueça de dizer quais são as variáveis dependentes e independentes para cada teste.</p>
+</section>
 <section id="exercício-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercício-1">Exercício 1</h2>
 <p><strong>Descreva cada uma das variáveis presentes no banco de dados. Qual o nível de mensuração de cada uma delas?</strong></p>
+<p>A tabela apresenta os dados de 36 trabalhadores de uma empresa.</p>
 <p>Um pouco sobre a base dos dados:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dados)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -368,7 +379,19 @@ $ SAL_RIO2 &lt;dbl&gt; 6.86, 7.39, 7.59, 7.44, 8.12, 4.00, 6.66, 6.86, 7.39, 7.5
 <section id="exercício-4" class="level2">
 <h2 class="anchored" data-anchor-id="exercício-4">Exercício 4</h2>
 <p><strong>Compare, estatisticamente (α=5%), se há diferenças na distribuição de número de filhos e na idade média em função das regiões de origem dos trabalhadores.</strong></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>FAZER!</p>
+</div>
+</div>
 </section>
 <section id="exercício-5" class="level2">
 <h2 class="anchored" data-anchor-id="exercício-5">Exercício 5</h2>
@@ -550,6 +573,222 @@ $ SAL_RIO2 &lt;dbl&gt; 6.86, 7.39, 7.59, 7.44, 8.12, 4.00, 6.66, 6.86, 7.39, 7.5
 </div>
 <p>Neste caso, o valor-p também foi maior que 5%. Não encontramos associação entre estado civil e grau de escolaridade.</p>
 </section>
+</section>
+<section id="exercício-7" class="level2">
+<h2 class="anchored" data-anchor-id="exercício-7">Exercício 7</h2>
+<p><strong>Segundo dados do IBGE, a média da idade da população de SP é de 31 anos. A amostra apresentada possui diferença significativa na média da idade em relação à estimativa média populacional?</strong></p>
+<p>Nesse caso, podemos fazer o intervalo de confiança para a média de idade dos trabalhadores, e comparar com a média de idade da população de SP.</p>
+<p>O histograma dos dados de idade me dá pistas de que considerar a distribuição como normal é uma aproximação aceitável.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>media_idade <span class="ot">&lt;-</span> <span class="fu">mean</span>(dados<span class="sc">$</span>IDADE)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>dados <span class="sc">|&gt;</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> IDADE) <span class="sc">+</span> </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribuição da idade dos trabalhadores"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Idade"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Número de trabalhadores"</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Precisamos calcular o intervalo de confiança. Fiz primeiro à mão, e depois em R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quandas pessoas temos na base?</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>quantidade_pessoas <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dados)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Qual é a média da idade?</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>media_idade <span class="ot">&lt;-</span> <span class="fu">mean</span>(dados<span class="sc">$</span>IDADE)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Qual é o desvio padrão da idade?</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>sd_idade <span class="ot">&lt;-</span> <span class="fu">sd</span>(dados<span class="sc">$</span>IDADE)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>valor_z <span class="ot">&lt;-</span> <span class="fl">1.96</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>erro <span class="ot">&lt;-</span> valor_z <span class="sc">*</span> sd_idade <span class="sc">/</span> <span class="fu">sqrt</span>(quantidade_pessoas)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>ic_idade <span class="ot">&lt;-</span> <span class="fu">c</span>(media_idade <span class="sc">-</span> erro, media_idade <span class="sc">+</span> erro)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>ic_idade</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 32.38244 36.78422</code></pre>
+</div>
+</div>
+<p>Ao comparar o intervalo de confiança e a média de idade da população de São Paulo, percebemos que a diferença é significativa, pois a média da idade da população de São Paulo (31 anos) está fora do intervalo de confiança para a média da idade dos trabalhadores (arredondando, aprox entre 32 e 37 anos).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">grupo =</span> <span class="fu">c</span>(<span class="st">"Trabalhadores"</span>, <span class="st">"População de SP"</span>),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">idade_media =</span> <span class="fu">c</span>(media_idade, <span class="dv">31</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> grupo, <span class="at">y =</span> idade_media) <span class="sc">+</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">"Trabalhadores"</span>, <span class="at">ymin =</span> ic_idade[<span class="dv">1</span>], <span class="at">ymax =</span> ic_idade[<span class="dv">2</span>]), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">40</span>)) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercício-8" class="level2">
+<h2 class="anchored" data-anchor-id="exercício-8">Exercício 8</h2>
+<p><strong>O salário desta amostra foi medido em três anos seguidos (06,07 e 08). Houve diferença entre o salário ao longo do tempo? (α=5%).</strong></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pensar em como fazer!</p>
+</div>
+</div>
+<p>Primeiro, podemos deixar os dados no formato “longo” para facilitar a visualização.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>salario_tempo <span class="ot">&lt;-</span> dados <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rowid_to_column</span>(<span class="at">var =</span> <span class="st">"id_pessoa"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id_pessoa, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">salario_06 =</span> SAL_RIO,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">salario_07 =</span> SAL_RIO1,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">salario_08 =</span> SAL_RIO2) <span class="sc">|&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"salario_06"</span>, <span class="st">"salario_07"</span>, <span class="st">"salario_08"</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Visualizando a distribuição do salário nos 3 momentos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>salario_tempo <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> value) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercício-9" class="level2">
+<h2 class="anchored" data-anchor-id="exercício-9">Exercício 9</h2>
+<p><strong>Observe à variável “Número de filhos”. Calcule o escore z para cada uma dos participantes da amostra. Quais participantes podem ser considerados outliers para a amostra número de filhos?</strong></p>
+<p>A lógica do z-score é pensar: quantos desvios padrão de distância um valor encontrado está da média?</p>
+<p>Um valor absoluto de escore z igual ou maior que 3 indicaria que um valor pode ser considerado um outlier.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dados_z_score <span class="ot">&lt;-</span> dados <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">numero_filhos =</span> N_MERO_D) <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">media_numero_filhos =</span> <span class="fu">mean</span>(numero_filhos),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_numero_filhos =</span> <span class="fu">sd</span>(numero_filhos),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">z_score_numero_filhos =</span> (numero_filhos <span class="sc">-</span> media_numero_filhos) <span class="sc">/</span> sd_numero_filhos,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_z_score_numero_filhos =</span> <span class="fu">abs</span>(z_score_numero_filhos)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Calculado o escore z, o trabalhador da linha 29 apresenta 5 filhos, e um z_score maior que 3.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>outliers_filhos <span class="ot">&lt;-</span> dados_z_score <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(abs_z_score_numero_filhos  <span class="sc">&gt;=</span> <span class="dv">3</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>outliers_filhos <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 13%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">rowid</th>
+<th style="text-align: left;">ESTADO_C</th>
+<th style="text-align: left;">GRAU_DE</th>
+<th style="text-align: right;">numero_filhos</th>
+<th style="text-align: right;">SAL_RIO</th>
+<th style="text-align: right;">IDADE</th>
+<th style="text-align: left;">ORIGEM</th>
+<th style="text-align: right;">SAL_RIO1</th>
+<th style="text-align: right;">SAL_RIO2</th>
+<th style="text-align: right;">media_numero_filhos</th>
+<th style="text-align: right;">sd_numero_filhos</th>
+<th style="text-align: right;">z_score_numero_filhos</th>
+<th style="text-align: right;">abs_z_score_numero_filhos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">Casado</td>
+<td style="text-align: left;">2o. Grau</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">14.71</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">interior</td>
+<td style="text-align: right;">4.56</td>
+<td style="text-align: right;">17.26</td>
+<td style="text-align: right;">0.9166667</td>
+<td style="text-align: right;">1.250714</td>
+<td style="text-align: right;">3.264802</td>
+<td style="text-align: right;">3.264802</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Visualização:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>numero_filhos_outlier <span class="ot">&lt;-</span> <span class="fu">unique</span>(outliers_filhos<span class="sc">$</span>numero_filhos)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>dados_z_score <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(numero_filhos) <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> numero_filhos, <span class="at">y =</span> n) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">y =</span> <span class="dv">2</span>, <span class="at">x =</span> numero_filhos_outlier, <span class="at">label =</span> <span class="st">"Outlier"</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  gghighlight<span class="sc">::</span><span class="fu">gghighlight</span>(numero_filhos <span class="sc">%in%</span> numero_filhos_outlier) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">max</span>(dados<span class="sc">$</span>N_MERO_D))) <span class="sc">+</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Número de filhos"</span>,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frequência"</span>,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Quantidade de filhos por trabalhador"</span>,</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Existe algum outlier?"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 
 </main>

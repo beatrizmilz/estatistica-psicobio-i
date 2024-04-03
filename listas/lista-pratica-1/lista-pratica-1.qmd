@@ -13,6 +13,8 @@ knitr:
 toc: true
 ---
 
+## Instruções: 
+
 A tabela `lista de exercícios.sta` apresenta os dados de 36 trabalhadores de uma empresa.
 
 ```{r}
@@ -25,6 +27,13 @@ library(tidyverse)
 # Carregando os dados
 dados <- haven::read_sav("dados.sav") 
 ```
+
+Observações:
+
+1-      Verifique a normalidade das variáveis antes de escolher o teste. Justifique a escolha de cada um dos testes que você for utilizar.
+
+2-      Não se esqueça de dizer quais são as variáveis dependentes e independentes para cada teste.
+
 
 ## Exercício 1
 
@@ -154,7 +163,10 @@ dados |>
 
 **Compare, estatisticamente (α=5%), se há diferenças na distribuição de número de filhos e na idade média em função das regiões de origem dos trabalhadores.**
 
+
+:::{.callout-important}
 FAZER!
+:::
 
 ## Exercício 5
 
@@ -262,5 +274,154 @@ fisher.test(dados_ec_ge) |>
 ```
 
 Neste caso, o valor-p também foi maior que 5%.  Não encontramos associação entre estado civil e grau de escolaridade.
+
+
+## Exercício 7
+
+**Segundo dados do IBGE, a média da idade da população de SP é de 31 anos. A amostra apresentada possui diferença significativa na média da idade em relação à estimativa média populacional?**
+
+
+Nesse caso, podemos fazer o intervalo de confiança para a média de idade dos trabalhadores, e comparar com a média de idade da população de SP.
+
+
+O histograma dos dados de idade me dá pistas de que considerar a distribuição como normal é uma aproximação aceitável.
+
+```{r}
+media_idade <- mean(dados$IDADE)
+
+dados |> 
+  ggplot() +
+  aes(x = IDADE) + 
+  geom_histogram(binwidth = 5, color = "black", fill = "lightblue") +
+  theme_light() +
+  labs(
+    title = "Distribuição da idade dos trabalhadores",
+    x = "Idade",
+    y = "Número de trabalhadores"
+  )
+```
+
+Precisamos calcular o intervalo de confiança. Fiz primeiro à mão, e depois em R.
+
+```{r}
+# Quandas pessoas temos na base?
+quantidade_pessoas <- nrow(dados)
+
+# Qual é a média da idade?
+media_idade <- mean(dados$IDADE)
+
+# Qual é o desvio padrão da idade?
+sd_idade <- sd(dados$IDADE)
+
+valor_z <- 1.96
+
+
+erro <- valor_z * sd_idade / sqrt(quantidade_pessoas)
+
+ic_idade <- c(media_idade - erro, media_idade + erro)
+
+ic_idade
+
+```
+
+
+Ao comparar o intervalo de confiança e a média de idade da população de São Paulo, percebemos que a diferença é significativa, pois a média da idade da população de São Paulo (31 anos) está fora do intervalo de confiança para a média da idade dos trabalhadores (arredondando, aprox entre 32 e 37 anos).
+
+
+
+```{r}
+tibble(
+  grupo = c("Trabalhadores", "População de SP"),
+  idade_media = c(media_idade, 31)
+) |> 
+  ggplot() +
+  aes(x = grupo, y = idade_media) + 
+  geom_errorbar(aes(x = "Trabalhadores", ymin = ic_idade[1], ymax = ic_idade[2]), width = 0.2) +
+  geom_point() + 
+    theme_light() +
+  scale_y_continuous(limits = c(30, 40)) 
+```
+
+## Exercício 8
+
+**O salário desta amostra foi medido em três anos seguidos (06,07 e 08). Houve diferença entre o salário ao longo do tempo? (α=5%).**
+
+
+:::{.callout-important}
+Pensar em como fazer!
+:::
+
+Primeiro, podemos deixar os dados no formato "longo" para facilitar a visualização.
+
+```{r}
+salario_tempo <- dados |>
+  tibble::rowid_to_column(var = "id_pessoa") |>
+  select(id_pessoa, 
+         salario_06 = SAL_RIO,
+         salario_07 = SAL_RIO1,
+         salario_08 = SAL_RIO2) |>
+  pivot_longer(cols = c("salario_06", "salario_07", "salario_08"))
+```
+
+
+Visualizando a distribuição do salário nos 3 momentos:
+
+```{r}
+salario_tempo |> 
+  ggplot() +
+  aes(x = value) +
+  geom_histogram(binwidth = 5, color = "black", fill = "lightblue") +
+  facet_wrap(~name, ncol = 1) +
+  theme_light()
+```
+
+## Exercício 9
+
+**Observe à variável “Número de filhos”. Calcule o escore z para cada uma dos participantes da amostra. Quais participantes podem ser considerados outliers para a amostra número de filhos?**
+
+A lógica do z-score é pensar: quantos desvios padrão de distância um valor encontrado está da média?
+
+Um valor absoluto de escore z igual ou maior que 3 indicaria que um valor pode ser considerado um outlier.
+
+```{r}
+dados_z_score <- dados |>
+  rowid_to_column() |>
+  rename(numero_filhos = N_MERO_D) |>
+  dplyr::mutate(
+    media_numero_filhos = mean(numero_filhos),
+    sd_numero_filhos = sd(numero_filhos),
+    z_score_numero_filhos = (numero_filhos - media_numero_filhos) / sd_numero_filhos,
+    abs_z_score_numero_filhos = abs(z_score_numero_filhos)
+  )
+```
+Calculado o escore z, o trabalhador da linha 29 apresenta 5 filhos, e um z_score maior que 3.
+
+```{r}
+outliers_filhos <- dados_z_score |>
+  dplyr::filter(abs_z_score_numero_filhos  >= 3)
+
+outliers_filhos |>
+  knitr::kable()
+```
+
+Visualização: 
+
+```{r}
+numero_filhos_outlier <- unique(outliers_filhos$numero_filhos)
+
+dados_z_score |>
+  dplyr::count(numero_filhos) |>
+  ggplot() +
+  aes(x = numero_filhos, y = n) +
+  geom_col(color = "black", fill = "lightblue") +
+  geom_text(y = 2, x = numero_filhos_outlier, label = "Outlier") +
+  gghighlight::gghighlight(numero_filhos %in% numero_filhos_outlier) +
+  scale_x_continuous(breaks = seq(0, max(dados$N_MERO_D))) +
+  theme_light() +
+  labs(x = "Número de filhos",
+       y = "Frequência",
+       title = "Quantidade de filhos por trabalhador",
+       subtitle = "Existe algum outlier?")
+```
 
 
