@@ -43,6 +43,7 @@ dados |>
     y = "Número de trabalhadores"
   )
 
+# Idade
 
 dados |> 
   group_by(ESTADO_C) |> 
@@ -70,6 +71,7 @@ dados |>
     y = "Número de trabalhadores"
   )
 
+# -----
 
 idade_minima_ic = 32
 idade_maxima_ic = 37

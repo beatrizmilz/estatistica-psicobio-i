@@ -1,0 +1,266 @@
+---
+title: "Lista Prática 1"
+subtitle: "Análise de Dados aplicados a Psicobiologia"
+format: html
+editor: visual
+lang: pt
+author: "Beatriz Milz"
+knitr:
+  opts_chunk: 
+    message: false
+    warning: false
+    echo: true
+toc: true
+---
+
+A tabela `lista de exercícios.sta` apresenta os dados de 36 trabalhadores de uma empresa.
+
+```{r}
+# Carregando pacotes
+library(haven)
+library(tidyverse)
+```
+
+```{r}
+# Carregando os dados
+dados <- haven::read_sav("dados.sav") 
+```
+
+## Exercício 1
+
+**Descreva cada uma das variáveis presentes no banco de dados. Qual o nível de mensuração de cada uma delas?**
+
+A tabela apresenta os dados de 36 trabalhadores de uma empresa.
+
+Um pouco sobre a base dos dados:
+
+```{r}
+glimpse(dados)
+```
+
+"**ESTADO_C**" - Variável que representa o estado civil da pessoa. Neste caso, as categorias presentes são: Casado, Solteiro. É uma variável qualitativa categórica nominal (apresenta categorias, mas sem uma ordem definida). 
+
+"**GRAU_DE**" - Variável que representa o grau de instrução da pessoa. Apresenta as seguintes categorias: 1o. Grau,  2o. Grau e Superior. É uma variável qualitativa categórica ordinal (apresenta categorias, e essas categorias apresentam uma ordem: as pessoas primeiramente cursam o primeiro grau, depois o segundo grau, e depois o ensino superior).
+
+"**N_MERO_D**" - Variável que representa uma contagem, que varia entre 0 e 5, portanto é uma variável quantitativa discreta. Apesar do nome não deixar claro o que a variável representa, caso fosse necessário realizar um "chute", seria que a variável representa o número de filhos que essa pessoa tem (existe apenas 1 pessoa com 5 filhos e essa pessoa tem 40 anos, o mais comum é não ter filhos, etc.).
+
+"**SAL_RIO**" -  Variável quantitativa contínua, que representa o salário da pessoa. Os valores estão entre 4.0 e 23.3. Provavelmente é o valor do salário por hora.
+
+"**IDADE**" - Variável que representa a idade da pessoa, apresentando idades entre 20 e 48 anos. É uma variável quantitativa discreta, pois apenas apresenta números inteiros.
+
+"**ORIGEM**" - Variável qualitativa categórica nominal que apresenta a região de origem da pessoa, baseada nas seguintes categorias: capital, interior, outros.
+
+"**SAL_RIO1**" - Variável quantitativa contínua que apresenta o valor do salário, mas como já existe uma variável "SAL_RIO", não ficou claro para mim sobre qual salário se refere. Os valores apresentados estão entre 2.5 e 23.3. O exercício 8 aponta que essas variáveis sobre salário se referem ao salário em 3 anos seguidos:  **SAL_RIO (**06), **SAL_RIO1 (**07) e **SAL_RIO2 (**08). 
+
+"**SAL_RIO2**" - Variável quantitativa contínua que apresenta o valor do salário, mas como já existe uma variável "SAL_RIO", não ficou claro para mim sobre qual salário se refere. Os valores apresentados estão entre 2 e 44.  O exercício 8 aponta que essas variáveis sobre salário se referem ao salário em 3 anos seguidos:  **SAL_RIO (**06), **SAL_RIO1 (**07) e **SAL_RIO2 (**08).
+
+## Exercício 2
+
+**Construa tabelas de freqüências para os dados referentes ao grau de instrução, estado civil e região de origem.**
+
+```{r}
+criar_tabela_frequencia <- function(dados, variavel){
+  
+  # Coisa horrorosa! Melhorar isso, Beatriz
+  Categoria <- dados[[variavel]]
+  
+  
+  janitor::tabyl(Categoria) |>
+    mutate(percent = scales::percent(percent)) |> 
+    rename("Frequência Absoluta" = n,
+            "Frequência Relativa" = percent) |> 
+  knitr::kable()  
+    
+}
+```
+
+### Estado Civil
+
+```{r}
+criar_tabela_frequencia(dados, "ESTADO_C") 
+```
+
+### Grau de escolaridade
+
+```{r}
+criar_tabela_frequencia(dados, "GRAU_DE") 
+```
+
+### Região de origem
+
+```{r}
+criar_tabela_frequencia(dados, "ORIGEM") 
+```
+
+## Exercício 3
+
+**Represente graficamente estas tabelas (utilizando pelo menos 2 tipos diferentes de gráficos)**
+
+### Estado Civil
+
+```{r}
+dados |>
+  rename(VAR = ESTADO_C) |> 
+  count(VAR) |>
+  mutate(
+    VAR_PORC = (n / sum(n)),
+    VAR_PORC_100 = scales::percent(VAR_PORC),
+    VAR_TEXTO = paste0(stringr::str_to_title(VAR), " - ", VAR_PORC_100)
+  ) |>
+  ggplot() +
+  geom_bar(aes(x = "", y = VAR_PORC, fill = VAR_TEXTO),
+           stat = "identity",
+           width = 1) +
+  coord_polar(theta = "y") +
+  theme_void() +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Trabalhadores por Estado Civil",
+       fill = "Estado Civil")
+```
+
+### Grau de escolaridade
+
+```{r}
+dados |> 
+  ggplot() +
+  aes(x = GRAU_DE, fill = GRAU_DE) + 
+  geom_bar(show.legend = FALSE) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_light() +
+  labs(
+    title = "Trabalhadores por Grau de escolaridade",
+    x = "Grau de escolaridade",
+    y = "Número de trabalhadores"
+  )
+```
+
+### Região de origem
+
+```{r}
+dados |> 
+  ggplot() +
+  aes(x = ORIGEM, fill = ORIGEM) + 
+  geom_bar(show.legend = FALSE) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_light() +
+  labs(
+    title = "Trabalhadores por região de origem",
+    x = "Região de origem",
+    y = "Número de trabalhadores"
+  )
+```
+
+## Exercício 4
+
+**Compare, estatisticamente (α=5%), se há diferenças na distribuição de número de filhos e na idade média em função das regiões de origem dos trabalhadores.**
+
+FAZER!
+
+## Exercício 5
+
+**Calcule o salário médio e a idade média dos solteiros e dos casados.**
+
+```{r}
+tab_ex_5 <- dados |> 
+  group_by(ESTADO_C) |> 
+  summarise(
+    media_salario = round(mean(SAL_RIO), 2),
+    media_idade = round(mean(IDADE), 0)
+  )
+
+tab_ex_5 |> 
+  knitr::kable()
+```
+
+Salário médio:
+
+-   Solteiros: 9,87
+
+-   Casados: 12,1
+
+Idade média:
+
+-   Solteiros: aproximadamente 34 anos (33,9)
+
+-   Casados: aproximadamente 35 anos (35,2)
+
+
+## Exercício 6
+
+**Verifique a associação entre estado civil e grau de instrução. É possível dizer que existe associação significante entre estado civil e grau de instrução (α=5%)?**
+
+Primeiro, visualizando os dados: 
+
+```{r}
+dados |>
+  ggplot() +
+  aes(fill = ESTADO_C, x = GRAU_DE) +
+  geom_bar(position = "fill") +
+  scale_fill_brewer(palette = "Set2") +
+  theme_light() +
+  labs(
+    x = "Grau de escolaridade",
+    fill = "Estado Civil",
+    y = "Proporção"
+  )
+```
+
+Temos 2 variáveis categóricas. Para verificar associação, precisamos usar o teste Qui-quadrado. 
+
+### Pressupostos do Qui-quadrado
+
+Verificando se não tem nenhuma casela com 0 elementos:
+
+```{r}
+janitor::tabyl(dados, GRAU_DE, ESTADO_C) |> 
+  knitr::kable()
+```
+
+
+Verificando se temos pelo menos 4 elementos por casela: Nesse caso, não! Tem duas caselas com 3 indivíduos. Nesse caso, podemos usar o teste exato de fisher.
+
+Vou testar com os dois e ver se o resultado é diferente.
+
+### Chi-quadrado com o pacote infer
+
+Modo rápido: usando o pacote [infer](https://infer.netlify.app/)
+
+Referências: 
+
+- <https://infer.netlify.app/articles/chi_squared>
+
+- <https://www.tmwr.org/inferential>
+
+
+```{r}
+library(infer)
+```
+
+
+```{r}
+resultado <- chisq_test(dados, formula = ESTADO_C ~ GRAU_DE) 
+
+resultado |> knitr::kable()
+```
+
+O valor-p é maior que 5%, portanto não é significativo. Não encontramos associação entre estado civil e grau de escolaridade.
+
+
+### Teste exato de Fisher
+
+Pelo que entendi, esse teste é mais "conservador" que o Qui-quadrado. Portanto, se no Qui-quadrado deu "não significativo", acredito que aqui a resposta será igual.
+
+```{r}
+# preparando a tabela para o teste
+dados_ec_ge <- janitor::tabyl(dados, GRAU_DE, ESTADO_C) |> 
+  tibble::column_to_rownames("GRAU_DE")
+
+# Executando o teste
+fisher.test(dados_ec_ge) |> 
+  broom::tidy() |> 
+  knitr::kable()
+```
+
+Neste caso, o valor-p também foi maior que 5%.  Não encontramos associação entre estado civil e grau de escolaridade.
+
+
