@@ -13,7 +13,7 @@ knitr:
 toc: true
 ---
 
-## Instruções: 
+## Instruções 
 
 A tabela `lista de exercícios.sta` apresenta os dados de 36 trabalhadores de uma empresa.
 
@@ -34,6 +34,8 @@ Observações:
 
 2-      Não se esqueça de dizer quais são as variáveis dependentes e independentes para cada teste.
 
+
+# Exercícios de estatística descritiva
 
 ## Exercício 1
 
@@ -195,6 +197,8 @@ Idade média:
 -   Solteiros: aproximadamente 34 anos (33,9)
 
 -   Casados: aproximadamente 35 anos (35,2)
+
+# Exercícios com testes estatísticos
 
 
 ## Exercício 6
@@ -374,6 +378,7 @@ salario_tempo |>
   facet_wrap(~name, ncol = 1) +
   theme_light()
 ```
+# Exercícios de análise de outlier
 
 ## Exercício 9
 
