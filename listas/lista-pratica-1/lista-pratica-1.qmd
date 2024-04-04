@@ -25,6 +25,7 @@ library(tidyverse)
 
 ```{r}
 # Carregando os dados
+# Renomeei os dados para: dados.sav
 dados <- haven::read_sav("dados.sav") 
 ```
 
@@ -161,51 +162,113 @@ dados |>
   )
 ```
 
-## Exercício 4
-
-**Compare, estatisticamente (α=5%), se há diferenças na distribuição de número de filhos e na idade média em função das regiões de origem dos trabalhadores.**
-
-
-:::{.callout-important}
-FAZER!
-:::
-
 ## Exercício 5
 
 **Calcule o salário médio e a idade média dos solteiros e dos casados.**
 
+### Idade média por estado Civil
+
 ```{r}
-tab_ex_5 <- dados |> 
+dados |> 
   group_by(ESTADO_C) |> 
   summarise(
-    media_salario = round(mean(SAL_RIO), 2),
     media_idade = round(mean(IDADE), 0)
-  )
-
-tab_ex_5 |> 
-  knitr::kable()
+  ) |> 
+  knitr::kable(col.names = c("Estado civil", "Idade média"))
 ```
-
-Salário médio:
-
--   Solteiros: 9,87
-
--   Casados: 12,1
-
 Idade média:
 
 -   Solteiros: aproximadamente 34 anos (33,9)
 
 -   Casados: aproximadamente 35 anos (35,2)
 
+
+### Salário médio por estado civil
+
+Aqui fiquei com dúvida sobre o que era esperado, pois existem 3 colunas que apresentam dados de salário (ver exercício 8).
+
+Primeiro calculei a média do salário geral (considerando os 3 anos):
+
+```{r}
+media_salario_geral <- dados |>
+  select(ESTADO_C, SAL_RIO, SAL_RIO1, SAL_RIO2) |>
+  pivot_longer(cols = starts_with("SAL"),
+               names_to = "variavel",
+               values_to = "salario") |>
+  group_by(ESTADO_C) |>
+  summarise(media_geral_salario = round(mean(salario), 1))
+```
+
+
+Depois calculei a média dos salários considerando o ano:
+
+```{r}
+media_salario <- dados |> 
+  group_by(ESTADO_C) |> 
+  summarise(
+    media_salario_ano_06 = round(mean(SAL_RIO), 1),
+    media_salario_ano_07 = round(mean(SAL_RIO1), 1),
+    media_salario_ano_08 = round(mean(SAL_RIO2), 1),    
+  ) 
+```
+
+E uni as duas tabelas:
+
+```{r}
+media_salario_geral |> 
+  left_join(media_salario) |> 
+  knitr::kable()
+```
+
+Essas variáveis vão ser abordadas posteriormente, no exercício 8.
+
+
+
+Salário médio - considerando os 3 anos:
+
+-   Solteiros: 9,7
+
+-   Casados: 11,8
+
+
+
 # Exercícios com testes estatísticos
 
+## Exercício 4
+
+**Compare, estatisticamente (α=5%), se há diferenças na distribuição de número de filhos e na idade média em função das regiões de origem dos trabalhadores.**
+
+
+
+###  Número de filhos em função da região de origem
+
+
+Variável independente: Região de origem - Categórica
+
+Variável dependente: Número de filhos - Numérica
+
+:::{.callout-important}
+FAZER!
+:::
+
+
+### Idade média em função da região de origem
+
+
+Variável independente: Região de origem - Categórica
+
+Variável dependente: Idade - Numérica
+
+
+:::{.callout-important}
+FAZER!
+:::
 
 ## Exercício 6
 
 **Verifique a associação entre estado civil e grau de instrução. É possível dizer que existe associação significante entre estado civil e grau de instrução (α=5%)?**
 
-Primeiro, visualizando os dados: 
+Primeiro, visualizando os dados: não tem nada que me chame muita atenção. Vamos seguindo.
 
 ```{r}
 dados |>
@@ -222,6 +285,8 @@ dados |>
 ```
 
 Temos 2 variáveis categóricas. Para verificar associação, precisamos usar o teste Qui-quadrado. 
+
+Nesse caso, não existe variável dependente e independente.
 
 ### Pressupostos do Qui-quadrado
 
@@ -287,12 +352,11 @@ Neste caso, o valor-p também foi maior que 5%.  Não encontramos associação e
 
 Nesse caso, podemos fazer o intervalo de confiança para a média de idade dos trabalhadores, e comparar com a média de idade da população de SP.
 
+### Normalidade
 
 O histograma dos dados de idade me dá pistas de que considerar a distribuição como normal é uma aproximação aceitável.
 
 ```{r}
-media_idade <- mean(dados$IDADE)
-
 dados |> 
   ggplot() +
   aes(x = IDADE) + 
@@ -304,6 +368,19 @@ dados |>
     y = "Número de trabalhadores"
   )
 ```
+
+
+Podemos também testar a normalidade com o teste de Shapiro-Wilk:
+
+```{r}
+shapiro.test(dados$IDADE) |> 
+  broom::tidy() |> 
+  knitr::kable()
+```
+A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 95%. Com o resultado encontrado (p-valor = 0.99) podemos assumir a normalidade.
+
+
+### Intervalo de confiança
 
 Precisamos calcular o intervalo de confiança. Fiz primeiro à mão, e depois em R.
 
@@ -346,14 +423,12 @@ tibble(
   scale_y_continuous(limits = c(30, 40)) 
 ```
 
+
+
 ## Exercício 8
 
 **O salário desta amostra foi medido em três anos seguidos (06,07 e 08). Houve diferença entre o salário ao longo do tempo? (α=5%).**
 
-
-:::{.callout-important}
-Pensar em como fazer!
-:::
 
 Primeiro, podemos deixar os dados no formato "longo" para facilitar a visualização.
 
@@ -364,20 +439,92 @@ salario_tempo <- dados |>
          salario_06 = SAL_RIO,
          salario_07 = SAL_RIO1,
          salario_08 = SAL_RIO2) |>
-  pivot_longer(cols = c("salario_06", "salario_07", "salario_08"))
+  pivot_longer(cols = c("salario_06", "salario_07", "salario_08"), 
+               names_to = "ano_salario", values_to = "valor_salario")
 ```
 
 
-Visualizando a distribuição do salário nos 3 momentos:
+Visualizando a distribuição do salário nos 3 momentos: não parece ter grandes diferenças. Só no ano 08 tem alguém recebendo mais que os outros.
 
 ```{r}
 salario_tempo |> 
   ggplot() +
-  aes(x = value) +
+  aes(x = valor_salario) +
   geom_histogram(binwidth = 5, color = "black", fill = "lightblue") +
-  facet_wrap(~name, ncol = 1) +
+  facet_wrap(~ano_salario, ncol = 1) +
   theme_light()
 ```
+
+
+### Testando normalidade
+
+Podemos também testar a normalidade com o teste de Shapiro-Wilk:
+
+
+```{r}
+salario_tempo |> 
+  dplyr::group_by(ano_salario) |> 
+  dplyr::summarise(
+    teste = shapiro.test(valor_salario) |> broom::tidy()
+  ) |> 
+  tidyr::unnest() |> 
+  dplyr::mutate(
+    normalidade = p.value > 0.05
+  ) |> 
+  knitr::kable()
+```
+Apenas o salário do ano 06 apresenta uma distribuição que podemos considerar normal.
+
+Então usar testes baseados na média não é uma boa idéia!
+
+
+:::{.callout-important}
+Pensar em qual teste fazer.
+Temos o salário (variável contínua) ao longo do tempo.
+Nesse caso, entendo o tempo como a variável independente, e o salário como variável dependente.
+
+Análise de variância? Ainda não vimos em aula!
+:::
+
+### Experimentando com o infer
+
+Isso pode estar bem errado!! REVISAR, ENTENDER
+
+```{r}
+estatistica_observada <- salario_tempo |>
+  specify(explanatory = ano_salario, 
+                 response = valor_salario) |>
+   hypothesise(null = "independence") |> 
+  calculate(stat =  "F")
+
+estatistica_observada
+```
+
+```{r}
+distribuicao_hipotese_nula <- salario_tempo |>
+  specify(explanatory = ano_salario, 
+                 response = valor_salario) |>
+  assume(distribution = "F")
+
+distribuicao_hipotese_nula
+```
+
+```{r}
+distribuicao_hipotese_nula  |> 
+  visualize() + 
+  shade_p_value(estatistica_observada,
+                direction = "greater")
+```
+
+```{r}
+valor_p <- distribuicao_hipotese_nula  |> 
+  get_p_value(obs_stat = estatistica_observada,
+              direction = "greater")
+
+valor_p
+```
+
+
 # Exercícios de análise de outlier
 
 ## Exercício 9
