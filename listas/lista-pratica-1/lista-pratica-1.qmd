@@ -11,6 +11,9 @@ knitr:
     warning: false
     echo: true
 toc: true
+code-fold: show
+code-link: true
+
 ---
 
 ## Instruções 
