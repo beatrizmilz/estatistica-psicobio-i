@@ -24,6 +24,7 @@ A tabela `lista de exercícios.sta` apresenta os dados de 36 trabalhadores de um
 # Carregando pacotes
 library(haven)
 library(tidyverse)
+library(infer)
 ```
 
 ```{r}
@@ -37,6 +38,57 @@ Observações:
 1-      Verifique a normalidade das variáveis antes de escolher o teste. Justifique a escolha de cada um dos testes que você for utilizar.
 
 2-      Não se esqueça de dizer quais são as variáveis dependentes e independentes para cada teste.
+
+## Pacote infer
+
+Em alguns exercícios, usei o [infer](https://infer.netlify.app/), para treinar. Ele faz parte do pacote `{tidymodels}`.
+
+Referências: 
+
+- <https://infer.netlify.app/articles/chi_squared>
+
+- <https://www.tmwr.org/inferential>
+
+- <https://www.tidymodels.org/learn/statistics/infer/> 
+
+
+- <https://www.tidymodels.org/learn/statistics/xtabs/>
+
+
+```{r}
+library(infer)
+```
+
+
+## Funções auxiliares
+
+Criei essa função para calcular o intervalo de confiança de médias.
+
+Porém foi para treinar. Deve haver funções já implementadas e mais robustas!
+
+
+```{r}
+intervalo_de_confianca_media <- function(media, desvio_padrao, tamanho_amostra, confianca = 95){
+
+  if(confianca == 99){
+    z <- 2.58
+  } else if(confianca == 95){
+    z <- 1.96
+  } else if(confianca == 90){
+    z <- 1.65
+  } else {
+    usethis::ui_stop("Escolha dentre os seguintes níveis de confiança: 90%, 95% ou 99%.")
+  }
+
+    erro_padrao_calc <- desvio_padrao / sqrt(tamanho_amostra)
+  
+    valor_intervalo <- erro_padrao_calc * z
+    
+    c(ic_min = media - valor_intervalo, ic_max = media + valor_intervalo)
+    
+}
+```
+
 
 
 # Exercícios de estatística descritiva
@@ -250,9 +302,33 @@ Variável independente: Região de origem - Categórica
 
 Variável dependente: Número de filhos - Numérica
 
+
+Testando a normalidade com o teste de Shapiro-Wilk:
+
+```{r}
+shapiro.test(dados$N_MERO_D) |> 
+  broom::tidy() |> 
+  mutate(normalidade = p.value > 0.05) |> 
+  knitr::kable()
+```
+
+A quantidade de filhos não segue a distribuição normal.
+
 :::{.callout-important}
 FAZER!
 :::
+
+```{r}
+dados |> 
+  group_by(ORIGEM) |> 
+  count(N_MERO_D) |> 
+  ggplot(aes(x = N_MERO_D, y = n, fill = ORIGEM)) +
+  geom_col() +
+  facet_wrap(~ORIGEM, ncol = 1) +
+  theme_minimal()
+```
+
+
 
 
 ### Idade média em função da região de origem
@@ -263,9 +339,54 @@ Variável independente: Região de origem - Categórica
 Variável dependente: Idade - Numérica
 
 
-:::{.callout-important}
-FAZER!
-:::
+Testando a normalidade com o teste de Shapiro-Wilk:
+
+```{r}
+shapiro.test(dados$IDADE) |> 
+  broom::tidy() |> 
+  knitr::kable()
+```
+
+A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 95%. Com o resultado encontrado (p-valor = 0.99) podemos assumir a normalidade.
+
+
+
+Agora para o teste estatístico: nesse caso a variável independente é a ORIGEM (com 3 categorias), e a variável dependente é a idade.
+
+
+Vamos calcular o intervalo de confiança para as idades em cada grupo:
+
+```{r}
+ic_calculado_idade_origem <- dados |> 
+  dplyr::group_by(ORIGEM) |> 
+  summarise(
+    media_idade = mean(IDADE),
+    sd_idade = sd(IDADE),
+    n = dplyr::n()
+  ) |> 
+  dplyr::rowwise() |> 
+  mutate(
+    ic = list(intervalo_de_confianca_media(media = media_idade,
+                                      desvio_padrao = sd_idade,
+                                      tamanho_amostra = n))
+  ) |> 
+  tidyr::unnest_wider(col = ic)
+  
+
+ic_calculado_idade_origem |> 
+  knitr::kable()
+```
+
+```{r}
+ic_calculado_idade_origem |> 
+  ggplot() +
+  aes(x = ORIGEM, y = media_idade) +
+  geom_point() +
+  geom_errorbar(aes(ymin = ic_min, ymax = ic_max), width = 0.5)  +
+  theme_light()
+```
+Interpretando o gráfico, não há evidências para afirmar que as médias das idades são diferentes entre os grupos.
+
 
 ## Exercício 6
 
@@ -305,20 +426,8 @@ Verificando se temos pelo menos 4 elementos por casela: Nesse caso, não! Tem du
 
 Vou testar com os dois e ver se o resultado é diferente.
 
-### Chi-quadrado com o pacote infer
+### Chi-quadrado 
 
-Modo rápido: usando o pacote [infer](https://infer.netlify.app/)
-
-Referências: 
-
-- <https://infer.netlify.app/articles/chi_squared>
-
-- <https://www.tmwr.org/inferential>
-
-
-```{r}
-library(infer)
-```
 
 
 ```{r}
@@ -381,14 +490,6 @@ dados |>
 ```
 
 
-Podemos também testar a normalidade com o teste de Shapiro-Wilk:
-
-```{r}
-shapiro.test(dados$IDADE) |> 
-  broom::tidy() |> 
-  knitr::kable()
-```
-A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 95%. Com o resultado encontrado (p-valor = 0.99) podemos assumir a normalidade.
 
 
 ### Intervalo de confiança
@@ -405,15 +506,11 @@ media_idade <- mean(dados$IDADE)
 # Qual é o desvio padrão da idade?
 sd_idade <- sd(dados$IDADE)
 
-valor_z <- 1.96
-
-
-erro <- valor_z * sd_idade / sqrt(quantidade_pessoas)
-
-ic_idade <- c(media_idade - erro, media_idade + erro)
+ic_idade <- intervalo_de_confianca_media(media = media_idade,
+                             desvio_padrao = sd_idade, 
+                             tamanho_amostra = quantidade_pessoas)
 
 ic_idade
-
 ```
 
 
@@ -508,27 +605,6 @@ Análise de variância? Ainda não vimos em aula!
 
 ### Intervalo de confiança
 
-```{r}
-intervalo_de_confianca_media <- function(media, desvio_padrao, tamanho_amostra, confianca = 95){
-
-  if(confianca == 99){
-    z <- 2.58
-  } else if(confianca == 95){
-    z <- 1.96
-  } else if(confianca == 90){
-    z <- 1.65
-  } else {
-    usethis::ui_stop("Escolha dentre os seguintes níveis de confiança: 90%, 95% ou 99%.")
-  }
-
-    erro_padrao_calc <- desvio_padrao / sqrt(tamanho_amostra)
-  
-    valor_intervalo <- erro_padrao_calc * z
-    
-    c(ic_min = media - valor_intervalo, ic_max = media + valor_intervalo)
-    
-}
-```
 
 ```{r}
 ic_calculado_salario <- salario_tempo |> 

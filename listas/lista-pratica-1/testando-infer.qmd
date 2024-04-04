@@ -35,3 +35,34 @@ valor_p <- distribuicao_hipotese_nula  |>
 valor_p
 ```
 
+---
+
+```{r}
+# Calculando a estatística F
+estatistica_observada <- dados |> 
+  specify(response = IDADE, explanatory = ORIGEM)  |> 
+  hypothesize(null = "independence")  |> 
+  calculate(stat = "F")
+
+# gerando uma distribuição p/ hipótese nula
+null_dist <- dados  |> 
+  specify(response = IDADE, explanatory = ORIGEM)  |> 
+  hypothesize(null = "independence")  |> 
+  generate(reps = 1000, type = "permute")  |> 
+  calculate(stat = "F")
+
+
+# visualizando o p_valor encontrado
+null_dist  |> 
+  visualize() + 
+  shade_p_value(estatistica_observada,
+                direction = "greater")
+
+
+valor_p <- null_dist  |> 
+  get_p_value(obs_stat = estatistica_observada,
+              direction = "greater")
+
+valor_p
+
+```
