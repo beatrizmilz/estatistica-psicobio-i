@@ -355,6 +355,14 @@ Neste caso, o valor-p também foi maior que 5%.  Não encontramos associação e
 
 Nesse caso, podemos fazer o intervalo de confiança para a média de idade dos trabalhadores, e comparar com a média de idade da população de SP.
 
+
+Dados do IBGE - Entendo que quer dizer que são os dados do Censo. Portanto o que temos é a média da população (um parâmetro).
+
+Hipótese nula: média da idade dos trabalhadores é IGUAL à média da idade da população de SP.
+
+Hipótese alternativa: média da idade dos trabalhadores é DIFERENTE à média da idade da população de SP.
+
+
 ### Normalidade
 
 O histograma dos dados de idade me dá pistas de que considerar a distribuição como normal é uma aproximação aceitável.
@@ -426,6 +434,12 @@ tibble(
   scale_y_continuous(limits = c(30, 40)) 
 ```
 
+### Outra opção: comparar com valor de referência
+
+
+:::{.callout-important}
+FAZER!
+:::
 
 
 ## Exercício 8
@@ -489,43 +503,63 @@ Nesse caso, entendo o tempo como a variável independente, e o salário como var
 Análise de variância? Ainda não vimos em aula!
 :::
 
-### Experimentando com o infer
 
-Isso pode estar bem errado!! REVISAR, ENTENDER
+
+
+### Intervalo de confiança
 
 ```{r}
-estatistica_observada <- salario_tempo |>
-  specify(explanatory = ano_salario, 
-                 response = valor_salario) |>
-   hypothesise(null = "independence") |> 
-  calculate(stat =  "F")
+intervalo_de_confianca_media <- function(media, desvio_padrao, tamanho_amostra, confianca = 95){
 
-estatistica_observada
+  if(confianca == 99){
+    z <- 2.58
+  } else if(confianca == 95){
+    z <- 1.96
+  } else if(confianca == 90){
+    z <- 1.65
+  } else {
+    usethis::ui_stop("Escolha dentre os seguintes níveis de confiança: 90%, 95% ou 99%.")
+  }
+
+    erro_padrao_calc <- desvio_padrao / sqrt(tamanho_amostra)
+  
+    valor_intervalo <- erro_padrao_calc * z
+    
+    c(ic_min = media - valor_intervalo, ic_max = media + valor_intervalo)
+    
+}
 ```
 
 ```{r}
-distribuicao_hipotese_nula <- salario_tempo |>
-  specify(explanatory = ano_salario, 
-                 response = valor_salario) |>
-  assume(distribution = "F")
+ic_calculado_salario <- salario_tempo |> 
+  dplyr::group_by(ano_salario) |> 
+  summarise(
+    media_salario = mean(valor_salario),
+    sd_salario = sd(valor_salario),
+    n = dplyr::n()
+  ) |> 
+  dplyr::rowwise() |> 
+  mutate(
+    ic = list(intervalo_de_confianca_media(media = media_salario,
+                                      desvio_padrao = sd_salario,
+                                      tamanho_amostra = n))
+  ) |> 
+  tidyr::unnest_wider(col = ic)
+  
 
-distribuicao_hipotese_nula
+ic_calculado_salario |> 
+  knitr::kable()
 ```
 
 ```{r}
-distribuicao_hipotese_nula  |> 
-  visualize() + 
-  shade_p_value(estatistica_observada,
-                direction = "greater")
+ic_calculado_salario |> 
+  ggplot() +
+  aes(x = ano_salario, y = media_salario) +
+  geom_point() +
+  geom_errorbar(aes(ymin = ic_min, ymax = ic_max), width = 0.5)  +
+  theme_light()
 ```
-
-```{r}
-valor_p <- distribuicao_hipotese_nula  |> 
-  get_p_value(obs_stat = estatistica_observada,
-              direction = "greater")
-
-valor_p
-```
+Não há evidências para afirmar que as médias são diferentes.
 
 
 # Exercícios de análise de outlier

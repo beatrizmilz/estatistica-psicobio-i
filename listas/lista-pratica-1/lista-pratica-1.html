@@ -125,13 +125,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
 <li><a href="#normalidade" id="toc-normalidade" class="nav-link" data-scroll-target="#normalidade">Normalidade</a></li>
   <li><a href="#intervalo-de-confian%C3%A7a" id="toc-intervalo-de-confiança" class="nav-link" data-scroll-target="#intervalo-de-confian%C3%A7a">Intervalo de confiança</a></li>
+  <li><a href="#outra-op%C3%A7%C3%A3o-comparar-com-valor-de-refer%C3%AAncia" id="toc-outra-opção-comparar-com-valor-de-referência" class="nav-link" data-scroll-target="#outra-op%C3%A7%C3%A3o-comparar-com-valor-de-refer%C3%AAncia">Outra opção: comparar com valor de referência</a></li>
   </ul>
 </li>
   <li>
 <a href="#exerc%C3%ADcio-8" id="toc-exercício-8" class="nav-link" data-scroll-target="#exerc%C3%ADcio-8">Exercício 8</a>
   <ul class="collapse">
 <li><a href="#testando-normalidade" id="toc-testando-normalidade" class="nav-link" data-scroll-target="#testando-normalidade">Testando normalidade</a></li>
-  <li><a href="#experimentando-com-o-infer" id="toc-experimentando-com-o-infer" class="nav-link" data-scroll-target="#experimentando-com-o-infer">Experimentando com o infer</a></li>
+  <li><a href="#intervalo-de-confian%C3%A7a-1" id="toc-intervalo-de-confiança-1" class="nav-link" data-scroll-target="#intervalo-de-confian%C3%A7a-1">Intervalo de confiança</a></li>
   </ul>
 </li>
   </ul>
@@ -638,6 +639,9 @@ Importante
 </section></section><section id="exercício-7" class="level2"><h2 class="anchored" data-anchor-id="exercício-7">Exercício 7</h2>
 <p><strong>Segundo dados do IBGE, a média da idade da população de SP é de 31 anos. A amostra apresentada possui diferença significativa na média da idade em relação à estimativa média populacional?</strong></p>
 <p>Nesse caso, podemos fazer o intervalo de confiança para a média de idade dos trabalhadores, e comparar com a média de idade da população de SP.</p>
+<p>Dados do IBGE - Entendo que quer dizer que são os dados do Censo. Portanto o que temos é a média da população (um parâmetro).</p>
+<p>Hipótese nula: média da idade dos trabalhadores é IGUAL à média da idade da população de SP.</p>
+<p>Hipótese alternativa: média da idade dos trabalhadores é DIFERENTE à média da idade da população de SP.</p>
 <section id="normalidade" class="level3"><h3 class="anchored" data-anchor-id="normalidade">Normalidade</h3>
 <p>O histograma dos dados de idade me dá pistas de que considerar a distribuição como normal é uma aproximação aceitável.</p>
 <div class="cell">
@@ -720,6 +724,20 @@ Importante
 <figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+</div>
+</section><section id="outra-opção-comparar-com-valor-de-referência" class="level3"><h3 class="anchored" data-anchor-id="outra-opção-comparar-com-valor-de-referência">Outra opção: comparar com valor de referência</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importante
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>FAZER!</p>
 </div>
 </div>
 </section></section><section id="exercício-8" class="level2"><h2 class="anchored" data-anchor-id="exercício-8">Exercício 8</h2>
@@ -822,42 +840,94 @@ Importante
 <p>Análise de variância? Ainda não vimos em aula!</p>
 </div>
 </div>
-</section><section id="experimentando-com-o-infer" class="level3"><h3 class="anchored" data-anchor-id="experimentando-com-o-infer">Experimentando com o infer</h3>
-<p>Isso pode estar bem errado!! REVISAR, ENTENDER</p>
+</section><section id="intervalo-de-confiança-1" class="level3"><h3 class="anchored" data-anchor-id="intervalo-de-confiança-1">Intervalo de confiança</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">estatistica_observada</span> <span class="op">&lt;-</span> <span class="va">salario_tempo</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>explanatory <span class="op">=</span> <span class="va">ano_salario</span>, </span>
-<span>                 response <span class="op">=</span> <span class="va">valor_salario</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>   <span class="fu"><a href="https://infer.tidymodels.org/reference/hypothesize.html">hypothesise</a></span><span class="op">(</span>null <span class="op">=</span> <span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span>  <span class="st">"F"</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">intervalo_de_confianca_media</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">media</span>, <span class="va">desvio_padrao</span>, <span class="va">tamanho_amostra</span>, <span class="va">confianca</span> <span class="op">=</span> <span class="fl">95</span><span class="op">)</span><span class="op">{</span></span>
 <span></span>
-<span><span class="va">estatistica_observada</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>Response: valor_salario (numeric)
-Explanatory: ano_salario (factor)
-Null Hypothesis: independence
-# A tibble: 1 × 1
-   stat
-  &lt;dbl&gt;
-1 0.532</code></pre>
-</div>
-</div>
-<div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">distribuicao_hipotese_nula</span> <span class="op">&lt;-</span> <span class="va">salario_tempo</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>explanatory <span class="op">=</span> <span class="va">ano_salario</span>, </span>
-<span>                 response <span class="op">=</span> <span class="va">valor_salario</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/assume.html">assume</a></span><span class="op">(</span>distribution <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">confianca</span> <span class="op">==</span> <span class="fl">99</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">z</span> <span class="op">&lt;-</span> <span class="fl">2.58</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">confianca</span> <span class="op">==</span> <span class="fl">95</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">z</span> <span class="op">&lt;-</span> <span class="fl">1.96</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">confianca</span> <span class="op">==</span> <span class="fl">90</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">z</span> <span class="op">&lt;-</span> <span class="fl">1.65</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/ui.html">ui_stop</a></span><span class="op">(</span><span class="st">"Escolha dentre os seguintes níveis de confiança: 90%, 95% ou 99%."</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
 <span></span>
-<span><span class="va">distribuicao_hipotese_nula</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>An F distribution with 2 and 105 degrees of freedom.</code></pre>
+<span>    <span class="va">erro_padrao_calc</span> <span class="op">&lt;-</span> <span class="va">desvio_padrao</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">tamanho_amostra</span><span class="op">)</span></span>
+<span>  </span>
+<span>    <span class="va">valor_intervalo</span> <span class="op">&lt;-</span> <span class="va">erro_padrao_calc</span> <span class="op">*</span> <span class="va">z</span></span>
+<span>    </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>ic_min <span class="op">=</span> <span class="va">media</span> <span class="op">-</span> <span class="va">valor_intervalo</span>, ic_max <span class="op">=</span> <span class="va">media</span> <span class="op">+</span> <span class="va">valor_intervalo</span><span class="op">)</span></span>
+<span>    </span>
+<span><span class="op">}</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_salario</span> <span class="op">&lt;-</span> <span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ano_salario</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    media_salario <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">valor_salario</span><span class="op">)</span>,</span>
+<span>    sd_salario <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">valor_salario</span><span class="op">)</span>,</span>
+<span>    n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    ic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">intervalo_de_confianca_media</span><span class="op">(</span>media <span class="op">=</span> <span class="va">media_salario</span>,</span>
+<span>                                      desvio_padrao <span class="op">=</span> <span class="va">sd_salario</span>,</span>
+<span>                                      tamanho_amostra <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html">unnest_wider</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">ic</span><span class="op">)</span></span>
+<span>  </span>
+<span></span>
+<span><span class="va">ic_calculado_salario</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">ano_salario</th>
+<th style="text-align: right;">media_salario</th>
+<th style="text-align: right;">sd_salario</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">ic_min</th>
+<th style="text-align: right;">ic_max</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">salario_06</td>
+<td style="text-align: right;">11.12222</td>
+<td style="text-align: right;">4.587458</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">9.623653</td>
+<td style="text-align: right;">12.62079</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">salario_07</td>
+<td style="text-align: right;">10.04194</td>
+<td style="text-align: right;">5.009863</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">8.405389</td>
+<td style="text-align: right;">11.67850</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">salario_08</td>
+<td style="text-align: right;">11.35333</td>
+<td style="text-align: right;">7.307821</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">8.966112</td>
+<td style="text-align: right;">13.74055</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">distribuicao_hipotese_nula</span>  <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/visualize.html">visualize</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/shade_p_value.html">shade_p_value</a></span><span class="op">(</span><span class="va">estatistica_observada</span>,</span>
-<span>                direction <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_salario</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ano_salario</span>, y <span class="op">=</span> <span class="va">media_salario</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">ic_min</span>, ymax <span class="op">=</span> <span class="va">ic_max</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>  <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
@@ -865,26 +935,14 @@ Null Hypothesis: independence
 </div>
 </div>
 </div>
-<div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">valor_p</span> <span class="op">&lt;-</span> <span class="va">distribuicao_hipotese_nula</span>  <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/get_p_value.html">get_p_value</a></span><span class="op">(</span>obs_stat <span class="op">=</span> <span class="va">estatistica_observada</span>,</span>
-<span>              direction <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">valor_p</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  p_value
-    &lt;dbl&gt;
-1   0.589</code></pre>
-</div>
-</div>
+<p>Não há evidências para afirmar que as médias são diferentes.</p>
 </section></section></section><section id="exercícios-de-análise-de-outlier" class="level1"><h1>Exercícios de análise de outlier</h1>
 <section id="exercício-9" class="level2"><h2 class="anchored" data-anchor-id="exercício-9">Exercício 9</h2>
 <p><strong>Observe à variável “Número de filhos”. Calcule o escore z para cada uma dos participantes da amostra. Quais participantes podem ser considerados outliers para a amostra número de filhos?</strong></p>
 <p>A lógica do z-score é pensar: quantos desvios padrão de distância um valor encontrado está da média?</p>
 <p>Um valor absoluto de escore z igual ou maior que 3 indicaria que um valor pode ser considerado um outlier.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_z_score</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_z_score</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>numero_filhos <span class="op">=</span> <span class="va">N_MERO_D</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -897,7 +955,7 @@ Null Hypothesis: independence
 </div>
 <p>Calculado o escore z, o trabalhador da linha 29 apresenta 5 filhos, e um z_score maior que 3.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">outliers_filhos</span> <span class="op">&lt;-</span> <span class="va">dados_z_score</span> <span class="op">|&gt;</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">outliers_filhos</span> <span class="op">&lt;-</span> <span class="va">dados_z_score</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">abs_z_score_numero_filhos</span>  <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">outliers_filhos</span> <span class="op">|&gt;</span></span>
@@ -954,7 +1012,7 @@ Null Hypothesis: independence
 </div>
 <p>Visualização:</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numero_filhos_outlier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">outliers_filhos</span><span class="op">$</span><span class="va">numero_filhos</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numero_filhos_outlier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">outliers_filhos</span><span class="op">$</span><span class="va">numero_filhos</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">dados_z_score</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">numero_filhos</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -971,7 +1029,7 @@ Null Hypothesis: independence
 <span>       subtitle <span class="op">=</span> <span class="st">"Existe algum outlier?"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

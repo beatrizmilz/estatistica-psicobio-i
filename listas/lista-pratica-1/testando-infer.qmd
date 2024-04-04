@@ -1,0 +1,37 @@
+
+Isso pode estar bem errado!! REVISAR, ENTENDER
+
+```{r}
+estatistica_observada <- salario_tempo |>
+  specify(explanatory = ano_salario, 
+                 response = valor_salario) |>
+   hypothesise(null = "independence") |> 
+  calculate(stat =  "F")
+
+estatistica_observada
+```
+
+```{r}
+distribuicao_hipotese_nula <- salario_tempo |>
+  specify(explanatory = ano_salario, 
+                 response = valor_salario) |>
+  assume(distribution = "F")
+
+distribuicao_hipotese_nula
+```
+
+```{r}
+distribuicao_hipotese_nula  |> 
+  visualize() + 
+  shade_p_value(estatistica_observada,
+                direction = "greater")
+```
+
+```{r}
+valor_p <- distribuicao_hipotese_nula  |> 
+  get_p_value(obs_stat = estatistica_observada,
+              direction = "greater")
+
+valor_p
+```
+
