@@ -683,11 +683,34 @@ Importante
 </div>
 </div>
 <p>Interpretando o gráfico, não há evidências para afirmar que as médias das idades são diferentes entre os grupos.</p>
+<p>Fazendo a ANOVA, para fins de confirmar:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">valor_f</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>response <span class="op">=</span> <span class="va">IDADE</span>, explanatory <span class="op">=</span> <span class="va">ORIGEM</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/hypothesize.html">hypothesise</a></span><span class="op">(</span>null <span class="op">=</span> <span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#     Graus de liberdade entre os grupos (df1) = k - 1</span></span>
+<span><span class="co">#     Graus de liberdade dentro dos grupos (df2) = N - k</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Onde:</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co">#     k é o número de grupos ou tratamentos.</span></span>
+<span><span class="co">#     N é o número total de observações.</span></span>
+<span><span class="va">p_valor_teste_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="va">valor_f</span><span class="op">$</span><span class="va">stat</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, df1 <span class="op">=</span> <span class="fl">3</span> <span class="op">-</span> <span class="fl">1</span>, df2 <span class="op">=</span> <span class="fl">36</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">p_valor_teste_f</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3669772</code></pre>
+</div>
+</div>
+<p>Não rejeito a hipótese nula.</p>
 </section></section><section id="exercício-6" class="level2"><h2 class="anchored" data-anchor-id="exercício-6">Exercício 6</h2>
 <p><strong>Verifique a associação entre estado civil e grau de instrução. É possível dizer que existe associação significante entre estado civil e grau de instrução (α=5%)?</strong></p>
 <p>Primeiro, visualizando os dados: não tem nada que me chame muita atenção. Vamos seguindo.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">ESTADO_C</span>, x <span class="op">=</span> <span class="va">GRAU_DE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -700,7 +723,7 @@ Importante
 <span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -710,7 +733,7 @@ Importante
 <section id="pressupostos-do-qui-quadrado" class="level3"><h3 class="anchored" data-anchor-id="pressupostos-do-qui-quadrado">Pressupostos do Qui-quadrado</h3>
 <p>Verificando se não tem nenhuma casela com 0 elementos:</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">dados</span>, <span class="va">GRAU_DE</span>, <span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">dados</span>, <span class="va">GRAU_DE</span>, <span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -743,7 +766,7 @@ Importante
 <p>Vou testar com os dois e ver se o resultado é diferente.</p>
 </section><section id="chi-quadrado" class="level3"><h3 class="anchored" data-anchor-id="chi-quadrado">Chi-quadrado</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">resultado</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/chisq_test.html">chisq_test</a></span><span class="op">(</span><span class="va">dados</span>, formula <span class="op">=</span> <span class="va">ESTADO_C</span> <span class="op">~</span> <span class="va">GRAU_DE</span><span class="op">)</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">resultado</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/chisq_test.html">chisq_test</a></span><span class="op">(</span><span class="va">dados</span>, formula <span class="op">=</span> <span class="va">ESTADO_C</span> <span class="op">~</span> <span class="va">GRAU_DE</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">resultado</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -765,7 +788,7 @@ Importante
 </section><section id="teste-exato-de-fisher" class="level3"><h3 class="anchored" data-anchor-id="teste-exato-de-fisher">Teste exato de Fisher</h3>
 <p>Pelo que entendi, esse teste é mais “conservador” que o Qui-quadrado. Portanto, se no Qui-quadrado deu “não significativo”, acredito que aqui a resposta será igual.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># preparando a tabela para o teste</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># preparando a tabela para o teste</span></span>
 <span><span class="va">dados_ec_ge</span> <span class="op">&lt;-</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">dados</span>, <span class="va">GRAU_DE</span>, <span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"GRAU_DE"</span><span class="op">)</span></span>
 <span></span>
@@ -798,7 +821,7 @@ Importante
 <section id="normalidade" class="level3"><h3 class="anchored" data-anchor-id="normalidade">Normalidade</h3>
 <p>O histograma dos dados de idade me dá pistas de que considerar a distribuição como normal é uma aproximação aceitável.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">IDADE</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">5</span>, color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -810,7 +833,7 @@ Importante
 <span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -818,7 +841,7 @@ Importante
 </section><section id="intervalo-de-confiança" class="level3"><h3 class="anchored" data-anchor-id="intervalo-de-confiança">Intervalo de confiança</h3>
 <p>Precisamos calcular o intervalo de confiança. Fiz primeiro à mão, e depois em R.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Quandas pessoas temos na base?</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Quandas pessoas temos na base?</span></span>
 <span><span class="va">quantidade_pessoas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Qual é a média da idade?</span></span>
@@ -839,7 +862,7 @@ Importante
 </div>
 <p>Ao comparar o intervalo de confiança e a média de idade da população de São Paulo, percebemos que a diferença é significativa, pois a média da idade da população de São Paulo (31 anos) está fora do intervalo de confiança para a média da idade dos trabalhadores (arredondando, aprox entre 32 e 37 anos).</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  grupo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Trabalhadores"</span>, <span class="st">"População de SP"</span><span class="op">)</span>,</span>
 <span>  idade_media <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">media_idade</span>, <span class="fl">31</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -851,7 +874,7 @@ Importante
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">40</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -874,7 +897,7 @@ Importante
 <p><strong>O salário desta amostra foi medido em três anos seguidos (06,07 e 08). Houve diferença entre o salário ao longo do tempo? (α=5%).</strong></p>
 <p>Primeiro, podemos deixar os dados no formato “longo” para facilitar a visualização.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"id_pessoa"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id_pessoa</span>, </span>
 <span>         salario_06 <span class="op">=</span> <span class="va">SAL_RIO</span>,</span>
@@ -886,7 +909,7 @@ Importante
 </div>
 <p>Visualizando a distribuição do salário nos 3 momentos: não parece ter grandes diferenças. Só no ano 08 tem alguém recebendo mais que os outros.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">valor_salario</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">5</span>, color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -894,7 +917,7 @@ Importante
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -902,7 +925,7 @@ Importante
 <section id="testando-normalidade" class="level3"><h3 class="anchored" data-anchor-id="testando-normalidade">Testando normalidade</h3>
 <p>Podemos também testar a normalidade com o teste de Shapiro-Wilk:</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ano_salario</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    teste <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">valor_salario</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -972,7 +995,7 @@ Importante
 </div>
 </section><section id="intervalo-de-confiança-1" class="level3"><h3 class="anchored" data-anchor-id="intervalo-de-confiança-1">Intervalo de confiança</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_salario</span> <span class="op">&lt;-</span> <span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_salario</span> <span class="op">&lt;-</span> <span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ano_salario</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    media_salario <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">valor_salario</span><span class="op">)</span>,</span>
@@ -1030,7 +1053,7 @@ Importante
 </div>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_salario</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_salario</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ano_salario</span>, y <span class="op">=</span> <span class="va">media_salario</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1038,7 +1061,7 @@ Importante
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1050,7 +1073,7 @@ Importante
 <p>A lógica do z-score é pensar: quantos desvios padrão de distância um valor encontrado está da média?</p>
 <p>Um valor absoluto de escore z igual ou maior que 3 indicaria que um valor pode ser considerado um outlier.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_z_score</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_z_score</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>numero_filhos <span class="op">=</span> <span class="va">N_MERO_D</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -1063,7 +1086,7 @@ Importante
 </div>
 <p>Calculado o escore z, o trabalhador da linha 29 apresenta 5 filhos, e um z_score maior que 3.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">outliers_filhos</span> <span class="op">&lt;-</span> <span class="va">dados_z_score</span> <span class="op">|&gt;</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">outliers_filhos</span> <span class="op">&lt;-</span> <span class="va">dados_z_score</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">abs_z_score_numero_filhos</span>  <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">outliers_filhos</span> <span class="op">|&gt;</span></span>
@@ -1120,7 +1143,7 @@ Importante
 </div>
 <p>Visualização:</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numero_filhos_outlier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">outliers_filhos</span><span class="op">$</span><span class="va">numero_filhos</span><span class="op">)</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numero_filhos_outlier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">outliers_filhos</span><span class="op">$</span><span class="va">numero_filhos</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">dados_z_score</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">numero_filhos</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1137,7 +1160,7 @@ Importante
 <span>       subtitle <span class="op">=</span> <span class="st">"Existe algum outlier?"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

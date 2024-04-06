@@ -13,10 +13,9 @@ knitr:
 toc: true
 code-fold: show
 code-link: true
-
 ---
 
-## Instruções 
+## Instruções
 
 A tabela `lista de exercícios.sta` apresenta os dados de 36 trabalhadores de uma empresa.
 
@@ -35,37 +34,33 @@ dados <- haven::read_sav("dados.sav")
 
 Observações:
 
-1-      Verifique a normalidade das variáveis antes de escolher o teste. Justifique a escolha de cada um dos testes que você for utilizar.
+1- Verifique a normalidade das variáveis antes de escolher o teste. Justifique a escolha de cada um dos testes que você for utilizar.
 
-2-      Não se esqueça de dizer quais são as variáveis dependentes e independentes para cada teste.
+2- Não se esqueça de dizer quais são as variáveis dependentes e independentes para cada teste.
 
 ## Pacote infer
 
 Em alguns exercícios, usei o [infer](https://infer.netlify.app/), para treinar. Ele faz parte do pacote `{tidymodels}`.
 
-Referências: 
+Referências:
 
-- <https://infer.netlify.app/articles/chi_squared>
+-   <https://infer.netlify.app/articles/chi_squared>
 
-- <https://www.tmwr.org/inferential>
+-   <https://www.tmwr.org/inferential>
 
-- <https://www.tidymodels.org/learn/statistics/infer/> 
+-   <https://www.tidymodels.org/learn/statistics/infer/>
 
-
-- <https://www.tidymodels.org/learn/statistics/xtabs/>
-
+-   <https://www.tidymodels.org/learn/statistics/xtabs/>
 
 ```{r}
 library(infer)
 ```
-
 
 ## Funções auxiliares
 
 Criei essa função para calcular o intervalo de confiança de médias.
 
 Porém foi para treinar. Deve haver funções já implementadas e mais robustas!
-
 
 ```{r}
 intervalo_de_confianca_media <- function(media, desvio_padrao, tamanho_amostra, confianca = 95){
@@ -88,8 +83,6 @@ intervalo_de_confianca_media <- function(media, desvio_padrao, tamanho_amostra, 
     
 }
 ```
-
-
 
 # Exercícios de estatística descritiva
 
@@ -231,12 +224,12 @@ dados |>
   ) |> 
   knitr::kable(col.names = c("Estado civil", "Idade média"))
 ```
+
 Idade média:
 
 -   Solteiros: aproximadamente 34 anos (33,9)
 
 -   Casados: aproximadamente 35 anos (35,2)
-
 
 ### Salário médio por estado civil
 
@@ -253,7 +246,6 @@ media_salario_geral <- dados |>
   group_by(ESTADO_C) |>
   summarise(media_geral_salario = round(mean(salario), 1))
 ```
-
 
 Depois calculei a média dos salários considerando o ano:
 
@@ -277,15 +269,11 @@ media_salario_geral |>
 
 Essas variáveis vão ser abordadas posteriormente, no exercício 8.
 
-
-
 Salário médio - considerando os 3 anos:
 
 -   Solteiros: 9,7
 
 -   Casados: 11,8
-
-
 
 # Exercícios com testes estatísticos
 
@@ -293,15 +281,11 @@ Salário médio - considerando os 3 anos:
 
 **Compare, estatisticamente (α=5%), se há diferenças na distribuição de número de filhos e na idade média em função das regiões de origem dos trabalhadores.**
 
-
-
-###  Número de filhos em função da região de origem
-
+### Número de filhos em função da região de origem
 
 Variável independente: Região de origem - Categórica
 
 Variável dependente: Número de filhos - Numérica
-
 
 Testando a normalidade com o teste de Shapiro-Wilk:
 
@@ -314,7 +298,7 @@ shapiro.test(dados$N_MERO_D) |>
 
 A quantidade de filhos não segue a distribuição normal.
 
-:::{.callout-important}
+::: callout-important
 FAZER!
 :::
 
@@ -328,16 +312,11 @@ dados |>
   theme_minimal()
 ```
 
-
-
-
 ### Idade média em função da região de origem
-
 
 Variável independente: Região de origem - Categórica
 
 Variável dependente: Idade - Numérica
-
 
 Testando a normalidade com o teste de Shapiro-Wilk:
 
@@ -349,10 +328,7 @@ shapiro.test(dados$IDADE) |>
 
 A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 95%. Com o resultado encontrado (p-valor = 0.99) podemos assumir a normalidade.
 
-
-
 Agora para o teste estatístico: nesse caso a variável independente é a ORIGEM (com 3 categorias), e a variável dependente é a idade.
-
 
 Vamos calcular o intervalo de confiança para as idades em cada grupo:
 
@@ -385,8 +361,31 @@ ic_calculado_idade_origem |>
   geom_errorbar(aes(ymin = ic_min, ymax = ic_max), width = 0.5)  +
   theme_light()
 ```
+
 Interpretando o gráfico, não há evidências para afirmar que as médias das idades são diferentes entre os grupos.
 
+Fazendo a ANOVA, para fins de confirmar:
+
+```{r}
+valor_f <- dados |> 
+  specify(response = IDADE, explanatory = ORIGEM) |> 
+  hypothesise(null = "independence") |> 
+  calculate(stat = "F")
+```
+
+
+```{r}
+#     Graus de liberdade entre os grupos (df1) = k - 1
+#     Graus de liberdade dentro dos grupos (df2) = N - k
+# 
+# Onde:
+# 
+#     k é o número de grupos ou tratamentos.
+#     N é o número total de observações.
+p_valor_teste_f <- pf(valor_f$stat, lower.tail = TRUE, df1 = 3 - 1, df2 = 36 - 3)
+p_valor_teste_f
+```
+Não rejeito a hipótese nula.
 
 ## Exercício 6
 
@@ -408,7 +407,7 @@ dados |>
   )
 ```
 
-Temos 2 variáveis categóricas. Para verificar associação, precisamos usar o teste Qui-quadrado. 
+Temos 2 variáveis categóricas. Para verificar associação, precisamos usar o teste Qui-quadrado.
 
 Nesse caso, não existe variável dependente e independente.
 
@@ -421,14 +420,11 @@ janitor::tabyl(dados, GRAU_DE, ESTADO_C) |>
   knitr::kable()
 ```
 
-
 Verificando se temos pelo menos 4 elementos por casela: Nesse caso, não! Tem duas caselas com 3 indivíduos. Nesse caso, podemos usar o teste exato de fisher.
 
 Vou testar com os dois e ver se o resultado é diferente.
 
-### Chi-quadrado 
-
-
+### Chi-quadrado
 
 ```{r}
 resultado <- chisq_test(dados, formula = ESTADO_C ~ GRAU_DE) 
@@ -437,7 +433,6 @@ resultado |> knitr::kable()
 ```
 
 O valor-p é maior que 5%, portanto não é significativo. Não encontramos associação entre estado civil e grau de escolaridade.
-
 
 ### Teste exato de Fisher
 
@@ -454,23 +449,19 @@ fisher.test(dados_ec_ge) |>
   knitr::kable()
 ```
 
-Neste caso, o valor-p também foi maior que 5%.  Não encontramos associação entre estado civil e grau de escolaridade.
-
+Neste caso, o valor-p também foi maior que 5%. Não encontramos associação entre estado civil e grau de escolaridade.
 
 ## Exercício 7
 
 **Segundo dados do IBGE, a média da idade da população de SP é de 31 anos. A amostra apresentada possui diferença significativa na média da idade em relação à estimativa média populacional?**
 
-
 Nesse caso, podemos fazer o intervalo de confiança para a média de idade dos trabalhadores, e comparar com a média de idade da população de SP.
-
 
 Dados do IBGE - Entendo que quer dizer que são os dados do Censo. Portanto o que temos é a média da população (um parâmetro).
 
 Hipótese nula: média da idade dos trabalhadores é IGUAL à média da idade da população de SP.
 
 Hipótese alternativa: média da idade dos trabalhadores é DIFERENTE à média da idade da população de SP.
-
 
 ### Normalidade
 
@@ -488,9 +479,6 @@ dados |>
     y = "Número de trabalhadores"
   )
 ```
-
-
-
 
 ### Intervalo de confiança
 
@@ -513,10 +501,7 @@ ic_idade <- intervalo_de_confianca_media(media = media_idade,
 ic_idade
 ```
 
-
 Ao comparar o intervalo de confiança e a média de idade da população de São Paulo, percebemos que a diferença é significativa, pois a média da idade da população de São Paulo (31 anos) está fora do intervalo de confiança para a média da idade dos trabalhadores (arredondando, aprox entre 32 e 37 anos).
-
-
 
 ```{r}
 tibble(
@@ -533,16 +518,13 @@ tibble(
 
 ### Outra opção: comparar com valor de referência
 
-
-:::{.callout-important}
+::: callout-important
 FAZER!
 :::
-
 
 ## Exercício 8
 
 **O salário desta amostra foi medido em três anos seguidos (06,07 e 08). Houve diferença entre o salário ao longo do tempo? (α=5%).**
-
 
 Primeiro, podemos deixar os dados no formato "longo" para facilitar a visualização.
 
@@ -557,7 +539,6 @@ salario_tempo <- dados |>
                names_to = "ano_salario", values_to = "valor_salario")
 ```
 
-
 Visualizando a distribuição do salário nos 3 momentos: não parece ter grandes diferenças. Só no ano 08 tem alguém recebendo mais que os outros.
 
 ```{r}
@@ -569,11 +550,9 @@ salario_tempo |>
   theme_light()
 ```
 
-
 ### Testando normalidade
 
 Podemos também testar a normalidade com o teste de Shapiro-Wilk:
-
 
 ```{r}
 salario_tempo |> 
@@ -587,24 +566,18 @@ salario_tempo |>
   ) |> 
   knitr::kable()
 ```
+
 Apenas o salário do ano 06 apresenta uma distribuição que podemos considerar normal.
 
 Então usar testes baseados na média não é uma boa idéia!
 
-
-:::{.callout-important}
-Pensar em qual teste fazer.
-Temos o salário (variável contínua) ao longo do tempo.
-Nesse caso, entendo o tempo como a variável independente, e o salário como variável dependente.
+::: callout-important
+Pensar em qual teste fazer. Temos o salário (variável contínua) ao longo do tempo. Nesse caso, entendo o tempo como a variável independente, e o salário como variável dependente.
 
 Análise de variância? Ainda não vimos em aula!
 :::
 
-
-
-
 ### Intervalo de confiança
-
 
 ```{r}
 ic_calculado_salario <- salario_tempo |> 
@@ -635,8 +608,8 @@ ic_calculado_salario |>
   geom_errorbar(aes(ymin = ic_min, ymax = ic_max), width = 0.5)  +
   theme_light()
 ```
-Não há evidências para afirmar que as médias são diferentes.
 
+Não há evidências para afirmar que as médias são diferentes.
 
 # Exercícios de análise de outlier
 
@@ -659,6 +632,7 @@ dados_z_score <- dados |>
     abs_z_score_numero_filhos = abs(z_score_numero_filhos)
   )
 ```
+
 Calculado o escore z, o trabalhador da linha 29 apresenta 5 filhos, e um z_score maior que 3.
 
 ```{r}
@@ -669,7 +643,7 @@ outliers_filhos |>
   knitr::kable()
 ```
 
-Visualização: 
+Visualização:
 
 ```{r}
 numero_filhos_outlier <- unique(outliers_filhos$numero_filhos)
@@ -688,5 +662,3 @@ dados_z_score |>
        title = "Quantidade de filhos por trabalhador",
        subtitle = "Existe algum outlier?")
 ```
-
-
