@@ -364,7 +364,7 @@ ic_calculado_idade_origem |>
 
 Interpretando o gráfico, não há evidências para afirmar que as médias das idades são diferentes entre os grupos.
 
-Fazendo a ANOVA, para fins de confirmar:
+Fazendo a ANOVA, para fins de ter mais evidências sobre a resposta:
 
 ```{r}
 valor_f <- dados |> 
