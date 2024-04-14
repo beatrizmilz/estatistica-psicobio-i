@@ -1,0 +1,186 @@
+---
+title: "Lista prática 2"
+subtitle: "Estatística aplicada à psicobiologia I"
+format: html
+editor: visual
+lang: pt
+author: "Beatriz Milz"
+knitr:
+  opts_chunk: 
+    message: false
+    warning: false
+    echo: true
+toc: true
+code-fold: show
+code-link: true
+---
+
+```{r}
+library(tidyverse)
+library(infer)
+options(scipen = 9999)
+```
+
+```{r}
+dados_brutos <- haven::read_sav("alunos.sav") 
+```
+
+
+```{r}
+dados <- dados_brutos |> 
+  janitor::clean_names() |> 
+  tibble::rowid_to_column() |> 
+  dplyr::mutate(
+    grupo_cat = 
+      dplyr::case_when(grupo == 1 ~ "CDF",
+                       grupo == 2 ~ "Fundão")
+  )
+```
+
+
+
+```{r}
+dplyr::glimpse(dados)
+```
+
+
+Observe o banco de dados “Alunos.sav” a seguir. Neles estão descritos os dados referentes a avaliação de 120 alunos de uma escola e suas respectivas notas em uma série de 4 provas, além de uma classificação socioeconômica e seu “status” dentro da sala: ser da turma dos CDF ou da turma do Fundão.
+
+
+Dados: Nível de significância adotado – 5%.
+
+## Questão a)
+
+**Obtenha os valores de média e desvio padrão de cada uma das provas.**
+
+```{r}
+dados_provas_longo <- dados |> 
+  tidyr::pivot_longer(
+    cols = c(raclog, int_tex, ingles, redacao),
+    names_to = "prova",
+    values_to = "nota"
+  )
+```
+
+
+```{r}
+dados_provas_longo |>
+  dplyr::group_by(prova) |>
+  dplyr::summarise(media = mean(nota),
+                   desvio_padrao = sd(nota)) |>
+  knitr::kable()
+```
+
+
+
+
+## Questão b)
+
+**Obtenha os dados descritivos das provas em função do status dos alunos (CDF ou Fundão)**
+
+
+- Considerando os dois grupos de status:
+
+```{r}
+dados_provas_longo |> 
+  dplyr::group_by(grupo_cat) |> 
+  dplyr::summarise(
+    nota_media = mean(nota),
+    nota_mediana = median(nota),
+    nota_desvio_padrao = sd(nota)
+  ) |> 
+  knitr::kable()
+```
+- Considerando o status e a prova:
+```{r}
+dados_provas_longo |> 
+  dplyr::group_by(grupo_cat, prova) |> 
+  dplyr::summarise(
+    nota_media = mean(nota),
+    nota_mediana = median(nota),
+    nota_desvio_padrao = sd(nota)
+  ) |> 
+  knitr::kable()
+```
+
+- Visualizando os dados:
+
+```{r}
+dados_provas_longo |> 
+  ggplot() +
+  aes(x = prova, y = nota, fill = grupo_cat) +
+  geom_boxplot() + 
+  facet_wrap(~grupo_cat) + 
+  theme_minimal()
+```
+
+
+## Questão c)
+
+**As notas das provas possuem distribuição normal?**
+
+- Visualizando as distribuições:
+
+```{r}
+dados_provas_longo |> 
+  ggplot() +
+  aes(x = nota, fill = prova) +
+  geom_density() + 
+  facet_wrap(~prova) + 
+  theme_minimal()
+```
+
+Pelo gráfico, as notas da prova `int_tex` parecem ter distribuição próxima da normal.
+
+```{r}
+dados_provas_longo |> 
+  dplyr::group_by(prova) |> 
+  dplyr::summarise(
+    teste_normalidade = shapiro.test(nota) |> broom::tidy()
+  ) |> 
+  tidyr::unnest() |> 
+  dplyr::mutate(
+    normalidade = p.value > 0.05
+  ) |> 
+  knitr::kable()
+```
+
+
+O resultado teste Shapiro-wilk de normalidade concorda com a minha interpretação do gráfico de densidade: apenas a prova `int_tex` tem distribuição próxima da normal!
+
+
+## Questão d)
+
+**Existe diferença nas notas dos alunos em função da classificação socioeconômica?**
+
+## Questão e)
+
+**Existe diferença nas notas dos alunos em função do status dos alunos (CDF ou Fundão)?**
+
+
+## Questão f)
+
+**Existe associação significante entre a classificação socioeconômica e o status dos alunos na sala?**
+
+Nesse caso, faremos um Chi-Quadrado.
+
+Primeiro criamos a tabela de contingência e verificamos se todas as caselas tem pelo menos 4 alunos.
+
+```{r}
+dados_chi_quadrado <- janitor::tabyl(dados, grupo_cat, socio) |> 
+  glimpse()
+
+
+dados_chi_quadrado |> 
+  knitr::kable()
+```
+
+```{r}
+chi_quadrado <- dados |>
+  dplyr::select(grupo, socio) |>
+  chisq.test()
+
+chi_quadrado |> broom::tidy()
+```
+
+Não há evidências de que existe associação significativa entre a cllassificação socioeconômica e o status dos alunos na sala.

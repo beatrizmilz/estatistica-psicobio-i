@@ -299,7 +299,6 @@ dados |>
   theme_minimal()
 ```
 
-
 Testando a normalidade com o teste de Shapiro-Wilk:
 
 ```{r}
@@ -324,6 +323,7 @@ anova_filhos |>
   broom::tidy() |> 
   knitr::kable()
 ```
+
 O valor-p é maior que 5%, portanto não há diferença estatística na quantidade de filhos em função da região de origem.
 
 ### Idade média em função da região de origem
@@ -340,7 +340,7 @@ shapiro.test(dados$IDADE) |>
   knitr::kable()
 ```
 
-A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 95%. Com o resultado encontrado (p-valor = 0.99) podemos assumir a normalidade.
+A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 5%. Com o resultado encontrado (p-valor = 0.99) podemos assumir a normalidade.
 
 Agora para o teste estatístico: nesse caso a variável independente é a ORIGEM (com 3 categorias), e a variável dependente é a idade.
 
@@ -398,6 +398,7 @@ valor_f <- dados |>
 p_valor_teste_f <- pf(valor_f$stat, lower.tail = TRUE, df1 = 3 - 1, df2 = 36 - 3)
 p_valor_teste_f
 ```
+
 O valor-p é maior que 5%, portanto não rejeito a hipótese nula.
 
 ## Exercício 6
@@ -529,7 +530,6 @@ tibble(
   scale_y_continuous(limits = c(30, 40)) 
 ```
 
-
 ## Exercício 8
 
 **O salário desta amostra foi medido em três anos seguidos (06,07 e 08). Houve diferença entre o salário ao longo do tempo? (α=5%).**
@@ -579,7 +579,7 @@ Apenas o salário do ano 06 apresenta uma distribuição que podemos considerar 
 
 Então usar testes baseados na média não é uma boa idéia!
 
- Temos o salário (variável contínua) ao longo do tempo. Nesse caso, entendo o tempo como a variável independente, e o salário como variável dependente.
+Temos o salário (variável contínua) ao longo do tempo. Nesse caso, entendo o tempo como a variável independente, e o salário como variável dependente.
 
 Vamos usar o teste de análise de variância (ANOVA) para verificar se há diferença entre os salários ao longo do tempo.
 
@@ -593,8 +593,6 @@ anova_salario_tempo |>
 ```
 
 O valor de p é maior que 0.05, então não há diferença significativa entre os salários ao longo do tempo.
-
-
 
 ### Intervalo de confiança
 

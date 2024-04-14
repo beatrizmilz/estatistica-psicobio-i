@@ -1,0 +1,79 @@
+---
+title: "Lista teórica 6"
+subtitle: "Estatística aplicada à psicobiologia I"
+format: html
+editor: visual
+lang: pt
+author: "Beatriz Milz"
+knitr:
+  opts_chunk: 
+    message: false
+    warning: false
+    echo: true
+toc: true
+code-fold: show
+code-link: true
+---
+
+```{r}
+library(tidyverse)
+options(scipen = 9999)
+```
+
+
+```{r}
+dados <- readxl::read_excel("listas/lista-teorica-6/Roca da Serra do Sul.xls") |> 
+  janitor::clean_names()
+```
+
+```{r}
+dplyr::glimpse(dados)
+```
+
+
+## Questão 1
+
+1 - No banco de dados "Roça da Serra do Sul", queremos saber se existe diferença na idade entre homens e mulheres. Verifique os pré-requisitos para o teste no banco de dados e responda: qual é o teste mais indicado? 
+
+
+- Variável independente: Sexo
+
+- Variável dependente: Idade
+
+
+Visualizando os dados:
+
+```{r}
+dados |> 
+  ggplot(aes(x = age)) +
+  geom_histogram(bins = 10) +
+  facet_wrap(~sex)
+```
+
+Requisitos: 
+
+- Normalidade:
+
+```{r}
+shapiro.test(dados$age) |> 
+  broom::tidy() |> 
+  knitr::kable()
+```
+
+
+A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 5%. Com o resultado encontrado (p-valor próximo à 0) podemos assumir que não é normal.
+
+- Homogeneidade de variâncias:
+
+```{r}
+dados_separados_sexo <- dados |> 
+  dplyr::select(age, sex) |> 
+  dplyr::group_split(sex)
+```
+
+
+```{r}
+car::leveneTest(dados$age ~ dados$sex)
+```
+
+
