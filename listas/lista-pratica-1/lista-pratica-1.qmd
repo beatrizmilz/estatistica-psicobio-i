@@ -287,6 +287,19 @@ Variável independente: Região de origem - Categórica
 
 Variável dependente: Número de filhos - Numérica
 
+Visualizando os dados:
+
+```{r}
+dados |> 
+  group_by(ORIGEM) |> 
+  count(N_MERO_D) |> 
+  ggplot(aes(x = N_MERO_D, y = n, fill = ORIGEM)) +
+  geom_col() +
+  facet_wrap(~ORIGEM, ncol = 1) +
+  theme_minimal()
+```
+
+
 Testando a normalidade com o teste de Shapiro-Wilk:
 
 ```{r}
@@ -298,19 +311,20 @@ shapiro.test(dados$N_MERO_D) |>
 
 A quantidade de filhos não segue a distribuição normal.
 
-::: callout-important
-FAZER!
-:::
+Neste caso, o teste que faremos é uma ANOVA independente:
 
 ```{r}
-dados |> 
-  group_by(ORIGEM) |> 
-  count(N_MERO_D) |> 
-  ggplot(aes(x = N_MERO_D, y = n, fill = ORIGEM)) +
-  geom_col() +
-  facet_wrap(~ORIGEM, ncol = 1) +
-  theme_minimal()
+anova_filhos <- aov(N_MERO_D ~ ORIGEM, data = dados)
+
+anova_filhos
 ```
+
+```{r}
+anova_filhos |> 
+  broom::tidy() |> 
+  knitr::kable()
+```
+O valor-p é maior que 5%, portanto não há diferença estatística na quantidade de filhos em função da região de origem.
 
 ### Idade média em função da região de origem
 
@@ -373,7 +387,6 @@ valor_f <- dados |>
   calculate(stat = "F")
 ```
 
-
 ```{r}
 #     Graus de liberdade entre os grupos (df1) = k - 1
 #     Graus de liberdade dentro dos grupos (df2) = N - k
@@ -385,7 +398,7 @@ valor_f <- dados |>
 p_valor_teste_f <- pf(valor_f$stat, lower.tail = TRUE, df1 = 3 - 1, df2 = 36 - 3)
 p_valor_teste_f
 ```
-Não rejeito a hipótese nula.
+O valor-p é maior que 5%, portanto não rejeito a hipótese nula.
 
 ## Exercício 6
 
@@ -516,11 +529,6 @@ tibble(
   scale_y_continuous(limits = c(30, 40)) 
 ```
 
-### Outra opção: comparar com valor de referência
-
-::: callout-important
-FAZER!
-:::
 
 ## Exercício 8
 
@@ -571,11 +579,22 @@ Apenas o salário do ano 06 apresenta uma distribuição que podemos considerar 
 
 Então usar testes baseados na média não é uma boa idéia!
 
-::: callout-important
-Pensar em qual teste fazer. Temos o salário (variável contínua) ao longo do tempo. Nesse caso, entendo o tempo como a variável independente, e o salário como variável dependente.
+ Temos o salário (variável contínua) ao longo do tempo. Nesse caso, entendo o tempo como a variável independente, e o salário como variável dependente.
 
-Análise de variância? Ainda não vimos em aula!
-:::
+Vamos usar o teste de análise de variância (ANOVA) para verificar se há diferença entre os salários ao longo do tempo.
+
+```{r}
+anova_salario_tempo <-aov(valor_salario ~ ano_salario, data = salario_tempo) 
+
+
+anova_salario_tempo |> 
+  broom::tidy() |> 
+  knitr::kable()
+```
+
+O valor de p é maior que 0.05, então não há diferença significativa entre os salários ao longo do tempo.
+
+
 
 ### Intervalo de confiança
 
