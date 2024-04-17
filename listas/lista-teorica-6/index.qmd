@@ -20,9 +20,8 @@ library(tidyverse)
 options(scipen = 9999)
 ```
 
-
 ```{r}
-dados <- readxl::read_excel("listas/lista-teorica-6/Roca da Serra do Sul.xls") |> 
+dados <- readxl::read_excel("Roca da Serra do Sul.xls") |> 
   janitor::clean_names()
 ```
 
@@ -30,29 +29,61 @@ dados <- readxl::read_excel("listas/lista-teorica-6/Roca da Serra do Sul.xls") |
 dplyr::glimpse(dados)
 ```
 
-
 ## Questão 1
 
-1 - No banco de dados "Roça da Serra do Sul", queremos saber se existe diferença na idade entre homens e mulheres. Verifique os pré-requisitos para o teste no banco de dados e responda: qual é o teste mais indicado? 
+**1 - No banco de dados "Roça da Serra do Sul", queremos saber se existe diferença na idade entre homens e mulheres. Verifique os pré-requisitos para o teste no banco de dados e responda: qual é o teste mais indicado?**
+
+-   Variável independente: Sexo. Variável categórica.
+
+-   Variável dependente: Idade. Variável numérica discreta.
 
 
-- Variável independente: Sexo
+Quantidade de grupos na variável indepentende:
 
-- Variável dependente: Idade
+```{r}
+dados |>
+  dplyr::count(sex) |> 
+  knitr::kable()
+```
 
+Temos apenas 2 grupos.
+
+### Testando os pressupostos
+
+#### Normalidade
 
 Visualizando os dados:
 
 ```{r}
-dados |> 
+media_idade <- mean(dados$age, na.rm = TRUE)
+desvio_padrao_idade <- sd(dados$age, na.rm = TRUE)
+intervalo_idades <- 0:100
+
+# Simular uma curva caso esses valores fossem normais
+densidade_idade <-
+  dnorm(intervalo_idades, mean = media_idade, sd = desvio_padrao_idade)
+
+df_normal <- tibble::tibble(age = intervalo_idades,
+                            density = densidade_idade)
+
+dados |>
   ggplot(aes(x = age)) +
-  geom_histogram(bins = 10) +
-  facet_wrap(~sex)
+  geom_line(
+    data = df_normal,
+    aes(x = age, y = density),
+    color = "red",
+    alpha = 0.8
+  ) +
+  geom_density() +
+  theme_light() +
+  labs(title = "Distribuição da idade dos participantes da pesquisa",
+       x = "Idade",
+       y = "Densidade",
+       subtitle = "Curva em vermelho: simulação de uma curva normal, \n
+       segundo a média e desvio padrão encontrado nos dados; \n
+       Curva preta: dados reais.")
 ```
 
-Requisitos: 
-
-- Normalidade:
 
 ```{r}
 shapiro.test(dados$age) |> 
@@ -60,20 +91,287 @@ shapiro.test(dados$age) |>
   knitr::kable()
 ```
 
+A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 5%. Com o resultado encontrado (p-valor próximo à 0) podemos assumir que os dados não seguem a distribuição normal.
 
-A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 5%. Com o resultado encontrado (p-valor próximo à 0) podemos assumir que não é normal.
+#### Homogeneidade de variâncias
 
-- Homogeneidade de variâncias:
+Para isso, podemos fazer o teste de Levene.
 
-```{r}
-dados_separados_sexo <- dados |> 
-  dplyr::select(age, sex) |> 
-  dplyr::group_split(sex)
-```
-
+-   Hipótese nula: as variâncias são iguais.
+-   Hipótese alternativa: as variâncias são diferentes.
 
 ```{r}
 car::leveneTest(dados$age ~ dados$sex)
 ```
 
+Interpretando o resultado do teste de Levene:
 
+Neste caso, desejamos que o p-valor seja maior que 0.05, pois é desejável que as variâncias sejam iguais. Como o p-valor é igual à 0.05, rejeitamos a hipótese nula e assumimos que as variâncias são diferentes entre os grupos.
+
+Caso fosse usar o teste-t independente, ou ANOVA, teria que fazer a correção de Welch.
+
+Então a ideia é: é melhor usar um teste não paramétrico.
+
+Nossos dados não são pareados, e temos 2 grupos para a variável independente.
+
+Então, se formos usar um teste não paramétrico, o mais indicado seria o Mann-Whitney. Se formos usar um teste paramétrico, o mais indicado seria o teste t-independente.
+
+
+-   Dúvida: O N é suficiente? não é falado no texto.
+
+## Questão 2
+
+**2 - No banco de dados "Roça da Serra do Sul", queremos saber se existe diferença na idade entre homens e mulheres. Qual é a pergunta de pesquisa nesse caso?**
+
+Respondi: **Existe efeito do Sexo sobre a idade?**
+
+## Questão 3
+
+**3 - Faça o teste estatístico escolhido corretamente na questão 1 e responda a questão de pesquisa escolhida na questão 2.**
+
+### Teste t-independente (paramétrico):
+
+```{r}
+infer::t_test(
+  x = dados,
+  response = age,
+  explanatory = sex
+) |> 
+  knitr::kable()
+```
+-   Interpretação: Não temos evidências para afirmar que existe efeito do Sexo sobre a Idade.
+
+### Testando com Mann-Whitney (não paramétrico):
+
+Eu estava confusa, pois em todos os lugares que encontrei, falavam para usar a função `wilcox.test` para fazer o teste de Mann-Whitney. Porém, confunde com o nome do teste de Wilcoxon.
+
+Encontrei esse vídeo da Fernanda Peres, onde ela fala sobre isso: 
+<https://www.youtube.com/watch?v=ekvKa0HzeGo>
+
+Ainda estou insegura com isso... pesquisar mais.
+
+
+```{r}
+resultados_3_mw <- wilcox.test(age ~ sex, data = dados, exact = FALSE) |> 
+  broom::tidy()
+
+resultados_3_mw |> 
+  knitr::kable()
+```
+Interpretação: Não existe efeito do sexo sobre a idade.
+
+:::callout
+FAZER
+:::
+
+## Questão 4
+
+**4 - Em um artigo, um pesquisador escreveu na seção de métodos que seu estudo iria utilizar **150 participantes**. Porém, o revisor lendo a seção de resultados, observou que nos dados da ANOVA a notação estava `F(3,31)=1,43 p=0,001`. Com base nos valores de graus de liberdade diga qual o Tamanho da Amostra válida e o Número de grupos que o pesquisador tinha em seu estudo, respectivamente:**
+
+-   O que temos:
+
+  - 3 graus de liberdade dos grupos.
+
+  - 31 graus de liberdade da amostra.
+  
+
+> **RESPOSTA DA YNGRID VICTÓRIA CASSIANO MASCARENHAS**: 
+
+> Para determinar o tamanho da amostra válida e o número de grupos, podemos usar os graus de liberdade fornecidos na notação da ANOVA. 
+
+> Na notação `F(3,31)`, o primeiro número dentro dos parênteses representa os graus de liberdade entre os grupos (numerador) e o segundo número representa os graus de liberdade dentro dos grupos (denominador).  
+
+> Então, o número de grupos é dado pelos graus de liberdade entre os grupos mais 1, e o tamanho da amostra válida é a soma dos graus de liberdade entre e dentro dos grupos mais 1.
+> Nesse caso, temos: 
+
+> - Graus de liberdade entre os grupos: 3 (n +1 = x) 
+
+> - Graus de liberdade dentro dos grupos: 31 Portanto, o número de grupos é 3 + 1 = 4 e o tamanho da amostra válida é 3 + 31 + 1 = 35.
+
+
+Respondi: N=35 com 4 grupos.
+
+## Questão 5
+
+5 - Observe a tabela da ANOVA abaixo e calcule os valores de X e Y:
+
+![](images/clipboard-147295147.png)
+
+-   **ASSISTIR NA AULA QUE EU PERDI!**
+
+:::callout
+FAZER
+:::
+
+```{r}
+soma_dos_quadrados_entre_grupos <- 263.7
+media_dos_quadrados_entre_grupos <- 130.3
+soma_dos_quadrados_dentro_dos_grupos <- 4531.8
+soma_dos_quadrados_total <- 4792.5
+
+# media_dos_quadrados_dentro_dos_grupos <- Y
+```
+
+```{r}
+# dentro dos grupos
+# media_dos_quadrados_dentro_dos_grupos = soma_dos_quadrados_do_erro_dentro_dos_grupos/ graus_de_liberdade_do_erro_dentro_dos_grupos
+```
+
+
+
+## Questão 6 - FOI ANULADA
+
+## Questão 7
+
+**7 - Com base no banco de dados "Roça da Serra do Sul", queremos saber se o que as pessoas acham da vida delas (variável life) tem efeito sobre o número de horas que elas assistem tv (tvhours).**
+**Teste a variável dependente quanto aos pré-requisitos.**
+**Caso os pré-requisitos da VD não sejam atendidos, padronize a variável com base no método Z-escore e responda as perguntas.**
+**Qual o teste estatístico mais adequado para responder a pergunta de pesquisa proposta nesta questão?**
+
+---
+
+Variável independente: life
+Variável dependente: tvhours
+
+Quantas categorias temos na VI?
+
+```{r}
+dados |> 
+  dplyr::count(life) |> 
+  knitr::kable()
+```
+
+Opções de respostas:
+
+- Teste T - Teste paramétrico para 2 grupos. ão uso pois temos mais de 2 grupos.
+
+- [ ] ANOVA - Teste paramétrico para 2 ou mais grupos. 
+
+- Qui-Quadrado - Não uso pois temos 1 variável categórica, e 1 contínua. Para usar qui-quadrado, as duas deveriam ser categóricas.
+
+- [ ] Kruskall-Wallis - Teste não paramétrico para 2 ou mais grupos, similar ao ANOVA. 
+
+- Mann-Whitney - Teste não paramétrico para 2 grupos. Não uso, temos mais que 2 grupos.
+
+
+Agora a questão fica entre: uso um teste paramétrico ou não paramétrico?
+
+
+### Testando a normalidade
+
+```{r}
+media_tempo_tv <- mean(dados$tvhours, na.rm = TRUE)
+desvio_padrao_tempo_tv<- sd(dados$tvhours, na.rm = TRUE)
+intervalo_tempo_tv <- 0:24
+
+# Simular uma curva caso esses valores fossem normais
+densidade_tempo_tv <-
+  dnorm(intervalo_tempo_tv, mean = media_tempo_tv, sd = desvio_padrao_tempo_tv)
+
+df_tempo_tv_normal <-
+  tibble::tibble(tvhours = intervalo_tempo_tv, density = densidade_tempo_tv)
+
+dados |>
+  ggplot(aes(x = tvhours)) +
+  geom_line(
+    data = df_tempo_tv_normal,
+    aes(x = tvhours, y = density),
+    color = "red",
+    alpha = 0.8
+  ) +
+  geom_density() +
+  theme_light() +
+  labs(title = "Distribuição da idade dos participantes da pesquisa",
+       x = "Idade",
+       y = "Densidade",
+       subtitle = "Curva em vermelho: simulação de uma curva normal, \n
+       segundo a média e desvio padrão encontrado nos dados; \n
+       Curva preta: dados reais.")
+```
+
+Pelo gráfico já fica claro que os dados não seguem uma distribuição normal. Vamos fazer o teste de Shapiro-Wilk para confirmar.
+
+
+```{r}
+shapiro.test(dados$tvhours) |> 
+  broom::tidy() |> 
+  knitr::kable()
+```
+
+A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 5%. Com o resultado encontrado (p-valor próximo à 0) podemos assumir que os dados não seguem a distribuição normal.
+
+#### Homogeneidade de variâncias
+
+Para isso, podemos fazer o teste de Levene.
+
+-   Hipótese nula: as variâncias são iguais.
+-   Hipótese alternativa: as variâncias são diferentes.
+
+```{r}
+car::leveneTest(dados$tvhours ~ dados$life)
+```
+
+Interpretando o resultado do teste de Levene:
+
+Neste caso, desejamos que o p-valor seja maior que 0.05, pois é desejável que as variâncias sejam iguais. Como o p-valor é menor que 0.05, rejeitamos a hipótese nula e assumimos que as variâncias são diferentes entre os grupos.
+
+Caso fosse usar o teste-t independente, ou ANOVA, teria que fazer a correção de Welch.
+
+#### Calculando z-score de tvhours
+
+O exercício indica que, caso os pré-requisitos da VD não sejam atendidos, devemos padronizar a variável com base no método Z-escore.
+
+```{r}
+dados_zscore_tv <- dados |> 
+  dplyr::mutate(
+    media_tvhours = mean(tvhours, na.rm = TRUE),
+    desvio_padrao_tvhours = sd(tvhours, na.rm = TRUE),
+    z_score_tv_hours = (tvhours - media_tvhours) / desvio_padrao_tvhours)
+```
+
+
+#### Testando novamente
+
+```{r}
+dados_zscore_tv |>
+  ggplot(aes(x = z_score_tv_hours)) +
+  geom_density() +
+  theme_light()
+```
+
+
+Ainda está esquisito... 
+
+```{r}
+  car::leveneTest(dados_zscore_tv$z_score_tv_hours ~ dados$life)
+```
+Ainda não tem homogeneidade de variâncias.
+
+:::callout
+FAZER
+:::
+
+## Questão 8
+
+**8 - É necessário o uso de posthoc nesse caso?**
+
+
+Testes post-hoc são testes estatísticos que são realizados após o teste de ANOVA para identificar as diferenças significativas entre as médias de diferentes grupos.
+
+Usamos posthoc quando: a) o teste utilizado é a ANOVA; e b) o resultado é significativo.
+
+Resuminho que encontrei: <https://www.blog.psicometriaonline.com.br/o-que-e-um-teste-post-hoc/>
+
+:::callout
+FAZER
+:::
+
+
+## Questão 9
+
+**9 - Aplique o teste estatístico mais adequado e aplique teste posthoc caso necessário. Faça um parágrafo descrevendo os resultados, inclusive com as notações dos testes utilizados.**
+
+
+:::callout
+FAZER
+:::
