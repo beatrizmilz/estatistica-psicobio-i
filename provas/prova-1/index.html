@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Beatriz Milz">
+<title>Prova 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+</head>
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Índice</h2>
+   
+  <ul>
+<li><a href="#informa%C3%A7%C3%B5es-sobre-a-prova" id="toc-informações-sobre-a-prova" class="nav-link active" data-scroll-target="#informa%C3%A7%C3%B5es-sobre-a-prova">Informações sobre a prova</a></li>
+  <li>
+<a href="#dados-para-as-quest%C3%B5es-de-1-a-5" id="toc-dados-para-as-questões-de-1-a-5" class="nav-link" data-scroll-target="#dados-para-as-quest%C3%B5es-de-1-a-5">Dados para as questões de 1 a 5</a>
+  <ul class="collapse">
+<li><a href="#quest%C3%A3o-1" id="toc-questão-1" class="nav-link" data-scroll-target="#quest%C3%A3o-1">Questão 1</a></li>
+  <li><a href="#quest%C3%A3o-2" id="toc-questão-2" class="nav-link" data-scroll-target="#quest%C3%A3o-2">Questão 2</a></li>
+  <li><a href="#quest%C3%A3o-3" id="toc-questão-3" class="nav-link" data-scroll-target="#quest%C3%A3o-3">Questão 3</a></li>
+  <li><a href="#quest%C3%A3o-4" id="toc-questão-4" class="nav-link" data-scroll-target="#quest%C3%A3o-4">Questão 4</a></li>
+  <li><a href="#quest%C3%A3o-5" id="toc-questão-5" class="nav-link" data-scroll-target="#quest%C3%A3o-5">Questão 5</a></li>
+  </ul>
+</li>
+  </ul></nav>
+</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Prova 1</h1>
+<p class="subtitle lead">Estatística aplicada à psicobiologia I</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Beatriz Milz </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header><div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">9999</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="informações-sobre-a-prova" class="level2"><h2 class="anchored" data-anchor-id="informações-sobre-a-prova">Informações sobre a prova</h2>
+<p>Para cada questão, selecione o teste estatístico correto, as Variáveis Dependentes e Independentes caso existam e faça um parágrafo descrevendo os resultados encontrados com as notações específicas e também destacando aonde está a diferença significante, caso ela exista.</p>
+<p>Para todas as análises, adote nível de significancia de 5%</p>
+</section><section id="dados-para-as-questões-de-1-a-5" class="level1"><h1>Dados para as questões de 1 a 5</h1>
+<p>Os dados abaixo representam os Tempos Totais de Sono de 100 pacientes, declarado pelo paciente e medido por um teste real, chamado polissonografia.</p>
+<p>O objetivo era verificar se pacientes sem depressão (50) ou com depressão (50) têm uma boa percepção em relação ao tempo que de fato permanecem dormindo. NÃO É PARA FAZER CONTA ALGUMA, UTILIZE AS INFORMAÇÕES DA TABELA ABAIXO!</p>
+<p><img src="images/clipboard-792303048.png" class="img-fluid"></p>
+<section id="questão-1" class="level2"><h2 class="anchored" data-anchor-id="questão-1">Questão 1</h2>
+<p><strong>1 - Existe diferença estatística entre os grupos com depressão e sem depressão em função do tempo de sono dito pelo paciente?</strong></p>
+<p>Variável independente: Grupo (variável categórica, com 2 categorias: com depressão/sem depressão).</p>
+<p>Variável dependente: TTS dito pelo paciente (em minutos, variável numérica). Essa variável tem distribuição próxima à normal segundo o teste de Shapiro-Wilk, mas não apresenta homogeneidade das variâncias segundo o teste de Levenne.</p>
+<p>O teste escolhido foi o teste t independente. Nesse caso, é importante realizar a correção de Welch devido à não-homogeneidade das variâncias.</p>
+<p>A estatística T encontrada foi de 1,11, sendo menor que o valor crítico (T=1,22) para considerar o valor p &lt; 0.05. Portanto, não temos evidências para apontar que existe diferença estatística entre os grupos (depressão/sem depressão) em função do tempo de sono real medido para os pacientes.</p>
+</section><section id="questão-2" class="level2"><h2 class="anchored" data-anchor-id="questão-2">Questão 2</h2>
+<p><strong>2 - Existe diferença estatística entre os grupos com depressão e sem depressão em função do tempo de sono real medido pela polissonografia?</strong></p>
+<p>Variável independente: Grupo (variável categórica, com 2 categorias: com depressão/sem depressão).</p>
+<p>Variável dependente: TTS real (em minutos, variável numérica). Essa variável tem distribuição próxima à normal segundo o teste de Shapiro-Wilk, e apresenta homogeneidade das variâncias segundo o teste de Levenne.</p>
+<p>O teste escolhido foi o teste t independente.</p>
+<p>A estatística T encontrada foi de 6,28, sendo maior que o valor crítico (T=1,22) para considerar o valor p &lt; 0.05. Portanto, existe diferença estatística entre os grupos (depressão/sem depressão) em função do tempo de sono real medido para os pacientes.</p>
+</section><section id="questão-3" class="level2"><h2 class="anchored" data-anchor-id="questão-3">Questão 3</h2>
+<p><strong>3 - Existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para as pessoas com depressão?</strong></p>
+<p>Variável independente: categoria de TTS (variável categórica, com 2 categorias: TTS dito pelo paciente/TTS real).</p>
+<p>Variável dependente: tempo em minutos (em minutos, variável numérica).</p>
+<p>Neste caso, consideramos apenas o grupo de pessoas com depressão, e utilizamos um teste-t pareado. O resultado obtido foi T=7,22, sendo maior que o valor crítico (T=3,96) para considerar o valor p &lt; 0.05.</p>
+<p>Portanto, para as pessoas com depressão, existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para os pacientes com depressão.</p>
+</section><section id="questão-4" class="level2"><h2 class="anchored" data-anchor-id="questão-4">Questão 4</h2>
+<p><strong>4 - Existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para as pessoas sem depressão?</strong></p>
+<p>Variável independente: categoria de TTS (variável categórica, com 2 categorias: TTS dito pelo paciente/TTS real).</p>
+<p>Variável dependente: tempo em minutos (em minutos, variável numérica).</p>
+<p>Neste caso, consideramos apenas o grupo de pessoas sem depressão, e utilizamos um teste-t pareado. O resultado obtido foi T=3,09, sendo menor que o valor crítico (T=3,96) para considerar o valor p &lt; 0.05.</p>
+<p>Portanto, para as pessoas com depressão, não existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para os pacientes com depressão.</p>
+</section><section id="questão-5" class="level2"><h2 class="anchored" data-anchor-id="questão-5">Questão 5</h2>
+<p><strong>5 - Supondo que pessoas em geral costumam dormir em média 8 horas por noite (480 minutos), podemos dizer que toda nossa amostra (independentemente da presença de depressão ou não) possui valor médio <em>semelhante</em> de tempo total de sono real em relação a média esperada populacional?</strong></p>
+<ul>
+<li><p>Média amostral = 460,4</p></li>
+<li><p>Média populacional = 480</p></li>
+</ul>
+<p>Vou calcular o intervalo de confiança da média amostral:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">media_amostral_tts_sr</span> <span class="op">&lt;-</span> <span class="fl">460.4</span></span>
+<span><span class="va">dp_amostral_tts_sr</span> <span class="op">&lt;-</span> <span class="fl">18.4</span></span>
+<span><span class="va">n_amostral_tts_sr</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fl">1.96</span> <span class="co"># para nível de significancia 5%</span></span>
+<span></span>
+<span><span class="va">ic_incompleto</span> <span class="op">&lt;-</span> <span class="va">z</span> <span class="op">*</span> <span class="op">(</span><span class="va">dp_amostral_tts_sr</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n_amostral_tts_sr</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ic_tts_sr</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">media_amostral_tts_sr</span> <span class="op">-</span> <span class="va">ic_incompleto</span>,</span>
+<span>    <span class="va">media_amostral_tts_sr</span> <span class="op">+</span> <span class="va">ic_incompleto</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tab_media</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  media <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">460.4</span>, <span class="fl">480</span><span class="op">)</span>,</span>
+<span>  tipo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"amostral"</span>, <span class="st">"populacional"</span><span class="op">)</span>,</span>
+<span>  media_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ic_tts_sr</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  media_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ic_tts_sr</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="cn">NA</span><span class="op">)</span>,  </span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tab_media</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">media</th>
+<th style="text-align: left;">tipo</th>
+<th style="text-align: right;">media_min</th>
+<th style="text-align: right;">media_max</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">460.4</td>
+<td style="text-align: left;">amostral</td>
+<td style="text-align: right;">456.7936</td>
+<td style="text-align: right;">464.0064</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">480.0</td>
+<td style="text-align: left;">populacional</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tab_media</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tipo</span>, y <span class="op">=</span> <span class="va">media</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">media_min</span>, ymax <span class="op">=</span> <span class="va">media_max</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">450</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Sim com p menor que 5%. A amostra possui valor médio de sono semelhante a média populacional</p></li>
+<li><p>Sim com p maior que 5%. A amostra possui valor médio de sono maior do que a média populacional</p></li>
+<li><p><label><input type="checkbox" checked=""><strong>Não</strong> com p menor que 5% A amostra possui valor médio de <strong>sono menor</strong> do que a média populacional</label></p></li>
+<li><p><strong>Não</strong> com p maior que 5%. A amostra possui valor médio de <strong>sono menor</strong> do que a média populacional</p></li>
+<li><p>Não com p maior que 5%. A amostra possui valor médio de sono semelhante a média populacional</p></li>
+<li><p>Sim com p maior que 5%. A amostra possui valor médio de sono menor do que a média populacional</p></li>
+<li><p>Não temos informações suficientes</p></li>
+</ul></section></section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

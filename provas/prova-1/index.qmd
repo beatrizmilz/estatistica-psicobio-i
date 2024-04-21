@@ -1,0 +1,158 @@
+---
+title: "Prova 1"
+subtitle: "Estatística aplicada à psicobiologia I"
+format: html
+editor: visual
+lang: pt
+author: "Beatriz Milz"
+knitr:
+  opts_chunk: 
+    message: false
+    warning: false
+    echo: true
+toc: true
+code-fold: show
+code-link: true
+---
+
+```{r}
+library(tidyverse)
+options(scipen = 9999)
+```
+
+## Informações sobre a prova
+
+Para cada questão, selecione o teste estatístico correto, as Variáveis Dependentes e Independentes caso existam e faça um parágrafo descrevendo os resultados encontrados com as notações específicas e também destacando aonde está a diferença significante, caso ela exista.
+
+Para todas as análises, adote nível de significancia de 5%
+
+# Dados para as questões de 1 a 5
+
+Os dados abaixo representam os Tempos Totais de Sono de 100 pacientes, declarado pelo paciente e medido por um teste real, chamado polissonografia.
+
+O objetivo era verificar se pacientes sem depressão (50) ou com depressão (50) têm uma boa percepção em relação ao tempo que de fato permanecem dormindo. NÃO É PARA FAZER CONTA ALGUMA, UTILIZE AS INFORMAÇÕES DA TABELA ABAIXO!
+
+![](images/clipboard-792303048.png)
+
+## Questão 1
+
+**1 - Existe diferença estatística entre os grupos com depressão e sem depressão em função do tempo de sono dito pelo paciente?**
+
+Variável independente: Grupo (variável categórica, com 2 categorias: com depressão/sem depressão).
+
+Variável dependente: TTS dito pelo paciente (em minutos, variável numérica). Essa variável tem distribuição próxima à normal segundo o teste de Shapiro-Wilk, mas não apresenta homogeneidade das variâncias segundo o teste de Levenne.
+
+O teste escolhido foi o teste t independente. Nesse caso, é importante realizar a correção de Welch devido à não-homogeneidade das variâncias.
+
+A estatística T encontrada foi de 1,11, sendo menor que o valor crítico (T=1,22) para considerar o valor p < 0.05. Portanto, não temos evidências para apontar que existe diferença estatística entre os grupos (depressão/sem depressão) em função do tempo de sono real medido para os pacientes.
+
+
+## Questão 2
+
+**2 - Existe diferença estatística entre os grupos com depressão e sem depressão em função do tempo de sono real medido pela polissonografia?**
+
+
+Variável independente: Grupo (variável categórica, com 2 categorias: com depressão/sem depressão).
+
+Variável dependente: TTS real (em minutos, variável numérica). Essa variável tem distribuição próxima à normal segundo o teste de Shapiro-Wilk, e apresenta homogeneidade das variâncias segundo o teste de Levenne.
+
+O teste escolhido foi o teste t independente. 
+
+A estatística T encontrada foi de 6,28, sendo maior que o valor crítico (T=1,22) para considerar o valor p < 0.05. Portanto, existe diferença estatística entre os grupos (depressão/sem depressão) em função do tempo de sono real medido para os pacientes.
+
+
+## Questão 3 
+
+**3 - Existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para as pessoas com depressão?**
+
+
+Variável independente: categoria de TTS (variável categórica, com 2 categorias: TTS dito pelo paciente/TTS real).
+
+Variável dependente: tempo em minutos (em minutos, variável numérica). 
+
+Neste caso, consideramos apenas o grupo de pessoas com depressão, e utilizamos um teste-t pareado. O resultado obtido foi T=7,22, sendo maior que o valor crítico (T=3,96) para considerar o valor p < 0.05.
+
+Portanto, para as pessoas com depressão, existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para os pacientes com depressão.
+
+
+
+## Questão 4
+
+**4 - Existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para as pessoas sem depressão?**
+
+Variável independente: categoria de TTS (variável categórica, com 2 categorias: TTS dito pelo paciente/TTS real).
+
+Variável dependente: tempo em minutos (em minutos, variável numérica). 
+
+Neste caso, consideramos apenas o grupo de pessoas sem depressão, e utilizamos um teste-t pareado. O resultado obtido foi T=3,09, sendo menor que o valor crítico (T=3,96) para considerar o valor p < 0.05.
+
+Portanto, para as pessoas com depressão, não existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para os pacientes com depressão.
+
+
+
+## Questão 5
+
+**5 - Supondo que pessoas em geral costumam dormir em média 8 horas por noite (480 minutos), podemos dizer que toda nossa amostra (independentemente da presença de depressão ou não) possui valor médio _semelhante_ de tempo total de sono real em relação a média esperada populacional?**
+
+
+- Média amostral = 460,4
+
+- Média populacional = 480
+
+
+Vou calcular o intervalo de confiança da média amostral:
+
+```{r}
+media_amostral_tts_sr <- 460.4
+dp_amostral_tts_sr <- 18.4
+n_amostral_tts_sr <- 100
+
+z <- 1.96 # para nível de significancia 5%
+
+ic_incompleto <- z * (dp_amostral_tts_sr / sqrt(n_amostral_tts_sr))
+
+ic_tts_sr <-
+  c(media_amostral_tts_sr - ic_incompleto,
+    media_amostral_tts_sr + ic_incompleto)
+```
+
+```{r}
+tab_media <- tibble::tibble(
+  media = c(460.4, 480),
+  tipo = c("amostral", "populacional"),
+  media_min = c(ic_tts_sr[1], NA),
+  media_max = c(ic_tts_sr[2], NA),  
+)
+
+tab_media |> 
+  knitr::kable()
+```
+
+```{r}
+tab_media |>
+  ggplot(aes(x = tipo, y = media)) +
+  geom_errorbar(aes(ymin = media_min, ymax = media_max)) +
+  geom_point(color = "red") +
+  theme_minimal() + 
+  scale_y_continuous(limits = c(450, 500))
+```
+
+- Sim com p menor que 5%. A amostra possui valor médio de sono semelhante a média populacional
+
+
+- Sim com p maior que 5%. A amostra possui valor médio de sono maior do que a média populacional
+
+
+- [x] **Não** com p menor que 5% A amostra possui valor médio de **sono menor** do que a média populacional
+
+
+- **Não** com p maior que 5%. A amostra possui valor médio de **sono menor** do que a média populacional
+
+
+- Não com p maior que 5%. A amostra possui valor médio de sono semelhante a média populacional
+
+
+- Sim com p maior que 5%. A amostra possui valor médio de sono menor do que a média populacional
+
+
+- Não temos informações suficientes
