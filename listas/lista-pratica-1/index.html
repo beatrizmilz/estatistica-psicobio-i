@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Beatriz Milz">
+<title>Lista Prática 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="lista-pratica-1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lista-pratica-1_files/libs/quarto-html/quarto.js"></script>
+<script src="lista-pratica-1_files/libs/quarto-html/popper.min.js"></script>
+<script src="lista-pratica-1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lista-pratica-1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lista-pratica-1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lista-pratica-1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lista-pratica-1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lista-pratica-1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lista-pratica-1_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+</head>
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Índice</h2>
+   
+  <ul>
+<li><a href="#instru%C3%A7%C3%B5es" id="toc-instruções" class="nav-link active" data-scroll-target="#instru%C3%A7%C3%B5es">Instruções</a></li>
+  <li><a href="#pacote-infer" id="toc-pacote-infer" class="nav-link" data-scroll-target="#pacote-infer">Pacote infer</a></li>
+  <li><a href="#fun%C3%A7%C3%B5es-auxiliares" id="toc-funções-auxiliares" class="nav-link" data-scroll-target="#fun%C3%A7%C3%B5es-auxiliares">Funções auxiliares</a></li>
+  <li>
+<a href="#exerc%C3%ADcios-de-estat%C3%ADstica-descritiva" id="toc-exercícios-de-estatística-descritiva" class="nav-link" data-scroll-target="#exerc%C3%ADcios-de-estat%C3%ADstica-descritiva">Exercícios de estatística descritiva</a>
+  <ul class="collapse">
+<li><a href="#exerc%C3%ADcio-1" id="toc-exercício-1" class="nav-link" data-scroll-target="#exerc%C3%ADcio-1">Exercício 1</a></li>
+  <li>
+<a href="#exerc%C3%ADcio-2" id="toc-exercício-2" class="nav-link" data-scroll-target="#exerc%C3%ADcio-2">Exercício 2</a>
+  <ul class="collapse">
+<li><a href="#estado-civil" id="toc-estado-civil" class="nav-link" data-scroll-target="#estado-civil">Estado Civil</a></li>
+  <li><a href="#grau-de-escolaridade" id="toc-grau-de-escolaridade" class="nav-link" data-scroll-target="#grau-de-escolaridade">Grau de escolaridade</a></li>
+  <li><a href="#regi%C3%A3o-de-origem" id="toc-região-de-origem" class="nav-link" data-scroll-target="#regi%C3%A3o-de-origem">Região de origem</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#exerc%C3%ADcio-3" id="toc-exercício-3" class="nav-link" data-scroll-target="#exerc%C3%ADcio-3">Exercício 3</a>
+  <ul class="collapse">
+<li><a href="#estado-civil-1" id="toc-estado-civil-1" class="nav-link" data-scroll-target="#estado-civil-1">Estado Civil</a></li>
+  <li><a href="#grau-de-escolaridade-1" id="toc-grau-de-escolaridade-1" class="nav-link" data-scroll-target="#grau-de-escolaridade-1">Grau de escolaridade</a></li>
+  <li><a href="#regi%C3%A3o-de-origem-1" id="toc-região-de-origem-1" class="nav-link" data-scroll-target="#regi%C3%A3o-de-origem-1">Região de origem</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#exerc%C3%ADcio-5" id="toc-exercício-5" class="nav-link" data-scroll-target="#exerc%C3%ADcio-5">Exercício 5</a>
+  <ul class="collapse">
+<li><a href="#idade-m%C3%A9dia-por-estado-civil" id="toc-idade-média-por-estado-civil" class="nav-link" data-scroll-target="#idade-m%C3%A9dia-por-estado-civil">Idade média por estado Civil</a></li>
+  <li><a href="#sal%C3%A1rio-m%C3%A9dio-por-estado-civil" id="toc-salário-médio-por-estado-civil" class="nav-link" data-scroll-target="#sal%C3%A1rio-m%C3%A9dio-por-estado-civil">Salário médio por estado civil</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#exerc%C3%ADcios-com-testes-estat%C3%ADsticos" id="toc-exercícios-com-testes-estatísticos" class="nav-link" data-scroll-target="#exerc%C3%ADcios-com-testes-estat%C3%ADsticos">Exercícios com testes estatísticos</a>
+  <ul class="collapse">
+<li>
+<a href="#exerc%C3%ADcio-4" id="toc-exercício-4" class="nav-link" data-scroll-target="#exerc%C3%ADcio-4">Exercício 4</a>
+  <ul class="collapse">
+<li><a href="#n%C3%BAmero-de-filhos-em-fun%C3%A7%C3%A3o-da-regi%C3%A3o-de-origem" id="toc-número-de-filhos-em-função-da-região-de-origem" class="nav-link" data-scroll-target="#n%C3%BAmero-de-filhos-em-fun%C3%A7%C3%A3o-da-regi%C3%A3o-de-origem">Número de filhos em função da região de origem</a></li>
+  <li><a href="#idade-m%C3%A9dia-em-fun%C3%A7%C3%A3o-da-regi%C3%A3o-de-origem" id="toc-idade-média-em-função-da-região-de-origem" class="nav-link" data-scroll-target="#idade-m%C3%A9dia-em-fun%C3%A7%C3%A3o-da-regi%C3%A3o-de-origem">Idade média em função da região de origem</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#exerc%C3%ADcio-6" id="toc-exercício-6" class="nav-link" data-scroll-target="#exerc%C3%ADcio-6">Exercício 6</a>
+  <ul class="collapse">
+<li><a href="#pressupostos-do-qui-quadrado" id="toc-pressupostos-do-qui-quadrado" class="nav-link" data-scroll-target="#pressupostos-do-qui-quadrado">Pressupostos do Qui-quadrado</a></li>
+  <li><a href="#chi-quadrado" id="toc-chi-quadrado" class="nav-link" data-scroll-target="#chi-quadrado">Chi-quadrado</a></li>
+  <li><a href="#teste-exato-de-fisher" id="toc-teste-exato-de-fisher" class="nav-link" data-scroll-target="#teste-exato-de-fisher">Teste exato de Fisher</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#exerc%C3%ADcio-7" id="toc-exercício-7" class="nav-link" data-scroll-target="#exerc%C3%ADcio-7">Exercício 7</a>
+  <ul class="collapse">
+<li><a href="#normalidade" id="toc-normalidade" class="nav-link" data-scroll-target="#normalidade">Normalidade</a></li>
+  <li><a href="#intervalo-de-confian%C3%A7a" id="toc-intervalo-de-confiança" class="nav-link" data-scroll-target="#intervalo-de-confian%C3%A7a">Intervalo de confiança</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#exerc%C3%ADcio-8" id="toc-exercício-8" class="nav-link" data-scroll-target="#exerc%C3%ADcio-8">Exercício 8</a>
+  <ul class="collapse">
+<li><a href="#testando-normalidade" id="toc-testando-normalidade" class="nav-link" data-scroll-target="#testando-normalidade">Testando normalidade</a></li>
+  <li><a href="#intervalo-de-confian%C3%A7a-1" id="toc-intervalo-de-confiança-1" class="nav-link" data-scroll-target="#intervalo-de-confian%C3%A7a-1">Intervalo de confiança</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#exerc%C3%ADcios-de-an%C3%A1lise-de-outlier" id="toc-exercícios-de-análise-de-outlier" class="nav-link" data-scroll-target="#exerc%C3%ADcios-de-an%C3%A1lise-de-outlier">Exercícios de análise de outlier</a>
+  <ul class="collapse">
+<li><a href="#exerc%C3%ADcio-9" id="toc-exercício-9" class="nav-link" data-scroll-target="#exerc%C3%ADcio-9">Exercício 9</a></li>
+  </ul>
+</li>
+  </ul></nav>
+</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Lista Prática 1</h1>
+<p class="subtitle lead">Análise de Dados aplicados a Psicobiologia</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Beatriz Milz </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="instruções" class="level2"><h2 class="anchored" data-anchor-id="instruções">Instruções</h2>
+<p>A tabela <code>lista de exercícios.sta</code> apresenta os dados de 36 trabalhadores de uma empresa.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Carregando pacotes</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Carregando os dados</span></span>
+<span><span class="co"># Renomeei os dados para: dados.sav</span></span>
+<span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/read_spss.html">read_sav</a></span><span class="op">(</span><span class="st">"dados.sav"</span><span class="op">)</span> </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Observações:</p>
+<p>1- Verifique a normalidade das variáveis antes de escolher o teste. Justifique a escolha de cada um dos testes que você for utilizar.</p>
+<p>2- Não se esqueça de dizer quais são as variáveis dependentes e independentes para cada teste.</p>
+</section><section id="pacote-infer" class="level2"><h2 class="anchored" data-anchor-id="pacote-infer">Pacote infer</h2>
+<p>Em alguns exercícios, usei o <a href="https://infer.netlify.app/">infer</a>, para treinar. Ele faz parte do pacote <a href="https://tidymodels.tidymodels.org">tidymodels</a>.</p>
+<p>Referências:</p>
+<ul>
+<li><p><a href="https://infer.netlify.app/articles/chi_squared" class="uri">https://infer.netlify.app/articles/chi_squared</a></p></li>
+<li><p><a href="https://www.tmwr.org/inferential" class="uri">https://www.tmwr.org/inferential</a></p></li>
+<li><p><a href="https://www.tidymodels.org/learn/statistics/infer/" class="uri">https://www.tidymodels.org/learn/statistics/infer/</a></p></li>
+<li><p><a href="https://www.tidymodels.org/learn/statistics/xtabs/" class="uri">https://www.tidymodels.org/learn/statistics/xtabs/</a></p></li>
+</ul>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymodels/infer">infer</a></span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="funções-auxiliares" class="level2"><h2 class="anchored" data-anchor-id="funções-auxiliares">Funções auxiliares</h2>
+<p>Criei essa função para calcular o intervalo de confiança de médias.</p>
+<p>Porém foi para treinar. Deve haver funções já implementadas e mais robustas!</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">intervalo_de_confianca_media</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">media</span>, <span class="va">desvio_padrao</span>, <span class="va">tamanho_amostra</span>, <span class="va">confianca</span> <span class="op">=</span> <span class="fl">95</span><span class="op">)</span><span class="op">{</span></span>
+<span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">confianca</span> <span class="op">==</span> <span class="fl">99</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">z</span> <span class="op">&lt;-</span> <span class="fl">2.58</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">confianca</span> <span class="op">==</span> <span class="fl">95</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">z</span> <span class="op">&lt;-</span> <span class="fl">1.96</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">confianca</span> <span class="op">==</span> <span class="fl">90</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">z</span> <span class="op">&lt;-</span> <span class="fl">1.65</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/ui.html">ui_stop</a></span><span class="op">(</span><span class="st">"Escolha dentre os seguintes níveis de confiança: 90%, 95% ou 99%."</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>    <span class="va">erro_padrao_calc</span> <span class="op">&lt;-</span> <span class="va">desvio_padrao</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">tamanho_amostra</span><span class="op">)</span></span>
+<span>  </span>
+<span>    <span class="va">valor_intervalo</span> <span class="op">&lt;-</span> <span class="va">erro_padrao_calc</span> <span class="op">*</span> <span class="va">z</span></span>
+<span>    </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>ic_min <span class="op">=</span> <span class="va">media</span> <span class="op">-</span> <span class="va">valor_intervalo</span>, ic_max <span class="op">=</span> <span class="va">media</span> <span class="op">+</span> <span class="va">valor_intervalo</span><span class="op">)</span></span>
+<span>    </span>
+<span><span class="op">}</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="exercícios-de-estatística-descritiva" class="level1"><h1>Exercícios de estatística descritiva</h1>
+<section id="exercício-1" class="level2"><h2 class="anchored" data-anchor-id="exercício-1">Exercício 1</h2>
+<p><strong>Descreva cada uma das variáveis presentes no banco de dados. Qual o nível de mensuração de cada uma delas?</strong></p>
+<p>A tabela apresenta os dados de 36 trabalhadores de uma empresa.</p>
+<p>Um pouco sobre a base dos dados:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Rows: 36
+Columns: 8
+$ ESTADO_C &lt;chr&gt; "Solteiro", "Casado", "Casado", "Solteiro", "Solteiro", "Casa…
+$ GRAU_DE  &lt;chr&gt; "1o. Grau", "1o. Grau", "1o. Grau", "2o. Grau", "1o. Grau", "…
+$ N_MERO_D &lt;dbl&gt; 0, 1, 2, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 3, 0, 0, 1, 2, 0, 0, 1…
+$ SAL_RIO  &lt;dbl&gt; 4.00, 4.56, 5.25, 5.73, 6.26, 6.66, 6.86, 7.39, 7.59, 7.44, 8…
+$ IDADE    &lt;dbl&gt; 26, 32, 36, 20, 40, 28, 41, 43, 34, 23, 33, 27, 37, 44, 30, 3…
+$ ORIGEM   &lt;chr&gt; "interior", "capital", "capital", "outro", "outro", "interior…
+$ SAL_RIO1 &lt;dbl&gt; 4.56, 5.25, 5.73, 6.26, 6.66, 6.86, 7.39, 9.35, 9.77, 9.80, 1…
+$ SAL_RIO2 &lt;dbl&gt; 6.86, 7.39, 7.59, 7.44, 8.12, 4.00, 6.66, 6.86, 7.39, 7.59, 7…</code></pre>
+</div>
+</div>
+<p>“<strong>ESTADO_C</strong>” - Variável que representa o estado civil da pessoa. Neste caso, as categorias presentes são: Casado, Solteiro. É uma variável qualitativa categórica nominal (apresenta categorias, mas sem uma ordem definida).&nbsp;</p>
+<p>“<strong>GRAU_DE</strong>” - Variável que representa o grau de instrução da pessoa. Apresenta as seguintes categorias: 1o. Grau,&nbsp; 2o. Grau e Superior. É uma variável qualitativa categórica ordinal (apresenta categorias, e essas categorias apresentam uma ordem: as pessoas primeiramente cursam o primeiro grau, depois o segundo grau, e depois o ensino superior).</p>
+<p>“<strong>N_MERO_D</strong>” - Variável que representa uma contagem, que varia entre 0 e 5, portanto é uma variável quantitativa discreta. Apesar do nome não deixar claro o que a variável representa, caso fosse necessário realizar um “chute”, seria que a variável representa o número de filhos que essa pessoa tem (existe apenas 1 pessoa com 5 filhos e essa pessoa tem 40 anos, o mais comum é não ter filhos, etc.).</p>
+<p>“<strong>SAL_RIO</strong>” -&nbsp; Variável quantitativa contínua, que representa o salário da pessoa. Os valores estão entre 4.0 e 23.3. Provavelmente é o valor do salário por hora.</p>
+<p>“<strong>IDADE</strong>” - Variável que representa a idade da pessoa, apresentando idades entre 20 e 48 anos. É uma variável quantitativa discreta, pois apenas apresenta números inteiros.</p>
+<p>“<strong>ORIGEM</strong>” - Variável qualitativa categórica nominal que apresenta a região de origem da pessoa, baseada nas seguintes categorias: capital, interior, outros.</p>
+<p>“<strong>SAL_RIO1</strong>” - Variável quantitativa contínua que apresenta o valor do salário, mas como já existe uma variável “SAL_RIO”, não ficou claro para mim sobre qual salário se refere. Os valores apresentados estão entre 2.5 e 23.3. O exercício 8 aponta que essas variáveis sobre salário se referem ao salário em 3 anos seguidos:&nbsp; <strong>SAL_RIO (</strong>06), <strong>SAL_RIO1 (</strong>07) e <strong>SAL_RIO2 (</strong>08).&nbsp;</p>
+<p>“<strong>SAL_RIO2</strong>” - Variável quantitativa contínua que apresenta o valor do salário, mas como já existe uma variável “SAL_RIO”, não ficou claro para mim sobre qual salário se refere. Os valores apresentados estão entre 2 e 44.&nbsp; O exercício 8 aponta que essas variáveis sobre salário se referem ao salário em 3 anos seguidos:&nbsp; <strong>SAL_RIO (</strong>06), <strong>SAL_RIO1 (</strong>07) e <strong>SAL_RIO2 (</strong>08).</p>
+</section><section id="exercício-2" class="level2"><h2 class="anchored" data-anchor-id="exercício-2">Exercício 2</h2>
+<p><strong>Construa tabelas de freqüências para os dados referentes ao grau de instrução, estado civil e região de origem.</strong></p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">criar_tabela_frequencia</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dados</span>, <span class="va">variavel</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Coisa horrorosa! Melhorar isso, Beatriz</span></span>
+<span>  <span class="va">Categoria</span> <span class="op">&lt;-</span> <span class="va">dados</span><span class="op">[[</span><span class="va">variavel</span><span class="op">]</span><span class="op">]</span></span>
+<span>  </span>
+<span>  </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">Categoria</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>percent <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">(</span><span class="va">percent</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="st">"Frequência Absoluta"</span> <span class="op">=</span> <span class="va">n</span>,</span>
+<span>            <span class="st">"Frequência Relativa"</span> <span class="op">=</span> <span class="va">percent</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>  </span>
+<span>    </span>
+<span><span class="op">}</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="estado-civil" class="level3"><h3 class="anchored" data-anchor-id="estado-civil">Estado Civil</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">criar_tabela_frequencia</span><span class="op">(</span><span class="va">dados</span>, <span class="st">"ESTADO_C"</span><span class="op">)</span> </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: right;">Frequência Absoluta</th>
+<th style="text-align: left;">Frequência Relativa</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Casado</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">56%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solteiro</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">44%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section><section id="grau-de-escolaridade" class="level3"><h3 class="anchored" data-anchor-id="grau-de-escolaridade">Grau de escolaridade</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">criar_tabela_frequencia</span><span class="op">(</span><span class="va">dados</span>, <span class="st">"GRAU_DE"</span><span class="op">)</span> </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: right;">Frequência Absoluta</th>
+<th style="text-align: left;">Frequência Relativa</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1o. Grau</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">33%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2o. Grau</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">50%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">superior</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">17%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section><section id="região-de-origem" class="level3"><h3 class="anchored" data-anchor-id="região-de-origem">Região de origem</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">criar_tabela_frequencia</span><span class="op">(</span><span class="va">dados</span>, <span class="st">"ORIGEM"</span><span class="op">)</span> </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: right;">Frequência Absoluta</th>
+<th style="text-align: left;">Frequência Relativa</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">capital</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">30.6%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">interior</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">33.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">outro</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">36.1%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section></section><section id="exercício-3" class="level2"><h2 class="anchored" data-anchor-id="exercício-3">Exercício 3</h2>
+<p><strong>Represente graficamente estas tabelas (utilizando pelo menos 2 tipos diferentes de gráficos)</strong></p>
+<section id="estado-civil-1" class="level3"><h3 class="anchored" data-anchor-id="estado-civil-1">Estado Civil</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>VAR <span class="op">=</span> <span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">VAR</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    VAR_PORC <span class="op">=</span> <span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    VAR_PORC_100 <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">(</span><span class="va">VAR_PORC</span><span class="op">)</span>,</span>
+<span>    VAR_TEXTO <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span><span class="op">(</span><span class="va">VAR</span><span class="op">)</span>, <span class="st">" - "</span>, <span class="va">VAR_PORC_100</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="va">VAR_PORC</span>, fill <span class="op">=</span> <span class="va">VAR_TEXTO</span><span class="op">)</span>,</span>
+<span>           stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>           width <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_polar.html">coord_polar</a></span><span class="op">(</span>theta <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Trabalhadores por Estado Civil"</span>,</span>
+<span>       fill <span class="op">=</span> <span class="st">"Estado Civil"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="grau-de-escolaridade-1" class="level3"><h3 class="anchored" data-anchor-id="grau-de-escolaridade-1">Grau de escolaridade</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">GRAU_DE</span>, fill <span class="op">=</span> <span class="va">GRAU_DE</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Trabalhadores por Grau de escolaridade"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Grau de escolaridade"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Número de trabalhadores"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="região-de-origem-1" class="level3"><h3 class="anchored" data-anchor-id="região-de-origem-1">Região de origem</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ORIGEM</span>, fill <span class="op">=</span> <span class="va">ORIGEM</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Trabalhadores por região de origem"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Região de origem"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Número de trabalhadores"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="exercício-5" class="level2"><h2 class="anchored" data-anchor-id="exercício-5">Exercício 5</h2>
+<p><strong>Calcule o salário médio e a idade média dos solteiros e dos casados.</strong></p>
+<section id="idade-média-por-estado-civil" class="level3"><h3 class="anchored" data-anchor-id="idade-média-por-estado-civil">Idade média por estado Civil</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    media_idade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">IDADE</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Estado civil"</span>, <span class="st">"Idade média"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">Estado civil</th>
+<th style="text-align: right;">Idade média</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Casado</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solteiro</td>
+<td style="text-align: right;">34</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Idade média:</p>
+<ul>
+<li><p>Solteiros: aproximadamente 34 anos (33,9)</p></li>
+<li><p>Casados: aproximadamente 35 anos (35,2)</p></li>
+</ul></section><section id="salário-médio-por-estado-civil" class="level3"><h3 class="anchored" data-anchor-id="salário-médio-por-estado-civil">Salário médio por estado civil</h3>
+<p>Aqui fiquei com dúvida sobre o que era esperado, pois existem 3 colunas que apresentam dados de salário (ver exercício 8).</p>
+<p>Primeiro calculei a média do salário geral (considerando os 3 anos):</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">media_salario_geral</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">ESTADO_C</span>, <span class="va">SAL_RIO</span>, <span class="va">SAL_RIO1</span>, <span class="va">SAL_RIO2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"SAL"</span><span class="op">)</span>,</span>
+<span>               names_to <span class="op">=</span> <span class="st">"variavel"</span>,</span>
+<span>               values_to <span class="op">=</span> <span class="st">"salario"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>media_geral_salario <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">salario</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Depois calculei a média dos salários considerando o ano:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">media_salario</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    media_salario_ano_06 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">SAL_RIO</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    media_salario_ano_07 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">SAL_RIO1</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    media_salario_ano_08 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">SAL_RIO2</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,    </span>
+<span>  <span class="op">)</span> </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>E uni as duas tabelas:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">media_salario_geral</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">media_salario</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 21%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">ESTADO_C</th>
+<th style="text-align: right;">media_geral_salario</th>
+<th style="text-align: right;">media_salario_ano_06</th>
+<th style="text-align: right;">media_salario_ano_07</th>
+<th style="text-align: right;">media_salario_ano_08</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Casado</td>
+<td style="text-align: right;">11.8</td>
+<td style="text-align: right;">12.1</td>
+<td style="text-align: right;">9.5</td>
+<td style="text-align: right;">13.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solteiro</td>
+<td style="text-align: right;">9.7</td>
+<td style="text-align: right;">9.9</td>
+<td style="text-align: right;">10.7</td>
+<td style="text-align: right;">8.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Essas variáveis vão ser abordadas posteriormente, no exercício 8.</p>
+<p>Salário médio - considerando os 3 anos:</p>
+<ul>
+<li><p>Solteiros: 9,7</p></li>
+<li><p>Casados: 11,8</p></li>
+</ul></section></section></section><section id="exercícios-com-testes-estatísticos" class="level1"><h1>Exercícios com testes estatísticos</h1>
+<section id="exercício-4" class="level2"><h2 class="anchored" data-anchor-id="exercício-4">Exercício 4</h2>
+<p><strong>Compare, estatisticamente (α=5%), se há diferenças na distribuição de número de filhos e na idade média em função das regiões de origem dos trabalhadores.</strong></p>
+<section id="número-de-filhos-em-função-da-região-de-origem" class="level3"><h3 class="anchored" data-anchor-id="número-de-filhos-em-função-da-região-de-origem">Número de filhos em função da região de origem</h3>
+<p>Variável independente: Região de origem - Categórica</p>
+<p>Variável dependente: Número de filhos - Numérica</p>
+<p>Visualizando os dados:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ORIGEM</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">N_MERO_D</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">N_MERO_D</span>, y <span class="op">=</span> <span class="va">n</span>, fill <span class="op">=</span> <span class="va">ORIGEM</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">ORIGEM</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Testando a normalidade com o teste de Shapiro-Wilk:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">N_MERO_D</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>normalidade <span class="op">=</span> <span class="va">p.value</span> <span class="op">&gt;</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: left;">method</th>
+<th style="text-align: left;">normalidade</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">0.7487881</td>
+<td style="text-align: right;">1.8e-06</td>
+<td style="text-align: left;">Shapiro-Wilk normality test</td>
+<td style="text-align: left;">FALSE</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p>A quantidade de filhos não segue a distribuição normal.</p>
+<p>Neste caso, o teste que faremos é uma ANOVA independente:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">anova_filhos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">N_MERO_D</span> <span class="op">~</span> <span class="va">ORIGEM</span>, data <span class="op">=</span> <span class="va">dados</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">anova_filhos</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Call:
+   aov(formula = N_MERO_D ~ ORIGEM, data = dados)
+
+Terms:
+                  ORIGEM Residuals
+Sum of Squares   1.84732  52.90268
+Deg. of Freedom        2        33
+
+Residual standard error: 1.26614
+Estimated effects may be unbalanced</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">anova_filhos</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">sumsq</th>
+<th style="text-align: right;">meansq</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ORIGEM</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.847319</td>
+<td style="text-align: right;">0.9236597</td>
+<td style="text-align: right;">0.5761668</td>
+<td style="text-align: right;">0.5676017</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">52.902681</td>
+<td style="text-align: right;">1.6031115</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>O valor-p é maior que 5%, portanto não há diferença estatística na quantidade de filhos em função da região de origem.</p>
+</section><section id="idade-média-em-função-da-região-de-origem" class="level3"><h3 class="anchored" data-anchor-id="idade-média-em-função-da-região-de-origem">Idade média em função da região de origem</h3>
+<p>Variável independente: Região de origem - Categórica</p>
+<p>Variável dependente: Idade - Numérica</p>
+<p>Testando a normalidade com o teste de Shapiro-Wilk:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">IDADE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: left;">method</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">0.9910388</td>
+<td style="text-align: right;">0.9903279</td>
+<td style="text-align: left;">Shapiro-Wilk normality test</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p>A hipótese nula deste teste é que os dados tem distribuição normal. Nesse caso, queremos que o valor-p seja maior que 95%. Com o resultado encontrado (p-valor = 0.99) podemos assumir a normalidade.</p>
+<p>Agora para o teste estatístico: nesse caso a variável independente é a ORIGEM (com 3 categorias), e a variável dependente é a idade.</p>
+<p>Vamos calcular o intervalo de confiança para as idades em cada grupo:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_idade_origem</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ORIGEM</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    media_idade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">IDADE</span><span class="op">)</span>,</span>
+<span>    sd_idade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">IDADE</span><span class="op">)</span>,</span>
+<span>    n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    ic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">intervalo_de_confianca_media</span><span class="op">(</span>media <span class="op">=</span> <span class="va">media_idade</span>,</span>
+<span>                                      desvio_padrao <span class="op">=</span> <span class="va">sd_idade</span>,</span>
+<span>                                      tamanho_amostra <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html">unnest_wider</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">ic</span><span class="op">)</span></span>
+<span>  </span>
+<span></span>
+<span><span class="va">ic_calculado_idade_origem</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">ORIGEM</th>
+<th style="text-align: right;">media_idade</th>
+<th style="text-align: right;">sd_idade</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">ic_min</th>
+<th style="text-align: right;">ic_max</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">capital</td>
+<td style="text-align: right;">36.00000</td>
+<td style="text-align: right;">6.180615</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">32.34749</td>
+<td style="text-align: right;">39.65251</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">interior</td>
+<td style="text-align: right;">33.25000</td>
+<td style="text-align: right;">5.894913</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">29.91464</td>
+<td style="text-align: right;">36.58536</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">outro</td>
+<td style="text-align: right;">34.61538</td>
+<td style="text-align: right;">8.067822</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">30.22967</td>
+<td style="text-align: right;">39.00110</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_idade_origem</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ORIGEM</span>, y <span class="op">=</span> <span class="va">media_idade</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">ic_min</span>, ymax <span class="op">=</span> <span class="va">ic_max</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>  <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Interpretando o gráfico, não há evidências para afirmar que as médias das idades são diferentes entre os grupos.</p>
+<p>Fazendo a ANOVA, para fins de ter mais evidências sobre a resposta:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">valor_f</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/specify.html">specify</a></span><span class="op">(</span>response <span class="op">=</span> <span class="va">IDADE</span>, explanatory <span class="op">=</span> <span class="va">ORIGEM</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/hypothesize.html">hypothesise</a></span><span class="op">(</span>null <span class="op">=</span> <span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://infer.tidymodels.org/reference/calculate.html">calculate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#     Graus de liberdade entre os grupos (df1) = k - 1</span></span>
+<span><span class="co">#     Graus de liberdade dentro dos grupos (df2) = N - k</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Onde:</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co">#     k é o número de grupos ou tratamentos.</span></span>
+<span><span class="co">#     N é o número total de observações.</span></span>
+<span><span class="va">p_valor_teste_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="va">valor_f</span><span class="op">$</span><span class="va">stat</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, df1 <span class="op">=</span> <span class="fl">3</span> <span class="op">-</span> <span class="fl">1</span>, df2 <span class="op">=</span> <span class="fl">36</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">p_valor_teste_f</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3669772</code></pre>
+</div>
+</div>
+<p>O valor-p é maior que 5%, portanto não rejeito a hipótese nula.</p>
+</section></section><section id="exercício-6" class="level2"><h2 class="anchored" data-anchor-id="exercício-6">Exercício 6</h2>
+<p><strong>Verifique a associação entre estado civil e grau de instrução. É possível dizer que existe associação significante entre estado civil e grau de instrução (α=5%)?</strong></p>
+<p>Primeiro, visualizando os dados: não tem nada que me chame muita atenção. Vamos seguindo.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">ESTADO_C</span>, x <span class="op">=</span> <span class="va">GRAU_DE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Grau de escolaridade"</span>,</span>
+<span>    fill <span class="op">=</span> <span class="st">"Estado Civil"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Proporção"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Temos 2 variáveis categóricas. Para verificar associação, precisamos usar o teste Qui-quadrado.</p>
+<p>Nesse caso, não existe variável dependente e independente.</p>
+<section id="pressupostos-do-qui-quadrado" class="level3"><h3 class="anchored" data-anchor-id="pressupostos-do-qui-quadrado">Pressupostos do Qui-quadrado</h3>
+<p>Verificando se não tem nenhuma casela com 0 elementos:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">dados</span>, <span class="va">GRAU_DE</span>, <span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">GRAU_DE</th>
+<th style="text-align: right;">Casado</th>
+<th style="text-align: right;">Solteiro</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1o. Grau</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2o. Grau</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">superior</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Verificando se temos pelo menos 4 elementos por casela: Nesse caso, não! Tem duas caselas com 3 indivíduos. Nesse caso, podemos usar o teste exato de fisher.</p>
+<p>Vou testar com os dois e ver se o resultado é diferente.</p>
+</section><section id="chi-quadrado" class="level3"><h3 class="anchored" data-anchor-id="chi-quadrado">Chi-quadrado</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">resultado</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://infer.tidymodels.org/reference/chisq_test.html">chisq_test</a></span><span class="op">(</span><span class="va">dados</span>, formula <span class="op">=</span> <span class="va">ESTADO_C</span> <span class="op">~</span> <span class="va">GRAU_DE</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">resultado</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">chisq_df</th>
+<th style="text-align: right;">p_value</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">1.9125</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3843314</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p>O valor-p é maior que 5%, portanto não é significativo. Não encontramos associação entre estado civil e grau de escolaridade.</p>
+</section><section id="teste-exato-de-fisher" class="level3"><h3 class="anchored" data-anchor-id="teste-exato-de-fisher">Teste exato de Fisher</h3>
+<p>Pelo que entendi, esse teste é mais “conservador” que o Qui-quadrado. Portanto, se no Qui-quadrado deu “não significativo”, acredito que aqui a resposta será igual.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># preparando a tabela para o teste</span></span>
+<span><span class="va">dados_ec_ge</span> <span class="op">&lt;-</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">dados</span>, <span class="va">GRAU_DE</span>, <span class="va">ESTADO_C</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"GRAU_DE"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Executando o teste</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">dados_ec_ge</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">p.value</th>
+<th style="text-align: left;">method</th>
+<th style="text-align: left;">alternative</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">0.4043946</td>
+<td style="text-align: left;">Fisher’s Exact Test for Count Data</td>
+<td style="text-align: left;">two.sided</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p>Neste caso, o valor-p também foi maior que 5%. Não encontramos associação entre estado civil e grau de escolaridade.</p>
+</section></section><section id="exercício-7" class="level2"><h2 class="anchored" data-anchor-id="exercício-7">Exercício 7</h2>
+<p><strong>Segundo dados do IBGE, a média da idade da população de SP é de 31 anos. A amostra apresentada possui diferença significativa na média da idade em relação à estimativa média populacional?</strong></p>
+<p>Nesse caso, podemos fazer o intervalo de confiança para a média de idade dos trabalhadores, e comparar com a média de idade da população de SP.</p>
+<p>Dados do IBGE - Entendo que quer dizer que são os dados do Censo. Portanto o que temos é a média da população (um parâmetro).</p>
+<p>Hipótese nula: média da idade dos trabalhadores é IGUAL à média da idade da população de SP.</p>
+<p>Hipótese alternativa: média da idade dos trabalhadores é DIFERENTE à média da idade da população de SP.</p>
+<section id="normalidade" class="level3"><h3 class="anchored" data-anchor-id="normalidade">Normalidade</h3>
+<p>O histograma dos dados de idade me dá pistas de que considerar a distribuição como normal é uma aproximação aceitável.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">IDADE</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">5</span>, color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Distribuição da idade dos trabalhadores"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Idade"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Número de trabalhadores"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="intervalo-de-confiança" class="level3"><h3 class="anchored" data-anchor-id="intervalo-de-confiança">Intervalo de confiança</h3>
+<p>Precisamos calcular o intervalo de confiança. Fiz primeiro à mão, e depois em R.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Quandas pessoas temos na base?</span></span>
+<span><span class="va">quantidade_pessoas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Qual é a média da idade?</span></span>
+<span><span class="va">media_idade</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">IDADE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Qual é o desvio padrão da idade?</span></span>
+<span><span class="va">sd_idade</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">IDADE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ic_idade</span> <span class="op">&lt;-</span> <span class="fu">intervalo_de_confianca_media</span><span class="op">(</span>media <span class="op">=</span> <span class="va">media_idade</span>,</span>
+<span>                             desvio_padrao <span class="op">=</span> <span class="va">sd_idade</span>, </span>
+<span>                             tamanho_amostra <span class="op">=</span> <span class="va">quantidade_pessoas</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ic_idade</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>  ic_min   ic_max 
+32.38244 36.78422 </code></pre>
+</div>
+</div>
+<p>Ao comparar o intervalo de confiança e a média de idade da população de São Paulo, percebemos que a diferença é significativa, pois a média da idade da população de São Paulo (31 anos) está fora do intervalo de confiança para a média da idade dos trabalhadores (arredondando, aprox entre 32 e 37 anos).</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  grupo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Trabalhadores"</span>, <span class="st">"População de SP"</span><span class="op">)</span>,</span>
+<span>  idade_media <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">media_idade</span>, <span class="fl">31</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">grupo</span>, y <span class="op">=</span> <span class="va">idade_media</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Trabalhadores"</span>, ymin <span class="op">=</span> <span class="va">ic_idade</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, ymax <span class="op">=</span> <span class="va">ic_idade</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">40</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="exercício-8" class="level2"><h2 class="anchored" data-anchor-id="exercício-8">Exercício 8</h2>
+<p><strong>O salário desta amostra foi medido em três anos seguidos (06,07 e 08). Houve diferença entre o salário ao longo do tempo? (α=5%).</strong></p>
+<p>Primeiro, podemos deixar os dados no formato “longo” para facilitar a visualização.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"id_pessoa"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id_pessoa</span>, </span>
+<span>         salario_06 <span class="op">=</span> <span class="va">SAL_RIO</span>,</span>
+<span>         salario_07 <span class="op">=</span> <span class="va">SAL_RIO1</span>,</span>
+<span>         salario_08 <span class="op">=</span> <span class="va">SAL_RIO2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"salario_06"</span>, <span class="st">"salario_07"</span>, <span class="st">"salario_08"</span><span class="op">)</span>, </span>
+<span>               names_to <span class="op">=</span> <span class="st">"ano_salario"</span>, values_to <span class="op">=</span> <span class="st">"valor_salario"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Visualizando a distribuição do salário nos 3 momentos: não parece ter grandes diferenças. Só no ano 08 tem alguém recebendo mais que os outros.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">valor_salario</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">5</span>, color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">ano_salario</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="testando-normalidade" class="level3"><h3 class="anchored" data-anchor-id="testando-normalidade">Testando normalidade</h3>
+<p>Podemos também testar a normalidade com o teste de Shapiro-Wilk:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ano_salario</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    teste <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">valor_salario</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    normalidade <span class="op">=</span> <span class="va">p.value</span> <span class="op">&gt;</span> <span class="fl">0.05</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 38%">
+<col style="width: 16%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">ano_salario</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: left;">method</th>
+<th style="text-align: left;">normalidade</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">salario_06</td>
+<td style="text-align: right;">0.9619393</td>
+<td style="text-align: right;">0.2465504</td>
+<td style="text-align: left;">Shapiro-Wilk normality test</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">salario_07</td>
+<td style="text-align: right;">0.9305990</td>
+<td style="text-align: right;">0.0260982</td>
+<td style="text-align: left;">Shapiro-Wilk normality test</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">salario_08</td>
+<td style="text-align: right;">0.7378603</td>
+<td style="text-align: right;">0.0000012</td>
+<td style="text-align: left;">Shapiro-Wilk normality test</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Apenas o salário do ano 06 apresenta uma distribuição que podemos considerar normal.</p>
+<p>Então usar testes baseados na média não é uma boa idéia!</p>
+<p>Temos o salário (variável contínua) ao longo do tempo. Nesse caso, entendo o tempo como a variável independente, e o salário como variável dependente.</p>
+<p>Vamos usar o teste de análise de variância (ANOVA) para verificar se há diferença entre os salários ao longo do tempo.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">anova_salario_tempo</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">valor_salario</span> <span class="op">~</span> <span class="va">ano_salario</span>, data <span class="op">=</span> <span class="va">salario_tempo</span><span class="op">)</span> </span>
+<span></span>
+<span></span>
+<span><span class="va">anova_salario_tempo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">sumsq</th>
+<th style="text-align: right;">meansq</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ano_salario</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">35.28184</td>
+<td style="text-align: right;">17.64092</td>
+<td style="text-align: right;">0.5316319</td>
+<td style="text-align: right;">0.5892185</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">3484.17099</td>
+<td style="text-align: right;">33.18258</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>O valor de p é maior que 0.05, então não há diferença significativa entre os salários ao longo do tempo.</p>
+</section><section id="intervalo-de-confiança-1" class="level3"><h3 class="anchored" data-anchor-id="intervalo-de-confiança-1">Intervalo de confiança</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_salario</span> <span class="op">&lt;-</span> <span class="va">salario_tempo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ano_salario</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    media_salario <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">valor_salario</span><span class="op">)</span>,</span>
+<span>    sd_salario <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">valor_salario</span><span class="op">)</span>,</span>
+<span>    n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    ic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">intervalo_de_confianca_media</span><span class="op">(</span>media <span class="op">=</span> <span class="va">media_salario</span>,</span>
+<span>                                      desvio_padrao <span class="op">=</span> <span class="va">sd_salario</span>,</span>
+<span>                                      tamanho_amostra <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html">unnest_wider</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">ic</span><span class="op">)</span></span>
+<span>  </span>
+<span></span>
+<span><span class="va">ic_calculado_salario</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">ano_salario</th>
+<th style="text-align: right;">media_salario</th>
+<th style="text-align: right;">sd_salario</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">ic_min</th>
+<th style="text-align: right;">ic_max</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">salario_06</td>
+<td style="text-align: right;">11.12222</td>
+<td style="text-align: right;">4.587458</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">9.623653</td>
+<td style="text-align: right;">12.62079</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">salario_07</td>
+<td style="text-align: right;">10.04194</td>
+<td style="text-align: right;">5.009863</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">8.405389</td>
+<td style="text-align: right;">11.67850</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">salario_08</td>
+<td style="text-align: right;">11.35333</td>
+<td style="text-align: right;">7.307821</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">8.966112</td>
+<td style="text-align: right;">13.74055</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ic_calculado_salario</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ano_salario</span>, y <span class="op">=</span> <span class="va">media_salario</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">ic_min</span>, ymax <span class="op">=</span> <span class="va">ic_max</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>  <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Não há evidências para afirmar que as médias são diferentes.</p>
+</section></section></section><section id="exercícios-de-análise-de-outlier" class="level1"><h1>Exercícios de análise de outlier</h1>
+<section id="exercício-9" class="level2"><h2 class="anchored" data-anchor-id="exercício-9">Exercício 9</h2>
+<p><strong>Observe à variável “Número de filhos”. Calcule o escore z para cada uma dos participantes da amostra. Quais participantes podem ser considerados outliers para a amostra número de filhos?</strong></p>
+<p>A lógica do z-score é pensar: quantos desvios padrão de distância um valor encontrado está da média?</p>
+<p>Um valor absoluto de escore z igual ou maior que 3 indicaria que um valor pode ser considerado um outlier.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_z_score</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>numero_filhos <span class="op">=</span> <span class="va">N_MERO_D</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    media_numero_filhos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">numero_filhos</span><span class="op">)</span>,</span>
+<span>    sd_numero_filhos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">numero_filhos</span><span class="op">)</span>,</span>
+<span>    z_score_numero_filhos <span class="op">=</span> <span class="op">(</span><span class="va">numero_filhos</span> <span class="op">-</span> <span class="va">media_numero_filhos</span><span class="op">)</span> <span class="op">/</span> <span class="va">sd_numero_filhos</span>,</span>
+<span>    abs_z_score_numero_filhos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_score_numero_filhos</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Calculado o escore z, o trabalhador da linha 29 apresenta 5 filhos, e um z_score maior que 3.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">outliers_filhos</span> <span class="op">&lt;-</span> <span class="va">dados_z_score</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">abs_z_score_numero_filhos</span>  <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">outliers_filhos</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 13%">
+<col style="width: 15%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: right;">rowid</th>
+<th style="text-align: left;">ESTADO_C</th>
+<th style="text-align: left;">GRAU_DE</th>
+<th style="text-align: right;">numero_filhos</th>
+<th style="text-align: right;">SAL_RIO</th>
+<th style="text-align: right;">IDADE</th>
+<th style="text-align: left;">ORIGEM</th>
+<th style="text-align: right;">SAL_RIO1</th>
+<th style="text-align: right;">SAL_RIO2</th>
+<th style="text-align: right;">media_numero_filhos</th>
+<th style="text-align: right;">sd_numero_filhos</th>
+<th style="text-align: right;">z_score_numero_filhos</th>
+<th style="text-align: right;">abs_z_score_numero_filhos</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">Casado</td>
+<td style="text-align: left;">2o. Grau</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">14.71</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">interior</td>
+<td style="text-align: right;">4.56</td>
+<td style="text-align: right;">17.26</td>
+<td style="text-align: right;">0.9166667</td>
+<td style="text-align: right;">1.250714</td>
+<td style="text-align: right;">3.264802</td>
+<td style="text-align: right;">3.264802</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p>Visualização:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numero_filhos_outlier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">outliers_filhos</span><span class="op">$</span><span class="va">numero_filhos</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dados_z_score</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">numero_filhos</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">numero_filhos</span>, y <span class="op">=</span> <span class="va">n</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">2</span>, x <span class="op">=</span> <span class="va">numero_filhos_outlier</span>, label <span class="op">=</span> <span class="st">"Outlier"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/gghighlight/reference/gghighlight.html">gghighlight</a></span><span class="op">(</span><span class="va">numero_filhos</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">numero_filhos_outlier</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">N_MERO_D</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Número de filhos"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Frequência"</span>,</span>
+<span>       title <span class="op">=</span> <span class="st">"Quantidade de filhos por trabalhador"</span>,</span>
+<span>       subtitle <span class="op">=</span> <span class="st">"Existe algum outlier?"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="lista-pratica-1_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
