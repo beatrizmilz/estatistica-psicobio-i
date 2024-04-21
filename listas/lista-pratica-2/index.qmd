@@ -25,7 +25,6 @@ options(scipen = 9999)
 dados_brutos <- haven::read_sav("alunos.sav") 
 ```
 
-
 ```{r}
 dados <- dados_brutos |> 
   janitor::clean_names() |> 
@@ -37,15 +36,11 @@ dados <- dados_brutos |>
   )
 ```
 
-
-
 ```{r}
 dplyr::glimpse(dados)
 ```
 
-
 Observe o banco de dados “Alunos.sav” a seguir. Neles estão descritos os dados referentes a avaliação de 120 alunos de uma escola e suas respectivas notas em uma série de 4 provas, além de uma classificação socioeconômica e seu “status” dentro da sala: ser da turma dos CDF ou da turma do Fundão.
-
 
 Dados: Nível de significância adotado – 5%.
 
@@ -62,7 +57,6 @@ dados_provas_longo <- dados |>
   )
 ```
 
-
 ```{r}
 dados_provas_longo |>
   dplyr::group_by(prova) |>
@@ -71,15 +65,11 @@ dados_provas_longo |>
   knitr::kable()
 ```
 
-
-
-
 ## Questão b)
 
 **Obtenha os dados descritivos das provas em função do status dos alunos (CDF ou Fundão)**
 
-
-- Considerando os dois grupos de status:
+-   Considerando os dois grupos de status:
 
 ```{r}
 dados_provas_longo |> 
@@ -91,7 +81,9 @@ dados_provas_longo |>
   ) |> 
   knitr::kable()
 ```
-- Considerando o status e a prova:
+
+-   Considerando o status e a prova:
+
 ```{r}
 dados_provas_longo |> 
   dplyr::group_by(grupo_cat, prova) |> 
@@ -103,23 +95,32 @@ dados_provas_longo |>
   knitr::kable()
 ```
 
-- Visualizando os dados:
+-   Visualizando os dados:
 
 ```{r}
 dados_provas_longo |> 
   ggplot() +
-  aes(x = prova, y = nota, fill = grupo_cat) +
-  geom_boxplot() + 
-  facet_wrap(~grupo_cat) + 
+  aes(x = nota) +
+  geom_histogram(bins = 10, color = "black", fill = "lightblue") + 
   theme_minimal()
 ```
 
+```{r}
+dados_provas_longo |> 
+  ggplot() +
+  aes(x = nota, fill = prova) +
+  geom_histogram(bins = 10, color = "black") + 
+  facet_grid(prova~grupo_cat) +
+  theme_minimal()
+```
 
 ## Questão c)
 
 **As notas das provas possuem distribuição normal?**
 
-- Visualizando as distribuições:
+### Considerando as disciplinas separadamente
+
+-   Visualizando as distribuições:
 
 ```{r}
 dados_provas_longo |> 
@@ -145,17 +146,86 @@ dados_provas_longo |>
   knitr::kable()
 ```
 
-
 O resultado teste Shapiro-wilk de normalidade concorda com a minha interpretação do gráfico de densidade: apenas a prova `int_tex` tem distribuição próxima da normal!
+
+### Considerando todas as provas, independente da matéria
+
+```{r}
+shapiro.test(dados_provas_longo$nota)
+```
+O tesultado do teste de normalidade Shapiro-Wilk aponta que, se considerarmos todas as provas, não tem distribuição normal.
 
 
 ## Questão d)
 
 **Existe diferença nas notas dos alunos em função da classificação socioeconômica?**
 
+```{r}
+dados_provas_longo_2 <- dados_provas_longo |> 
+  dplyr::mutate(
+    classe_socio = as.character(socio)
+  )
+```
+
+
+A variável independente é a classificação socioeconômica, sendo uma variável categórica com 4 grupos: 1, 2, 3 e 4.
+
+A variável dependente é a nota.
+
+Vimos no exercício acima que a variável dependente (nota) não tem distribuição normal.
+
+É importante também testar a homogeneidade das variâncias, utilizando o teste de Levene:
+
+```{r}
+car::leveneTest(dados_provas_longo_2$nota, dados_provas_longo_2$classe_socio)
+```
+Consideramos a partir do teste de levene que temos homogeneidade das variâncias.
+
+
+Vamos calcular a ANOVA:
+
+```{r}
+aov(nota ~ classe_socio, data = dados_provas_longo_2) |> 
+  summary()
+```
+
+Não temos evidências para afirmar que existe diferença nas notas dos alunos em função da classificação socioeconômica.
+
+```{r}
+dados_provas_longo_2 |> 
+  ggplot() +
+  geom_density(aes(x = nota, color = classe_socio)) +
+  theme_minimal()
+```
+
+
 ## Questão e)
 
 **Existe diferença nas notas dos alunos em função do status dos alunos (CDF ou Fundão)?**
+
+A variável independente é o status do aluno, sendo uma variável categórica com 2 grupos: CDF ou fundão.
+
+A variável dependente é a nota.
+
+Vimos no exercício acima que a variável dependente (nota) não tem distribuição normal, e que apresenta homogeneidade das variâncias.
+
+Podemos utilizar a ANOVA novamente:
+
+
+```{r}
+aov(nota ~ grupo_cat, data = dados_provas_longo_2) |> 
+  summary()
+```
+Neste caso, existe diferença nas notas dos alunos em função do status dos alunos (CDF ou Fundão). As notas do grupo CDF são em média maiores do que as notas do fundão.
+
+```{r}
+dados_provas_longo_2 |> 
+  ggplot() +
+  geom_density(aes(x = nota, color = grupo_cat)) +
+  theme_minimal()
+```
+
+
 
 
 ## Questão f)
@@ -183,4 +253,4 @@ chi_quadrado <- dados |>
 chi_quadrado |> broom::tidy()
 ```
 
-Não há evidências de que existe associação significativa entre a cllassificação socioeconômica e o status dos alunos na sala.
+Não há evidências de que existe associação significativa entre a classificação socioeconômica e o status dos alunos na sala (p-valor = 1).

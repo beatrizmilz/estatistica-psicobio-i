@@ -74,7 +74,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#quest%C3%A3o-a" id="toc-questão-a" class="nav-link active" data-scroll-target="#quest%C3%A3o-a">Questão a)</a></li>
   <li><a href="#quest%C3%A3o-b" id="toc-questão-b" class="nav-link" data-scroll-target="#quest%C3%A3o-b">Questão b)</a></li>
-  <li><a href="#quest%C3%A3o-c" id="toc-questão-c" class="nav-link" data-scroll-target="#quest%C3%A3o-c">Questão c)</a></li>
+  <li>
+<a href="#quest%C3%A3o-c" id="toc-questão-c" class="nav-link" data-scroll-target="#quest%C3%A3o-c">Questão c)</a>
+  <ul class="collapse">
+<li><a href="#considerando-as-disciplinas-separadamente" id="toc-considerando-as-disciplinas-separadamente" class="nav-link" data-scroll-target="#considerando-as-disciplinas-separadamente">Considerando as disciplinas separadamente</a></li>
+  <li><a href="#considerando-todas-as-provas-independente-da-mat%C3%A9ria" id="toc-considerando-todas-as-provas-independente-da-matéria" class="nav-link" data-scroll-target="#considerando-todas-as-provas-independente-da-mat%C3%A9ria">Considerando todas as provas, independente da matéria</a></li>
+  </ul>
+</li>
   <li><a href="#quest%C3%A3o-d" id="toc-questão-d" class="nav-link" data-scroll-target="#quest%C3%A3o-d">Questão d)</a></li>
   <li><a href="#quest%C3%A3o-e" id="toc-questão-e" class="nav-link" data-scroll-target="#quest%C3%A3o-e">Questão e)</a></li>
   <li><a href="#quest%C3%A3o-f" id="toc-questão-f" class="nav-link" data-scroll-target="#quest%C3%A3o-f">Questão f)</a></li>
@@ -316,9 +322,8 @@ $ grupo_cat &lt;chr&gt; "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", 
 <div class="cell">
 <details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_provas_longo</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prova</span>, y <span class="op">=</span> <span class="va">nota</span>, fill <span class="op">=</span> <span class="va">grupo_cat</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">grupo_cat</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nota</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -327,17 +332,12 @@ $ grupo_cat &lt;chr&gt; "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", 
 </div>
 </div>
 </div>
-</section><section id="questão-c" class="level2"><h2 class="anchored" data-anchor-id="questão-c">Questão c)</h2>
-<p><strong>As notas das provas possuem distribuição normal?</strong></p>
-<ul>
-<li>Visualizando as distribuições:</li>
-</ul>
 <div class="cell">
 <details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_provas_longo</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nota</span>, fill <span class="op">=</span> <span class="va">prova</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">prova</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">10</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">prova</span><span class="op">~</span><span class="va">grupo_cat</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
@@ -346,9 +346,29 @@ $ grupo_cat &lt;chr&gt; "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", 
 </div>
 </div>
 </div>
-<p>Pelo gráfico, as notas da prova <code>int_tex</code> parecem ter distribuição próxima da normal.</p>
+</section><section id="questão-c" class="level2"><h2 class="anchored" data-anchor-id="questão-c">Questão c)</h2>
+<p><strong>As notas das provas possuem distribuição normal?</strong></p>
+<section id="considerando-as-disciplinas-separadamente" class="level3"><h3 class="anchored" data-anchor-id="considerando-as-disciplinas-separadamente">Considerando as disciplinas separadamente</h3>
+<ul>
+<li>Visualizando as distribuições:</li>
+</ul>
 <div class="cell">
 <details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_provas_longo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nota</span>, fill <span class="op">=</span> <span class="va">prova</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">prova</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pelo gráfico, as notas da prova <code>int_tex</code> parecem ter distribuição próxima da normal.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_provas_longo</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">prova</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    teste_normalidade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">nota</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -408,16 +428,100 @@ $ grupo_cat &lt;chr&gt; "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", "CDF", 
 </div>
 </div>
 <p>O resultado teste Shapiro-wilk de normalidade concorda com a minha interpretação do gráfico de densidade: apenas a prova <code>int_tex</code> tem distribuição próxima da normal!</p>
-</section><section id="questão-d" class="level2"><h2 class="anchored" data-anchor-id="questão-d">Questão d)</h2>
+</section><section id="considerando-todas-as-provas-independente-da-matéria" class="level3"><h3 class="anchored" data-anchor-id="considerando-todas-as-provas-independente-da-matéria">Considerando todas as provas, independente da matéria</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">dados_provas_longo</span><span class="op">$</span><span class="va">nota</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  dados_provas_longo$nota
+W = 0.98818, p-value = 0.000632</code></pre>
+</div>
+</div>
+<p>O tesultado do teste de normalidade Shapiro-Wilk aponta que, se considerarmos todas as provas, não tem distribuição normal.</p>
+</section></section><section id="questão-d" class="level2"><h2 class="anchored" data-anchor-id="questão-d">Questão d)</h2>
 <p><strong>Existe diferença nas notas dos alunos em função da classificação socioeconômica?</strong></p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_provas_longo_2</span> <span class="op">&lt;-</span> <span class="va">dados_provas_longo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    classe_socio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">socio</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A variável independente é a classificação socioeconômica, sendo uma variável categórica com 4 grupos: 1, 2, 3 e 4.</p>
+<p>A variável dependente é a nota.</p>
+<p>Vimos no exercício acima que a variável dependente (nota) não tem distribuição normal.</p>
+<p>É importante também testar a homogeneidade das variâncias, utilizando o teste de Levene:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">dados_provas_longo_2</span><span class="op">$</span><span class="va">nota</span>, <span class="va">dados_provas_longo_2</span><span class="op">$</span><span class="va">classe_socio</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+       Df F value Pr(&gt;F)
+group   3  1.4976 0.2144
+      476               </code></pre>
+</div>
+</div>
+<p>Consideramos a partir do teste de levene que temos homogeneidade das variâncias.</p>
+<p>Vamos calcular a ANOVA:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">nota</span> <span class="op">~</span> <span class="va">classe_socio</span>, data <span class="op">=</span> <span class="va">dados_provas_longo_2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>              Df Sum Sq Mean Sq F value Pr(&gt;F)
+classe_socio   3      2  0.6812   0.257  0.856
+Residuals    476   1262  2.6517               </code></pre>
+</div>
+</div>
+<p>Não temos evidências para afirmar que existe diferença nas notas dos alunos em função da classificação socioeconômica.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_provas_longo_2</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nota</span>, color <span class="op">=</span> <span class="va">classe_socio</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section><section id="questão-e" class="level2"><h2 class="anchored" data-anchor-id="questão-e">Questão e)</h2>
 <p><strong>Existe diferença nas notas dos alunos em função do status dos alunos (CDF ou Fundão)?</strong></p>
+<p>A variável independente é o status do aluno, sendo uma variável categórica com 2 grupos: CDF ou fundão.</p>
+<p>A variável dependente é a nota.</p>
+<p>Vimos no exercício acima que a variável dependente (nota) não tem distribuição normal, e que apresenta homogeneidade das variâncias.</p>
+<p>Podemos utilizar a ANOVA novamente:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">nota</span> <span class="op">~</span> <span class="va">grupo_cat</span>, data <span class="op">=</span> <span class="va">dados_provas_longo_2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>             Df Sum Sq Mean Sq F value              Pr(&gt;F)    
+grupo_cat     1  324.1   324.1   164.7 &lt;0.0000000000000002 ***
+Residuals   478  940.2     2.0                                
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Neste caso, existe diferença nas notas dos alunos em função do status dos alunos (CDF ou Fundão). As notas do grupo CDF são em média maiores do que as notas do fundão.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_provas_longo_2</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nota</span>, color <span class="op">=</span> <span class="va">grupo_cat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section><section id="questão-f" class="level2"><h2 class="anchored" data-anchor-id="questão-f">Questão f)</h2>
 <p><strong>Existe associação significante entre a classificação socioeconômica e o status dos alunos na sala?</strong></p>
 <p>Nesse caso, faremos um Chi-Quadrado.</p>
 <p>Primeiro criamos a tabela de contingência e verificamos se todas as caselas tem pelo menos 4 alunos.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_chi_quadrado</span> <span class="op">&lt;-</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">dados</span>, <span class="va">grupo_cat</span>, <span class="va">socio</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_chi_quadrado</span> <span class="op">&lt;-</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/tabyl.html">tabyl</a></span><span class="op">(</span><span class="va">dados</span>, <span class="va">grupo_cat</span>, <span class="va">socio</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2
@@ -428,7 +532,7 @@ $ `2`       &lt;dbl&gt; 10, 21
 $ `3`       &lt;dbl&gt; 10, 22
 $ `4`       &lt;dbl&gt; 10, 16</code></pre>
 </div>
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_chi_quadrado</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_chi_quadrado</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -459,7 +563,7 @@ $ `4`       &lt;dbl&gt; 10, 16</code></pre>
 </div>
 </div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">chi_quadrado</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">chi_quadrado</span> <span class="op">&lt;-</span> <span class="va">dados</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">grupo</span>, <span class="va">socio</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -471,7 +575,7 @@ $ `4`       &lt;dbl&gt; 10, 16</code></pre>
 1      37.2    1.00       119 Pearson's Chi-squared test</code></pre>
 </div>
 </div>
-<p>Não há evidências de que existe associação significativa entre a cllassificação socioeconômica e o status dos alunos na sala.</p>
+<p>Não há evidências de que existe associação significativa entre a classificação socioeconômica e o status dos alunos na sala (p-valor = 1).</p>
 </section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
