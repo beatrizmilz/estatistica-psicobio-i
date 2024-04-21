@@ -37,7 +37,6 @@ dplyr::glimpse(dados)
 
 -   Variável dependente: Idade. Variável numérica discreta.
 
-
 Quantidade de grupos na variável indepentende:
 
 ```{r}
@@ -84,6 +83,7 @@ dados |>
        Curva preta: dados reais.")
 ```
 
+Na visualização, não parece tão longe da normal.
 
 ```{r}
 shapiro.test(dados$age) |> 
@@ -110,14 +110,14 @@ Neste caso, desejamos que o p-valor seja maior que 0.05, pois é desejável que 
 
 Caso fosse usar o teste-t independente, ou ANOVA, teria que fazer a correção de Welch.
 
-Então a ideia é: é melhor usar um teste não paramétrico.
-
 Nossos dados não são pareados, e temos 2 grupos para a variável independente.
 
 Então, se formos usar um teste não paramétrico, o mais indicado seria o Mann-Whitney. Se formos usar um teste paramétrico, o mais indicado seria o teste t-independente.
 
-
 -   Dúvida: O N é suficiente? não é falado no texto.
+
+
+Respondi: Teste t independente
 
 ## Questão 2
 
@@ -139,55 +139,48 @@ infer::t_test(
 ) |> 
   knitr::kable()
 ```
+
 -   Interpretação: Não temos evidências para afirmar que existe efeito do Sexo sobre a Idade.
+
+Respondi: `Não Existe efeito do Sexo sobre a Idade (t(1493)=-1,697,p=0,090)`
 
 ### Testando com Mann-Whitney (não paramétrico):
 
 Eu estava confusa, pois em todos os lugares que encontrei, falavam para usar a função `wilcox.test` para fazer o teste de Mann-Whitney. Porém, confunde com o nome do teste de Wilcoxon.
 
-Encontrei esse vídeo da Fernanda Peres, onde ela fala sobre isso: 
-<https://www.youtube.com/watch?v=ekvKa0HzeGo>
+Encontrei esse vídeo da Fernanda Peres, onde ela fala sobre isso: <https://www.youtube.com/watch?v=ekvKa0HzeGo>
 
 Ainda estou insegura com isso... pesquisar mais.
 
-
 ```{r}
-resultados_3_mw <- wilcox.test(age ~ sex, data = dados, exact = FALSE) |> 
-  broom::tidy()
-
-resultados_3_mw |> 
-  knitr::kable()
+wilcox.test(age ~ sex, data = dados, exact = FALSE)
 ```
+
 Interpretação: Não existe efeito do sexo sobre a idade.
 
-:::callout
-FAZER
-:::
+
 
 ## Questão 4
 
-**4 - Em um artigo, um pesquisador escreveu na seção de métodos que seu estudo iria utilizar **150 participantes**. Porém, o revisor lendo a seção de resultados, observou que nos dados da ANOVA a notação estava `F(3,31)=1,43 p=0,001`. Com base nos valores de graus de liberdade diga qual o Tamanho da Amostra válida e o Número de grupos que o pesquisador tinha em seu estudo, respectivamente:**
+**4 - Em um artigo, um pesquisador escreveu na seção de métodos que seu estudo iria utilizar** 150 participantes**. Porém, o revisor lendo a seção de resultados, observou que nos dados da ANOVA a notação estava `F(3,31)=1,43 p=0,001`. Com base nos valores de graus de liberdade diga qual o Tamanho da Amostra válida e o Número de grupos que o pesquisador tinha em seu estudo, respectivamente:**
 
 -   O que temos:
 
-  - 3 graus de liberdade dos grupos.
+-   3 graus de liberdade dos grupos.
 
-  - 31 graus de liberdade da amostra.
-  
+-   31 graus de liberdade da amostra.
 
-> **RESPOSTA DA YNGRID VICTÓRIA CASSIANO MASCARENHAS**: 
+> **RESPOSTA DA YNGRID VICTÓRIA CASSIANO MASCARENHAS**:
 
-> Para determinar o tamanho da amostra válida e o número de grupos, podemos usar os graus de liberdade fornecidos na notação da ANOVA. 
+> Para determinar o tamanho da amostra válida e o número de grupos, podemos usar os graus de liberdade fornecidos na notação da ANOVA.
 
-> Na notação `F(3,31)`, o primeiro número dentro dos parênteses representa os graus de liberdade entre os grupos (numerador) e o segundo número representa os graus de liberdade dentro dos grupos (denominador).  
+> Na notação `F(3,31)`, o primeiro número dentro dos parênteses representa os graus de liberdade entre os grupos (numerador) e o segundo número representa os graus de liberdade dentro dos grupos (denominador).
 
-> Então, o número de grupos é dado pelos graus de liberdade entre os grupos mais 1, e o tamanho da amostra válida é a soma dos graus de liberdade entre e dentro dos grupos mais 1.
-> Nesse caso, temos: 
+> Então, o número de grupos é dado pelos graus de liberdade entre os grupos mais 1, e o tamanho da amostra válida é a soma dos graus de liberdade entre e dentro dos grupos mais 1. Nesse caso, temos:
 
-> - Graus de liberdade entre os grupos: 3 (n +1 = x) 
+> -   Graus de liberdade entre os grupos: 3 (n +1 = x)
 
-> - Graus de liberdade dentro dos grupos: 31 Portanto, o número de grupos é 3 + 1 = 4 e o tamanho da amostra válida é 3 + 31 + 1 = 35.
-
+> -   Graus de liberdade dentro dos grupos: 31 Portanto, o número de grupos é 3 + 1 = 4 e o tamanho da amostra válida é 3 + 31 + 1 = 35.
 
 Respondi: N=35 com 4 grupos.
 
@@ -197,11 +190,6 @@ Respondi: N=35 com 4 grupos.
 
 ![](images/clipboard-147295147.png)
 
--   **ASSISTIR NA AULA QUE EU PERDI!**
-
-:::callout
-FAZER
-:::
 
 ```{r}
 soma_dos_quadrados_entre_grupos <- 263.7
@@ -212,25 +200,19 @@ soma_dos_quadrados_total <- 4792.5
 # media_dos_quadrados_dentro_dos_grupos <- Y
 ```
 
-```{r}
-# dentro dos grupos
-# media_dos_quadrados_dentro_dos_grupos = soma_dos_quadrados_do_erro_dentro_dos_grupos/ graus_de_liberdade_do_erro_dentro_dos_grupos
-```
 
-
+Respondi: `X=28,39 e Y=4,590`
 
 ## Questão 6 - FOI ANULADA
 
 ## Questão 7
 
-**7 - Com base no banco de dados "Roça da Serra do Sul", queremos saber se o que as pessoas acham da vida delas (variável life) tem efeito sobre o número de horas que elas assistem tv (tvhours).**
-**Teste a variável dependente quanto aos pré-requisitos.**
-**Caso os pré-requisitos da VD não sejam atendidos, padronize a variável com base no método Z-escore e responda as perguntas.**
-**Qual o teste estatístico mais adequado para responder a pergunta de pesquisa proposta nesta questão?**
+**7 - Com base no banco de dados "Roça da Serra do Sul", queremos saber se o que as pessoas acham da vida delas (variável life) tem efeito sobre o número de horas que elas assistem tv (tvhours).** **Teste a variável dependente quanto aos pré-requisitos.** **Caso os pré-requisitos da VD não sejam atendidos, padronize a variável com base no método Z-escore e responda as perguntas.** **Qual o teste estatístico mais adequado para responder a pergunta de pesquisa proposta nesta questão?**
 
----
+------------------------------------------------------------------------
 
-Variável independente: life
+Variável independente: life 
+
 Variável dependente: tvhours
 
 Quantas categorias temos na VI?
@@ -243,19 +225,17 @@ dados |>
 
 Opções de respostas:
 
-- Teste T - Teste paramétrico para 2 grupos. ão uso pois temos mais de 2 grupos.
+-   Teste T - Teste paramétrico para 2 grupos. não uso pois temos mais de 2 grupos.
 
-- [ ] ANOVA - Teste paramétrico para 2 ou mais grupos. 
+-   [ ] ANOVA - Teste paramétrico para 2 ou mais grupos.
 
-- Qui-Quadrado - Não uso pois temos 1 variável categórica, e 1 contínua. Para usar qui-quadrado, as duas deveriam ser categóricas.
+-   Qui-Quadrado - Não uso pois temos 1 variável categórica, e 1 contínua. Para usar qui-quadrado, as duas deveriam ser categóricas.
 
-- [ ] Kruskall-Wallis - Teste não paramétrico para 2 ou mais grupos, similar ao ANOVA. 
+-   [ ] Kruskall-Wallis - Teste não paramétrico para 2 ou mais grupos, similar ao ANOVA.
 
-- Mann-Whitney - Teste não paramétrico para 2 grupos. Não uso, temos mais que 2 grupos.
-
+-   Mann-Whitney - Teste não paramétrico para 2 grupos. Não uso, temos mais que 2 grupos.
 
 Agora a questão fica entre: uso um teste paramétrico ou não paramétrico?
-
 
 ### Testando a normalidade
 
@@ -290,7 +270,6 @@ dados |>
 ```
 
 Pelo gráfico já fica claro que os dados não seguem uma distribuição normal. Vamos fazer o teste de Shapiro-Wilk para confirmar.
-
 
 ```{r}
 shapiro.test(dados$tvhours) |> 
@@ -329,6 +308,16 @@ dados_zscore_tv <- dados |>
     z_score_tv_hours = (tvhours - media_tvhours) / desvio_padrao_tvhours)
 ```
 
+#### Visualizando a distribuição
+
+```{r}
+dados_zscore_tv |>
+  ggplot() +
+  geom_density(aes(x = tvhours)) +
+    geom_density(aes(x = z_score_tv_hours), color = "red") +
+  theme_light() +
+  facet_wrap(~life)
+```
 
 #### Testando novamente
 
@@ -339,22 +328,19 @@ dados_zscore_tv |>
   theme_light()
 ```
 
-
-Ainda está esquisito... 
+Mesmo padronizando com o z-score, não tem uma distribuição próxima à normal.
 
 ```{r}
-  car::leveneTest(dados_zscore_tv$z_score_tv_hours ~ dados$life)
+car::leveneTest(dados_zscore_tv$z_score_tv_hours ~ dados$life)
 ```
+
 Ainda não tem homogeneidade de variâncias.
 
-:::callout
-FAZER
-:::
+Nesse caso, acredito que usaria o teste Kruskall Wallis.
 
 ## Questão 8
 
 **8 - É necessário o uso de posthoc nesse caso?**
-
 
 Testes post-hoc são testes estatísticos que são realizados após o teste de ANOVA para identificar as diferenças significativas entre as médias de diferentes grupos.
 
@@ -362,16 +348,90 @@ Usamos posthoc quando: a) o teste utilizado é a ANOVA; e b) o resultado é sign
 
 Resuminho que encontrei: <https://www.blog.psicometriaonline.com.br/o-que-e-um-teste-post-hoc/>
 
-:::callout
+::: callout
 FAZER
 :::
+
 
 
 ## Questão 9
 
 **9 - Aplique o teste estatístico mais adequado e aplique teste posthoc caso necessário. Faça um parágrafo descrevendo os resultados, inclusive com as notações dos testes utilizados.**
 
+```{r}
+prop_tv_hours <- dados_zscore_tv |> 
+  dplyr::count(tvhours, sort = TRUE) |> 
+  mutate(prop = n/sum(n))
 
-:::callout
-FAZER
-:::
+# sum(prop_tv_hours$prop[1:4])
+```
+
+
+Com base no banco de dados "Roça da Serra do Sul", que apresenta respostas de 1500 residentes maiores de idade, realizamos um teste estatístico para avaliar se existe efeito da percepção que essas pessoas tem de suas vidas (variável life) sobre o número de horas que essas pessoas assistem tv (variável tvhours).
+
+Consideramos que a variável indepentende é "life", que representa o que as pessoas acham de suas vidas, sendo possível responder entre 3 categorias: Dull (n = 65), Exciting (n = 473) e Routine (n = 459). Existem também 503 pessoas que não responderam a pergunta.
+
+Consideramos que a variável dependente é "tvhours", que representa quantas horas as pessoas assistem tv por dia. Essa variável é numérica e discreta, com respostas entre 0 e 24 horas. Cerca de 80% dos respondentes passam entre 1 e 4 horas por dia assistindo TV. A variável dependente não apresenta distribuição normal, e também não apresenta homogeneidade das variâncias. Calculamos o z-score da variável tvhours para utilizar no cálculo do teste.
+
+
+
+O teste estatístico escolhido foi o Kruskall-Wallis, um teste não-paramétrico utilizado quando queremos avaliar o efeito de uma variável categórica com 2 ou mais categorias (neste caso, "life") em uma variável numérica (neste caso, "tvhours").
+
+O resultado da estatística teste foi de H = 42,254. O valor-p teve resultado menor que 0.05, portanto, consideramos que existe efeito da percepção que essas pessoas tem de suas vidas (variável life) sobre o número de horas que essas pessoas assistem tv (variável tvhours).
+
+O teste post-hoc utilizado para identificar as diferenças significativas entre os diferentes grupos foi o teste de Dunn (1964), e o valor-p foi ajustado pelo método Holm. Todos os grupos são diferentes (p<0.05), segundo os resultados encontrados.
+
+As análises foram realizadas utilizando a linguagem de programação R (R Core Team, 2024), e os pacotes: stats (R Core Team, 2024) e FSA (Ogle et al., 2023).
+
+---
+Resultados:
+
+Kruskal-Wallis rank sum test
+data:  z_score_tv_hours by life
+Kruskal-Wallis chi-squared = 42.265, df = 2, p-value = 0.0000000006643
+
+Teste post-hoc:
+
+Dunn (1964) Kruskal-Wallis multiple comparison p-values adjusted with the Holm method.
+
+
+|Comparison         |         Z|   P.unadj|     P.adj|
+|:------------------|---------:|---------:|---------:|
+|Dull - Exciting    |  5.898210| 0.0000000| 0.0000000|
+|Dull - Routine     |  3.875732| 0.0001063| 0.0001063|
+|Exciting - Routine | -4.085159| 0.0000440| 0.0000881|
+
+
+---
+
+Referências: 
+
+
+Dunn, O.J. 1964. Multiple comparisons using rank sums. Technometrics 6:241-252.
+
+
+Ogle DH, Doll JC, Wheeler AP, Dinno A (2023). _FSA: Simple Fisheries Stock Assessment Methods_. R package version 0.9.5, <https://CRAN.R-project.org/package=FSA>.
+  
+  
+R Core Team (2024). _R: A Language and Environment for Statistical Computing_. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>.
+
+### Calculando com o R base:
+
+```{r}
+teste <- kruskal.test(z_score_tv_hours ~ life, data = dados_zscore_tv)
+# Summary of the analysis
+summary(teste)
+teste
+```
+```{r}
+post_hoc <- FSA::dunnTest(z_score_tv_hours ~ life, data = dados_zscore_tv)
+
+post_hoc
+```
+
+
+```{r}
+post_hoc$res |> 
+  knitr::kable(format = "markdown")
+```
+
