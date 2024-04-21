@@ -348,11 +348,7 @@ Usamos posthoc quando: a) o teste utilizado é a ANOVA; e b) o resultado é sign
 
 Resuminho que encontrei: <https://www.blog.psicometriaonline.com.br/o-que-e-um-teste-post-hoc/>
 
-::: callout
-FAZER
-:::
-
-
+Respondi: Sim
 
 ## Questão 9
 
@@ -383,9 +379,9 @@ O teste post-hoc utilizado para identificar as diferenças significativas entre 
 
 As análises foram realizadas utilizando a linguagem de programação R (R Core Team, 2024), e os pacotes: stats (R Core Team, 2024) e FSA (Ogle et al., 2023).
 
----
 Resultados:
 
+```md
 Kruskal-Wallis rank sum test
 data:  z_score_tv_hours by life
 Kruskal-Wallis chi-squared = 42.265, df = 2, p-value = 0.0000000006643
@@ -401,7 +397,7 @@ Dunn (1964) Kruskal-Wallis multiple comparison p-values adjusted with the Holm m
 |Dull - Routine     |  3.875732| 0.0001063| 0.0001063|
 |Exciting - Routine | -4.085159| 0.0000440| 0.0000881|
 
-
+```
 ---
 
 Referências: 

@@ -96,7 +96,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li><a href="#quest%C3%A3o-8" id="toc-questão-8" class="nav-link" data-scroll-target="#quest%C3%A3o-8">Questão 8</a></li>
-  <li><a href="#quest%C3%A3o-9" id="toc-questão-9" class="nav-link" data-scroll-target="#quest%C3%A3o-9">Questão 9</a></li>
+  <li>
+<a href="#quest%C3%A3o-9" id="toc-questão-9" class="nav-link" data-scroll-target="#quest%C3%A3o-9">Questão 9</a>
+  <ul class="collapse">
+<li><a href="#calculando-com-o-r-base" id="toc-calculando-com-o-r-base" class="nav-link" data-scroll-target="#calculando-com-o-r-base">Calculando com o R base:</a></li>
+  </ul>
+</li>
   </ul></nav>
 </div>
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -216,6 +221,7 @@ $ attsprts &lt;chr&gt; "No", "No", "No", "No", "Yes", "No", "Yes", "Yes", "Yes",
 </div>
 </div>
 </div>
+<p>Na visualização, não parece tão longe da normal.</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">dados</span><span class="op">$</span><span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -256,12 +262,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Interpretando o resultado do teste de Levene:</p>
 <p>Neste caso, desejamos que o p-valor seja maior que 0.05, pois é desejável que as variâncias sejam iguais. Como o p-valor é igual à 0.05, rejeitamos a hipótese nula e assumimos que as variâncias são diferentes entre os grupos.</p>
 <p>Caso fosse usar o teste-t independente, ou ANOVA, teria que fazer a correção de Welch.</p>
-<p>Então a ideia é: é melhor usar um teste não paramétrico.</p>
 <p>Nossos dados não são pareados, e temos 2 grupos para a variável independente.</p>
 <p>Então, se formos usar um teste não paramétrico, o mais indicado seria o Mann-Whitney. Se formos usar um teste paramétrico, o mais indicado seria o teste t-independente.</p>
 <ul>
 <li>Dúvida: O N é suficiente? não é falado no texto.</li>
-</ul></section></section></section><section id="questão-2" class="level2"><h2 class="anchored" data-anchor-id="questão-2">Questão 2</h2>
+</ul>
+<p>Respondi: Teste t independente</p>
+</section></section></section><section id="questão-2" class="level2"><h2 class="anchored" data-anchor-id="questão-2">Questão 2</h2>
 <p><strong>2 - No banco de dados “Roça da Serra do Sul”, queremos saber se existe diferença na idade entre homens e mulheres. Qual é a pergunta de pesquisa nesse caso?</strong></p>
 <p>Respondi: <strong>Existe efeito do Sexo sobre a idade?</strong></p>
 </section><section id="questão-3" class="level2"><h2 class="anchored" data-anchor-id="questão-3">Questão 3</h2>
@@ -308,52 +315,26 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <ul>
 <li>Interpretação: Não temos evidências para afirmar que existe efeito do Sexo sobre a Idade.</li>
-</ul></section><section id="testando-com-mann-whitney-não-paramétrico" class="level3"><h3 class="anchored" data-anchor-id="testando-com-mann-whitney-não-paramétrico">Testando com Mann-Whitney (não paramétrico):</h3>
+</ul>
+<p>Respondi: <code>Não Existe efeito do Sexo sobre a Idade (t(1493)=-1,697,p=0,090)</code></p>
+</section><section id="testando-com-mann-whitney-não-paramétrico" class="level3"><h3 class="anchored" data-anchor-id="testando-com-mann-whitney-não-paramétrico">Testando com Mann-Whitney (não paramétrico):</h3>
 <p>Eu estava confusa, pois em todos os lugares que encontrei, falavam para usar a função <code>wilcox.test</code> para fazer o teste de Mann-Whitney. Porém, confunde com o nome do teste de Wilcoxon.</p>
 <p>Encontrei esse vídeo da Fernanda Peres, onde ela fala sobre isso: <a href="https://www.youtube.com/watch?v=ekvKa0HzeGo" class="uri">https://www.youtube.com/watch?v=ekvKa0HzeGo</a></p>
 <p>Ainda estou insegura com isso… pesquisar mais.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">resultados_3_mw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">dados</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">resultados_3_mw</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 60%">
-<col style="width: 14%">
-</colgroup>
-<thead><tr class="header">
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: left;">method</th>
-<th style="text-align: left;">alternative</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td style="text-align: right;">286387.5</td>
-<td style="text-align: right;">0.1215148</td>
-<td style="text-align: left;">Wilcoxon rank sum test with continuity correction</td>
-<td style="text-align: left;">two.sided</td>
-</tr></tbody>
-</table>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">dados</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  age by sex
+W = 286388, p-value = 0.1215
+alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 <p>Interpretação: Não existe efeito do sexo sobre a idade.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>FAZER</p>
-</div>
-</div>
-</div>
 </section></section><section id="questão-4" class="level2"><h2 class="anchored" data-anchor-id="questão-4">Questão 4</h2>
-<p><strong>4 - Em um artigo, um pesquisador escreveu na seção de métodos que seu estudo iria utilizar </strong>150 participantes<strong>. Porém, o revisor lendo a seção de resultados, observou que nos dados da ANOVA a notação estava <code>F(3,31)=1,43 p=0,001</code>. Com base nos valores de graus de liberdade diga qual o Tamanho da Amostra válida e o Número de grupos que o pesquisador tinha em seu estudo, respectivamente:</strong></p>
+<p><strong>4 - Em um artigo, um pesquisador escreveu na seção de métodos que seu estudo iria utilizar</strong> 150 participantes<strong>. Porém, o revisor lendo a seção de resultados, observou que nos dados da ANOVA a notação estava <code>F(3,31)=1,43 p=0,001</code>. Com base nos valores de graus de liberdade diga qual o Tamanho da Amostra válida e o Número de grupos que o pesquisador tinha em seu estudo, respectivamente:</strong></p>
 <ul>
 <li><p>O que temos:</p></li>
 <li><p>3 graus de liberdade dos grupos.</p></li>
@@ -385,21 +366,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section><section id="questão-5" class="level2"><h2 class="anchored" data-anchor-id="questão-5">Questão 5</h2>
 <p>5 - Observe a tabela da ANOVA abaixo e calcule os valores de X e Y:</p>
 <p><img src="images/clipboard-147295147.png" class="img-fluid"></p>
-<ul>
-<li><strong>ASSISTIR NA AULA QUE EU PERDI!</strong></li>
-</ul>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>FAZER</p>
-</div>
-</div>
-</div>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">soma_dos_quadrados_entre_grupos</span> <span class="op">&lt;-</span> <span class="fl">263.7</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">soma_dos_quadrados_entre_grupos</span> <span class="op">&lt;-</span> <span class="fl">263.7</span></span>
 <span><span class="va">media_dos_quadrados_entre_grupos</span> <span class="op">&lt;-</span> <span class="fl">130.3</span></span>
 <span><span class="va">soma_dos_quadrados_dentro_dos_grupos</span> <span class="op">&lt;-</span> <span class="fl">4531.8</span></span>
 <span><span class="va">soma_dos_quadrados_total</span> <span class="op">&lt;-</span> <span class="fl">4792.5</span></span>
@@ -407,16 +375,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span><span class="co"># media_dos_quadrados_dentro_dos_grupos &lt;- Y</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># dentro dos grupos</span></span>
-<span><span class="co"># media_dos_quadrados_dentro_dos_grupos = soma_dos_quadrados_do_erro_dentro_dos_grupos/ graus_de_liberdade_do_erro_dentro_dos_grupos</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<p>Respondi: <code>X=28,39 e Y=4,590</code></p>
 </section><section id="questão-6---foi-anulada" class="level2"><h2 class="anchored" data-anchor-id="questão-6---foi-anulada">Questão 6 - FOI ANULADA</h2>
 </section><section id="questão-7" class="level2"><h2 class="anchored" data-anchor-id="questão-7">Questão 7</h2>
 <p><strong>7 - Com base no banco de dados “Roça da Serra do Sul”, queremos saber se o que as pessoas acham da vida delas (variável life) tem efeito sobre o número de horas que elas assistem tv (tvhours).</strong> <strong>Teste a variável dependente quanto aos pré-requisitos.</strong> <strong>Caso os pré-requisitos da VD não sejam atendidos, padronize a variável com base no método Z-escore e responda as perguntas.</strong> <strong>Qual o teste estatístico mais adequado para responder a pergunta de pesquisa proposta nesta questão?</strong></p>
 <hr>
-<p>Variável independente: life Variável dependente: tvhours</p>
+<p>Variável independente: life</p>
+<p>Variável dependente: tvhours</p>
 <p>Quantas categorias temos na VI?</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados</span> <span class="op">|&gt;</span> </span>
@@ -451,7 +416,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Opções de respostas:</p>
 <ul>
-<li><p>Teste T - Teste paramétrico para 2 grupos. ão uso pois temos mais de 2 grupos.</p></li>
+<li><p>Teste T - Teste paramétrico para 2 grupos. não uso pois temos mais de 2 grupos.</p></li>
 <li><p><label><input type="checkbox">ANOVA - Teste paramétrico para 2 ou mais grupos.</label></p></li>
 <li><p>Qui-Quadrado - Não uso pois temos 1 variável categórica, e 1 contínua. Para usar qui-quadrado, as duas deveriam ser categóricas.</p></li>
 <li><p><label><input type="checkbox">Kruskall-Wallis - Teste não paramétrico para 2 ou mais grupos, similar ao ANOVA.</label></p></li>
@@ -489,7 +454,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span><span class="st">       Curva preta: dados reais."</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -545,9 +510,24 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span>    z_score_tv_hours <span class="op">=</span> <span class="op">(</span><span class="va">tvhours</span> <span class="op">-</span> <span class="va">media_tvhours</span><span class="op">)</span> <span class="op">/</span> <span class="va">desvio_padrao_tvhours</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="testando-novamente" class="level4"><h4 class="anchored" data-anchor-id="testando-novamente">Testando novamente</h4>
+</section><section id="visualizando-a-distribuição" class="level4"><h4 class="anchored" data-anchor-id="visualizando-a-distribuição">Visualizando a distribuição</h4>
 <div class="cell">
 <details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_zscore_tv</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tvhours</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">z_score_tv_hours</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">life</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="testando-novamente" class="level4"><h4 class="anchored" data-anchor-id="testando-novamente">Testando novamente</h4>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_zscore_tv</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">z_score_tv_hours</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -558,9 +538,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
-<p>Ainda está esquisito…</p>
+<p>Mesmo padronizando com o z-score, não tem uma distribuição próxima à normal.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">dados_zscore_tv</span><span class="op">$</span><span class="va">z_score_tv_hours</span> <span class="op">~</span> <span class="va">dados</span><span class="op">$</span><span class="va">life</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">dados_zscore_tv</span><span class="op">$</span><span class="va">z_score_tv_hours</span> <span class="op">~</span> <span class="va">dados</span><span class="op">$</span><span class="va">life</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
        Df F value       Pr(&gt;F)    
@@ -571,44 +551,118 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>Ainda não tem homogeneidade de variâncias.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>FAZER</p>
-</div>
-</div>
-</div>
+<p>Nesse caso, acredito que usaria o teste Kruskall Wallis.</p>
 </section></section></section><section id="questão-8" class="level2"><h2 class="anchored" data-anchor-id="questão-8">Questão 8</h2>
 <p><strong>8 - É necessário o uso de posthoc nesse caso?</strong></p>
 <p>Testes post-hoc são testes estatísticos que são realizados após o teste de ANOVA para identificar as diferenças significativas entre as médias de diferentes grupos.</p>
 <p>Usamos posthoc quando: a) o teste utilizado é a ANOVA; e b) o resultado é significativo.</p>
 <p>Resuminho que encontrei: <a href="https://www.blog.psicometriaonline.com.br/o-que-e-um-teste-post-hoc/" class="uri">https://www.blog.psicometriaonline.com.br/o-que-e-um-teste-post-hoc/</a></p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>FAZER</p>
-</div>
-</div>
-</div>
+<p>Respondi: Sim</p>
 </section><section id="questão-9" class="level2"><h2 class="anchored" data-anchor-id="questão-9">Questão 9</h2>
 <p><strong>9 - Aplique o teste estatístico mais adequado e aplique teste posthoc caso necessário. Faça um parágrafo descrevendo os resultados, inclusive com as notações dos testes utilizados.</strong></p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">prop_tv_hours</span> <span class="op">&lt;-</span> <span class="va">dados_zscore_tv</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">tvhours</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># sum(prop_tv_hours$prop[1:4])</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div class="callout-body-container">
-<p>FAZER</p>
+<p>Com base no banco de dados “Roça da Serra do Sul”, que apresenta respostas de 1500 residentes maiores de idade, realizamos um teste estatístico para avaliar se existe efeito da percepção que essas pessoas tem de suas vidas (variável life) sobre o número de horas que essas pessoas assistem tv (variável tvhours).</p>
+<p>Consideramos que a variável indepentende é “life”, que representa o que as pessoas acham de suas vidas, sendo possível responder entre 3 categorias: Dull (n = 65), Exciting (n = 473) e Routine (n = 459). Existem também 503 pessoas que não responderam a pergunta.</p>
+<p>Consideramos que a variável dependente é “tvhours”, que representa quantas horas as pessoas assistem tv por dia. Essa variável é numérica e discreta, com respostas entre 0 e 24 horas. Cerca de 80% dos respondentes passam entre 1 e 4 horas por dia assistindo TV. A variável dependente não apresenta distribuição normal, e também não apresenta homogeneidade das variâncias. Calculamos o z-score da variável tvhours para utilizar no cálculo do teste.</p>
+<p>O teste estatístico escolhido foi o Kruskall-Wallis, um teste não-paramétrico utilizado quando queremos avaliar o efeito de uma variável categórica com 2 ou mais categorias (neste caso, “life”) em uma variável numérica (neste caso, “tvhours”).</p>
+<p>O resultado da estatística teste foi de H = 42,254. O valor-p teve resultado menor que 0.05, portanto, consideramos que existe efeito da percepção que essas pessoas tem de suas vidas (variável life) sobre o número de horas que essas pessoas assistem tv (variável tvhours).</p>
+<p>O teste post-hoc utilizado para identificar as diferenças significativas entre os diferentes grupos foi o teste de Dunn (1964), e o valor-p foi ajustado pelo método Holm. Todos os grupos são diferentes (p&lt;0.05), segundo os resultados encontrados.</p>
+<p>As análises foram realizadas utilizando a linguagem de programação R (R Core Team, 2024), e os pacotes: stats (R Core Team, 2024) e FSA (Ogle et al., 2023).</p>
+<p>Resultados:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Kruskal-Wallis rank sum test</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data:  z_score_tv_hours by life</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>Kruskal-Wallis chi-squared = 42.265, df = 2, p-value = 0.0000000006643</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>Teste post-hoc:</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>Dunn (1964) Kruskal-Wallis multiple comparison p-values adjusted with the Holm method.</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>|Comparison         |         Z|   P.unadj|     P.adj|</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>|:------------------|---------:|---------:|---------:|</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>|Dull - Exciting    |  5.898210| 0.0000000| 0.0000000|</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>|Dull - Routine     |  3.875732| 0.0001063| 0.0001063|</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>|Exciting - Routine | -4.085159| 0.0000440| 0.0000881|</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+<p>Referências:</p>
+<p>Dunn, O.J. 1964. Multiple comparisons using rank sums. Technometrics 6:241-252.</p>
+<p>Ogle DH, Doll JC, Wheeler AP, Dinno A (2023). <em>FSA: Simple Fisheries Stock Assessment Methods</em>. R package version 0.9.5, <a href="https://CRAN.R-project.org/package=FSA" class="uri">https://CRAN.R-project.org/package=FSA</a>.</p>
+<p>R Core Team (2024). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing, Vienna, Austria. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<section id="calculando-com-o-r-base" class="level3"><h3 class="anchored" data-anchor-id="calculando-com-o-r-base">Calculando com o R base:</h3>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">teste</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">z_score_tv_hours</span> <span class="op">~</span> <span class="va">life</span>, data <span class="op">=</span> <span class="va">dados_zscore_tv</span><span class="op">)</span></span>
+<span><span class="co"># Summary of the analysis</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">teste</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>          Length Class  Mode     
+statistic 1      -none- numeric  
+parameter 1      -none- numeric  
+p.value   1      -none- numeric  
+method    1      -none- character
+data.name 1      -none- character</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">teste</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  z_score_tv_hours by life
+Kruskal-Wallis chi-squared = 42.265, df = 2, p-value = 0.0000000006643</code></pre>
 </div>
 </div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">post_hoc</span> <span class="op">&lt;-</span> <span class="fu">FSA</span><span class="fu">::</span><span class="fu"><a href="https://fishr-core-team.github.io/FSA/reference/dunnTest.html">dunnTest</a></span><span class="op">(</span><span class="va">z_score_tv_hours</span> <span class="op">~</span> <span class="va">life</span>, data <span class="op">=</span> <span class="va">dados_zscore_tv</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">post_hoc</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>          Comparison         Z           P.unadj            P.adj
+1    Dull - Exciting  5.898210 0.000000003674658 0.00000001102397
+2     Dull - Routine  3.875732 0.000106304676964 0.00010630467696
+3 Exciting - Routine -4.085159 0.000044046665502 0.00008809333100</code></pre>
 </div>
-</section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">post_hoc</span><span class="op">$</span><span class="va">res</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">Comparison</th>
+<th style="text-align: right;">Z</th>
+<th style="text-align: right;">P.unadj</th>
+<th style="text-align: right;">P.adj</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Dull - Exciting</td>
+<td style="text-align: right;">5.898210</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dull - Routine</td>
+<td style="text-align: right;">3.875732</td>
+<td style="text-align: right;">0.0001063</td>
+<td style="text-align: right;">0.0001063</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Exciting - Routine</td>
+<td style="text-align: right;">-4.085159</td>
+<td style="text-align: right;">0.0000440</td>
+<td style="text-align: right;">0.0000881</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section></section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
