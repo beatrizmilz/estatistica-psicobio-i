@@ -66,7 +66,14 @@ Variável independente: categoria de TTS (variável categórica, com 2 categoria
 
 Variável dependente: tempo em minutos (em minutos, variável numérica).
 
-Neste caso, consideramos apenas o grupo de pessoas com depressão, e utilizamos um teste-t pareado. O resultado obtido foi T=7,22, sendo maior que o valor crítico (T=3,96) para considerar o valor p \< 0.05.
+Neste caso, consideramos apenas o grupo de pessoas com depressão, e utilizamos um teste-t pareado.
+
+:::callout
+Conversar mais:
+Precisamos testar o mauchly - Esfericidade. Usar o total?
+:::
+
+O resultado obtido foi T=7,22, sendo maior que o valor crítico (T=3,96) para considerar o valor p \< 0.05.
 
 Portanto, para as pessoas com depressão, existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para os pacientes com depressão.
 
@@ -78,7 +85,14 @@ Variável independente: categoria de TTS (variável categórica, com 2 categoria
 
 Variável dependente: tempo em minutos (em minutos, variável numérica).
 
-Neste caso, consideramos apenas o grupo de pessoas sem depressão, e utilizamos um teste-t pareado. O resultado obtido foi T=3,09, sendo menor que o valor crítico (T=3,96) para considerar o valor p \< 0.05.
+Neste caso, consideramos apenas o grupo de pessoas sem depressão, e utilizamos um teste-t pareado.
+
+:::callout
+Conversar mais:
+Precisamos testar o mauchly - Esfericidade. Usar o total?
+:::
+
+O resultado obtido foi T=3,09, sendo menor que o valor crítico (T=3,96) para considerar o valor p \< 0.05.
 
 Portanto, para as pessoas com depressão, não existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para os pacientes com depressão.
 
@@ -126,6 +140,15 @@ tab_media |>
   theme_minimal() + 
   scale_y_continuous(limits = c(450, 500))
 ```
+
+
+:::callout
+Teste-t para uma amostra?
+:::
+
+
+**Podemos dizer que toda nossa amostra (independentemente da presença de depressão ou não) possui valor médio semelhante de tempo total de sono real em relação a média esperada populacional?**
+
 
 **Alternativas**:
 
@@ -185,9 +208,15 @@ round((ic_pesquisa_antiacido[2]-ic_pesquisa_antiacido[1])*100)
 
 Faixa de erro: 38%. Muito erro!!!
 
--   O que 112% de confiança significa? É possível ter IC maior que 100%?
+-   O que 112% de proporção significa? É possível ter proporção maior que 100%?
 
 -   O que o professor quer dizer com resultado fidedigno e reprodutível? Acredito que dependa do erro aceitável. Isso não está escrito na questão.
+
+
+:::callout
+Mandar no discord!
+:::
+
 
 **Alternativas**:
 
@@ -284,19 +313,21 @@ O gráfico acima mostra dados de dois grupos apresentados como um gráfico de ba
 
 **10 - Com base na figura e nas informações acima, diga qual a alternativa CORRETA:**
 
+::: callout
+Para mim não ficou claro a diferença entre as duas linhas da tabela (equal/unequal).
+:::
+
 -   [ ] Os resultados do teste t refletem que os valores de p são semelhantes, independente da distribuição ou do tamanho da amostra entre os grupos
 
 -   [ ] Amostras bimodais geram vieses nos resultados do teste t
 
 -   [ ] Podemos representar amostras com distribuições diferentes apenas usando gráficos de barra
 
--   [ ] Amostras com tamanhos desiguais podem gerar vieses nos resultados do teste t.
+-   [x] Amostras com tamanhos desiguais podem gerar vieses nos resultados do teste t.
 
 -   [ ] Todas estão corretas
 
-::: callout
-Para mim não ficou claro a diferença entre as duas linhas da tabela (equal/unequal).
-:::
+
 
 # Questões de 11 a 14
 
@@ -316,6 +347,10 @@ A variável dependente é a quantidade de palavras lembradas antes do treino de 
 
 Podemos usar o teste Wilcoxon, um teste não paramétrico.
 
+::: callout
+Não pode ser wilcoxon, pq esse é para medidas pareadas!
+:::
+
 Os resultados do teste de wilcoxon (W = 2,22) apontam que não existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas antes do treino de motrocidade.
 
 ## Questão 12
@@ -327,6 +362,7 @@ A variável independente é o tipo de escola (pública/privada). Portanto é uma
 A variável dependente é a quantidade de palavras lembradas depois do treino de motrocidade. Essa variável apresenta distribuição próxima à normal (baseado nos resultados do teste Shapiro-Wilk, p = 0.81), e apresenta homogeneidade das variâncias (baseado nos resultados do teste de Levenne, p = 0.30).
 
 Podemos usar o teste t-independente, um teste paramétrico.
+
 
 Os resultados do teste t independente (T = 5,59) apontam que existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas depois do treino de motrocidade.
 
@@ -346,6 +382,10 @@ Considerando apenas as crianças de escola privada:
 
 Podemos usar o teste t-pareado.
 
+::: callout
+Ver o mauchly!
+:::
+
 Os resultados do teste t pareado (T = 4,98) apontam que existe diferença entre os tempos (antes e depois do treino) na média de palavras lembradas pelas crianças.
 
 ## Questão 14
@@ -360,6 +400,10 @@ Considerando apenas as crianças de escola pública:
 
 Podemos usar o teste t-pareado.
 
+::: callout
+Ver o mauchly!
+:::
+
 Os resultados do teste t pareado (T = 3,59) apontam que não existe diferença entre os tempos (antes e depois do treino) na média de palavras lembradas pelas crianças.
 
 # Questões 15 a 20
@@ -367,6 +411,14 @@ Os resultados do teste t pareado (T = 3,59) apontam que não existe diferença e
 ## Questão 15
 
 O Banco de dados para responder a questão abaixo pode ser encontrado aqui: https://bit.ly/2XC89jN
+
+```{r}
+dados_hipertensao <- readr::read_delim("Hipertensao.csv", 
+    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+dplyr::glimpse(dados_hipertensao)
+```
+
 
 ![](images/clipboard-885151021.png)
 
@@ -380,8 +432,7 @@ O Banco de dados para responder a questão abaixo pode ser encontrado aqui: http
 Confuso!
 :::
 
-
--   [ ] Gráficos de barra são mais adequados para comparar valores individuais entre diferentes grupos, enquanto boxplots são mais úteis para visualizar a distribuição dos dados dentro de um único grupo.
+-   [x] Gráficos de barra são mais adequados para comparar valores individuais entre diferentes grupos, enquanto boxplots são mais úteis para visualizar a distribuição dos dados dentro de um único grupo.
 
 -   [ ] Boxplots são mais úteis para comparar valores individuais entre diferentes grupos, enquanto gráficos de barra são mais adequados para visualizar a distribuição dos dados dentro de um único grupo.
 
@@ -395,15 +446,15 @@ Confuso!
 
 **17- Qual das seguintes afirmações é VERDADEIRA sobre por que o teste ANOVA é preferível ao teste t para comparar médias em mais de 2 grupos?**
 
-- O teste t é mais apropriado para dados com distribuição normal, enquanto o ANOVA é mais robusto a desvios da normalidade.
+-   O teste t é mais apropriado para dados com distribuição normal, enquanto o ANOVA é mais robusto a desvios da normalidade.
 
-- O teste t pode ser utilizado para comparar diferentes variáveis de resposta, enquanto o ANOVA é limitado a um único fator de interesse.
+-   O teste t pode ser utilizado para comparar diferentes variáveis de resposta, enquanto o ANOVA é limitado a um único fator de interesse.
 
-- O teste t é mais fácil de interpretar, enquanto a interpretação do ANOVA é mais complexa.
+-   O teste t é mais fácil de interpretar, enquanto a interpretação do ANOVA é mais complexa.
 
-- O teste t não requer homogeneidade de variâncias, enquanto o ANOVA exige que as variâncias entre os grupos sejam iguais.
+-   O teste t não requer homogeneidade de variâncias, enquanto o ANOVA exige que as variâncias entre os grupos sejam iguais.
 
-- O teste t é mais adequado para amostras grandes, enquanto o ANOVA é apropriado para amostras pequenas e grandes.
+-   O teste t é mais adequado para amostras grandes, enquanto o ANOVA é apropriado para amostras pequenas e grandes.
 
 -   [x] O teste t é limitado a comparar duas amostras, enquanto o ANOVA pode ser usado para comparar médias em três ou mais grupos.
 
@@ -411,29 +462,35 @@ Confuso!
 
 **18- Qual das seguintes afirmações é VERDADEIRA sobre a relação entre tamanho de efeito e tamanho de amostra?**
 
-- Quanto maior o tamanho da amostra, maior o tamanho do efeito.
+-   Quanto maior o tamanho da amostra, maior o tamanho do efeito.
 
-- O tamanho do efeito é independente do tamanho da amostra.
+-   O tamanho do efeito é independente do tamanho da amostra.
 
 -   [x] O tamanho do efeito é inversamente proporcional ao tamanho da amostra.
 
--  O tamanho do efeito é diretamente proporcional ao tamanho da amostra apenas em experimentos controlados.
+-   O tamanho do efeito é diretamente proporcional ao tamanho da amostra apenas em experimentos controlados.
 
-- O tamanho do efeito é diretamente proporcional ao tamanho da amostra apenas em experimentos observacionais.
+-   O tamanho do efeito é diretamente proporcional ao tamanho da amostra apenas em experimentos observacionais.
 
 ## Questão 19
 
 19- Qual das seguintes afirmações é VERDADEIRA sobre o uso de intervalos de confiança para comparar diferenças entre um grupo em dois momentos diferentes no tempo?
 
+
 -   [ ] Os intervalos de confiança são usados apenas para descrever a precisão de uma estimativa, não para fazer inferências sobre a significância de uma diferença entre os momentos.
 
--   [ ] Intervalos de confiança são mais úteis para comparar grupos independentes do que grupos pareados.
+-   Intervalos de confiança são mais úteis para comparar grupos independentes do que grupos pareados.
 
--   [ ] Se o intervalo de confiança para a diferença entre os momentos incluir o valor zero, podemos concluir que não há diferença significativa entre os momentos.
+-   [x] Se o intervalo de confiança para a diferença entre os momentos incluir o valor zero, podemos concluir que não há diferença significativa entre os momentos. **Dezena acha que é essa! ela disse que o professor falou sobre isso na aula, rever**
 
-- O tamanho do intervalo de confiança é influenciado apenas pelo tamanho da amostra e não pela magnitude da diferença entre os momentos.
+-   O tamanho do intervalo de confiança é influenciado apenas pelo tamanho da amostra e não pela magnitude da diferença entre os momentos.
 
-- Intervalos de confiança não fornecem informações sobre a direção da diferença entre os momentos, apenas sobre a magnitude da diferença.
+-   Intervalos de confiança não fornecem informações sobre a direção da diferença entre os momentos, apenas sobre a magnitude da diferença.
+
+
+:::callout
+Ver referência: <https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf>
+:::
 
 ## Questão 20
 
@@ -457,10 +514,13 @@ Justifique com base nos valores calculados e diga se os dados epidemiológicos p
 
 ![](images/clipboard-2597700249.png)
 
+----
 
-Precisamos fazer testes qui-quadrado!
+
+
 
 ### A) Estudo transversal
+
 ```{r}
 est_transversal <- tibble::tibble(
   categoria = c("Orcs Bebem", "Orcs Abstemios"),
@@ -471,16 +531,8 @@ est_transversal <- tibble::tibble(
 est_transversal |> knitr::kable()
 ```
 
-
-
-```{r}
-chisq.test(est_transversal)
-```
-Existe associação.
-
-
-
 ### B) Estudo Caso-controle
+
 ```{r}
 est_cc <- tibble::tibble(
   categoria = c("Orcs Bebem", "Orcs Abstemios"),
@@ -491,17 +543,7 @@ est_cc <- tibble::tibble(
 est_cc |> knitr::kable()
 ```
 
-
-
-```{r}
-chisq.test(est_cc)
-```
-
-Existe associação.
-
-
 ### C) Coorte
-
 
 ```{r}
 est_coorte <- tibble::tibble(
@@ -514,19 +556,20 @@ est_coorte |> knitr::kable()
 ```
 
 
-
-```{r}
-chisq.test(est_coorte)
-```
-
-Existe associação.
-
-
 ### Resposta
 
 **É possível dizer que se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?**
 
+
+Será que a bebida AJUDA os orcs a lutarem melhor?
+
+
+- razão de prevalencia p/ transversal
+
+- odds ratio p/ caso-controle
+
+- risco relativo p/ coorte
+
 ::: callout
 Pensar!
 :::
-
