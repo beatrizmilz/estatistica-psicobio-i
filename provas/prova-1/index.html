@@ -406,50 +406,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>11 - Existe diferença entre Escolas Públicas e Privadas na média de palavras lembradas antes do treino de motricidade?</strong></p>
 <p>A variável independente é o tipo de escola (pública/privada). Portanto é uma variável categórica, com 2 categorias.</p>
 <p>A variável dependente é a quantidade de palavras lembradas antes do treino de motrocidade. Essa variável apresenta distribuição próxima à normal (baseado nos resultados do teste Shapiro-Wilk, p = 0.77), porém não apresenta homogeneidade das variâncias (baseado nos resultados do teste de Levenne, p = 0.01).</p>
-<p>Podemos usar o teste Wilcoxon, um teste não paramétrico.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Não pode ser wilcoxon, pq esse é para medidas pareadas!</p>
-</div>
-</div>
-</div>
-<p>Os resultados do teste de wilcoxon (W = 2,22) apontam que não existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas antes do treino de motrocidade.</p>
+<p>Podemos usar o teste-t independente, um teste paramétrico. Nesse caso, é importante realizar a correção de Welch devido à não-homogeneidade das variâncias.</p>
+<p>Os resultados do teste-t independente (t = 6,87) apontam que existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas antes do treino de motrocidade.</p>
 </section><section id="questão-12" class="level2"><h2 class="anchored" data-anchor-id="questão-12">Questão 12</h2>
 <p><strong>12 - Existe diferença entre Escolas Públicas e Privadas na média de palavras lembradas depois do treino de motricidade?</strong></p>
 <p>A variável independente é o tipo de escola (pública/privada). Portanto é uma variável categórica, com 2 categorias.</p>
 <p>A variável dependente é a quantidade de palavras lembradas depois do treino de motrocidade. Essa variável apresenta distribuição próxima à normal (baseado nos resultados do teste Shapiro-Wilk, p = 0.81), e apresenta homogeneidade das variâncias (baseado nos resultados do teste de Levenne, p = 0.30).</p>
 <p>Podemos usar o teste t-independente, um teste paramétrico.</p>
 <p>Os resultados do teste t independente (T = 5,59) apontam que existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas depois do treino de motrocidade.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Dado que estamos comparando, não seria melhor usar o mesmo teste nessas duas questões? (11 e 12)</p>
-</div>
-</div>
-</div>
 </section><section id="questão-13" class="level2"><h2 class="anchored" data-anchor-id="questão-13">Questão 13</h2>
 <p><strong>13 - Existe diferença entre o número de palavras lembradas antes e depois do treino para a Escola Privada?</strong></p>
 <p>A variável independente é o tempo: antes ou depois do treino. Portanto é uma variável categórica, com 2 categorias.</p>
 <p>A variável dependente é a quantidade de palavras lembradas.</p>
 <p>Considerando apenas as crianças de escola privada:</p>
 <p>Podemos usar o teste t-pareado.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Ver o mauchly!</p>
-</div>
-</div>
-</div>
+<p>Como se trata de um teste de medidas repetidas, é importante checar a esfericidade, o que pode ser verificado com o teste de Mauchly. Como não temos a informação considerando apenas para crianças de escolas privadas, considerei o valor total, que apresentou esfericidade (p = 0,61).</p>
 <p>Os resultados do teste t pareado (T = 4,98) apontam que existe diferença entre os tempos (antes e depois do treino) na média de palavras lembradas pelas crianças.</p>
 </section><section id="questão-14" class="level2"><h2 class="anchored" data-anchor-id="questão-14">Questão 14</h2>
 <p><strong>14 - Existe diferença entre o número de palavras lembradas antes e depois do treino para a Escola Pública?</strong></p>
@@ -457,20 +428,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A variável dependente é a quantidade de palavras lembradas.</p>
 <p>Considerando apenas as crianças de escola pública:</p>
 <p>Podemos usar o teste t-pareado.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Ver o mauchly!</p>
-</div>
-</div>
-</div>
+<p>Como se trata de um teste de medidas repetidas, é importante checar a esfericidade, o que pode ser verificado com o teste de Mauchly. Como não temos a informação considerando apenas para crianças de escolas públicas, considerei o valor total, que apresentou esfericidade (p = 0,61).</p>
 <p>Os resultados do teste t pareado (T = 3,59) apontam que não existe diferença entre os tempos (antes e depois do treino) na média de palavras lembradas pelas crianças.</p>
 </section></section><section id="questões-15-a-20" class="level1"><h1>Questões 15 a 20</h1>
 <section id="questão-15" class="level2"><h2 class="anchored" data-anchor-id="questão-15">Questão 15</h2>
-<p>O Banco de dados para responder a questão abaixo pode ser encontrado aqui: https://bit.ly/2XC89jN</p>
+<p>O Banco de dados para responder a questão abaixo pode ser encontrado aqui: <a href="https://bit.ly/2XC89jN" class="uri">https://bit.ly/2XC89jN</a></p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dados_hipertensao</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="st">"Hipertensao.csv"</span>, </span>
 <span>    delim <span class="op">=</span> <span class="st">";"</span>, escape_double <span class="op">=</span> <span class="cn">FALSE</span>, trim_ws <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -485,8 +447,122 @@ $ `DROGA B` &lt;dbl&gt; 189, 191, 193, 180, 179, 194, 182, 178, 192, 190, 186, 1
 $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 180, …</code></pre>
 </div>
 </div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hipertensao</span> <span class="op">&lt;-</span> <span class="va">dados_hipertensao</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="va">paciente</span>, names_to <span class="op">=</span> <span class="st">"droga"</span>, values_to <span class="op">=</span> <span class="st">"pressao_arterial"</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p><img src="images/clipboard-885151021.png" class="img-fluid"></p>
 <p><strong>15- Faça as análises estatísticas que julgar necessárias para verificar qual é o melhor tratamento. Faça um texto com as suas análises passo a passo e escreva sua conclusão como o faria para submeter um artigo para publicação. ESCREVA UM PARÁGRAFO DE ANÁLISE ESTATÍSTICA (Como na seção de métodos de um artigo) ONDE DEVEM SER APRESENTADAS - Qual a pergunta de pesquisa, VD e VI, Hipótese Nula e Alternativa e os testes estatísticos adotados e seus pré-requisitos caso seja necessário. ALÉM DISSO ESCREVA OUTRO PARÁGRAFO COM A ANÁLISE DOS DADOS - Resultados, notação dos testes, onde estão as diferenças entre os grupos/medidas e tamanhos do efeito. Utilize esse exercício como um treino para escrever seus próprios resultados daqui pra frente! Utilize o banco de dados apresentado no link acima. Fique a vontade para adicionar mais variáveis caso ache necessário</strong></p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hipertensao</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 54 × 3
+   paciente droga   pressao_arterial
+   &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;
+ 1 P1       droga_a              187
+ 2 P1       droga_b              189
+ 3 P1       droga_c              180
+ 4 P2       droga_a              182
+ 5 P2       droga_b              191
+ 6 P2       droga_c              185
+ 7 P3       droga_a              191
+ 8 P3       droga_b              193
+ 9 P3       droga_c              173
+10 P4       droga_a              174
+# ℹ 44 more rows</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">hipertensao</span><span class="op">$</span><span class="va">pressao_arterial</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 159</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">hipertensao</span><span class="op">$</span><span class="va">pressao_arterial</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 194</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">hipertensao</span><span class="op">$</span><span class="va">pressao_arterial</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  hipertensao$pressao_arterial
+W = 0.97791, p-value = 0.5819</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/leveneTest.html">leveneTest</a></span><span class="op">(</span><span class="va">hipertensao</span><span class="op">$</span><span class="va">pressao_arterial</span> <span class="op">~</span> <span class="va">hipertensao</span><span class="op">$</span><span class="va">droga</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+      Df F value  Pr(&gt;F)  
+group  2  2.6326 0.08463 .
+      39                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">hipertensao</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">pressao_arterial</span>, y <span class="op">=</span> <span class="va">droga</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">pressao_arterial</span> <span class="op">~</span> <span class="va">droga</span>, data <span class="op">=</span> <span class="va">hipertensao</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  term         df sumsq meansq statistic   p.value
+  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 droga         2  869.  434.       8.31  0.000988
+2 Residuals    39 2040.   52.3     NA    NA       </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Materiais e métodos: Análise estatística</strong></li>
+</ul>
+<p>Nesta pesquisa, buscamos responder a seguinte pergunta: Qual medicamento (droga A, B ou C) apresenta o melhor tratamento para a hipertensão (ou seja, apresenta maior diminuição de pressão arterial)?</p>
+<p>A variável independente é a droga utilizada para o tratamento (droga A, B ou C). É uma variável categórica nominal.</p>
+<p>A variável dependente é a pressão arterial, uma variável numérica discreta, apresentando valores entre 159 e 194.</p>
+<p>A hipótese nula é de que a média da pressão arterial (Mpa) para a droga A é igual à Mpa para a droga B, e igual para a Mpa para a droga C:</p>
+<p><code>Mpa_drogaA = Mpa_drogaB = Mpa_drogaC</code></p>
+<p>A hipótese alternativa é de que as médias da pressão arterial são diferente entre os grupos:</p>
+<p><code>Mpa_drogaA != Mpa_drogaB != Mpa_drogaC</code></p>
+<p>O teste de Shapiro-Wilk foi utilizado para testar a normalidade da variável dependente (pressão arterial). O resultado apontou para a normalidade da variável (p-valor = 0.58).</p>
+<p>O teste de Levenne foi utilizado para testar se existe homogeneidade das variâncias para a variável dependente. O resultado apontou que existe homogeneidade das variâncias (p-valor = 0.08).</p>
+<p>Portanto, teste estatístico escolhido foi a ANOVA (análise de variância).</p>
+<p>As análises de dados foram realizas utilizando o software R (R Core Team, 2024), e os seguintes pacotes: stats (R Core Team, 2024), car (Fox &amp; Weisberg, 2019), tidyverse (Wickham et al., 2019).</p>
+<ul>
+<li><strong>Resultados: Análise dos dados</strong></li>
+</ul>
+<p>A análise de variância apresentou F = 8.3, com p-valor &lt; 0.05, o que aponta que existe uma diferença significativa entre os grupos.</p>
+<p>Para encontrar quais são os grupos com diferenças significativas, foi realizado um teste post-hoc:</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>TAMANHO DE EFEITO??? VER O FINAL DA AULA QUE FALTA!</p>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Referências</strong></li>
+</ul>
+<p>Fox J, Weisberg S (2019). <em>An R Companion to Applied Regression</em>, Third edition. Sage, Thousand Oaks CA. <a href="https://socialsciences.mcmaster.ca/jfox/Books/Companion/" class="uri">https://socialsciences.mcmaster.ca/jfox/Books/Companion/</a>.</p>
+<p>R Core Team (2024). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing, Vienna, Austria. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.” <em>Journal of Open Source Software</em>, <em>4</em>(43), 1686. doi:10.21105/joss.01686 <a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a>.</p>
 </section><section id="questão-16" class="level2"><h2 class="anchored" data-anchor-id="questão-16">Questão 16</h2>
 <p><strong>16 - Qual das seguintes afirmações é VERDADEIRA sobre gráficos de barra e boxplots?</strong></p>
 <ul class="task-list">
@@ -534,7 +610,7 @@ $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 1
 <hr>
 <section id="a-estudo-transversal" class="level3"><h3 class="anchored" data-anchor-id="a-estudo-transversal">A) Estudo transversal</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_transversal</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_transversal</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  categoria <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Orcs Bebem"</span>, <span class="st">"Orcs Abstemios"</span><span class="op">)</span>,</span>
 <span>  nao_lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">1500</span><span class="op">)</span>,</span>
 <span>  lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">3500</span><span class="op">)</span></span>
@@ -565,7 +641,7 @@ $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 1
 </div>
 </section><section id="b-estudo-caso-controle" class="level3"><h3 class="anchored" data-anchor-id="b-estudo-caso-controle">B) Estudo Caso-controle</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_cc</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_cc</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  categoria <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Orcs Bebem"</span>, <span class="st">"Orcs Abstemios"</span><span class="op">)</span>,</span>
 <span>  nao_lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">50</span><span class="op">)</span>,</span>
 <span>  lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">450</span><span class="op">)</span></span>
@@ -596,7 +672,7 @@ $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 1
 </div>
 </section><section id="c-coorte" class="level3"><h3 class="anchored" data-anchor-id="c-coorte">C) Coorte</h3>
 <div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_coorte</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_coorte</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  categoria <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Orcs Bebem"</span>, <span class="st">"Orcs Abstemios"</span><span class="op">)</span>,</span>
 <span>  nao_lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">300</span><span class="op">)</span>,</span>
 <span>  lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">800</span>, <span class="fl">1700</span><span class="op">)</span></span>
@@ -628,11 +704,35 @@ $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 1
 </section><section id="resposta" class="level3"><h3 class="anchored" data-anchor-id="resposta">Resposta</h3>
 <p><strong>É possível dizer que se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?</strong></p>
 <p>Será que a bebida AJUDA os orcs a lutarem melhor?</p>
+<p>Neste caso, consideramos que a exposição é beber ou não, e o desfecho é lutar ou não lutar.</p>
+<p>Exposto (Orcs Bebem) - Desfecho: lutam | Exposto (Orcs Bebem) - Desfecho: não lutam ________________________________________________________________________________ Não-exposto (Orcs abstêmios) - Desfecho: lutam | Não-exposto (Orcs não bebem) - Desfecho: não lutam</p>
+<p>Com os resultados do estudo transversal, podemos calcular a razão de prevalências:</p>
 <ul>
-<li><p>razão de prevalencia p/ transversal</p></li>
-<li><p>odds ratio p/ caso-controle</p></li>
-<li><p>risco relativo p/ coorte</p></li>
+<li><p>Prevalência de Orcs que não lutam, dentre os expostos (beberam) = 200 / 200+300 = 0.4</p></li>
+<li><p>Prevalência de Orcs que não lutam, dentre os não-expostos (abstêmios) = 1500 / 1500+3500 = 0.3</p></li>
+<li><p>Razão de prevalências: 0.4/0.3 = 1.33</p></li>
 </ul>
+<p>Esse resultado aponta que existe associação entre desfecho “não lutar” e a exposição ao álcool. A interpretação dos resultados sugere que existe mais Orcs que não lutam quando são expostos (bebem).</p>
+<hr>
+<p>Com os resultados do estudo caso-controle, podemos calcular a razão de chances (<em>odds-ratio</em>).</p>
+<p>O que eu espero? Que Orcs que bebem, lutem. E que os Orcs que não bebem, não lutem.</p>
+<ul>
+<li><p>Chance de acontecer o que eu espero: orcs_bebem_lutam * orcs_abstemios_nao_lutam = 400 * 50 = 20000</p></li>
+<li><p>Chance de acontecer o que eu NÃO espero: orcs_bebem_nao_lutam * orcs_abstemios_lutam = 100 * 450 = 45000</p></li>
+<li><p>Razão de chances: 20000/45000 = 20/45 = 0.44</p></li>
+</ul>
+<p>Interpretação: existe uma associação - não espero. <strong>MELHORAR ISSO</strong></p>
+<p>Entendo que existe uma chance maior de orcs que bebem não lutarem, e orcs abstêmios lutarem.</p>
+<hr>
+<p>Com os resultados do Coorte, podemos calcular a razão de incidência (risco relativo):</p>
+<ul>
+<li><p>Incidência dos orcs que “NÃO LUTAM” dentre os expostos: 200/200+800 = 0.2</p></li>
+<li><p>Incidência dos orcs que “NÃO LUTAM” dentre os não-expostos: 300/300+1700 = 0.15</p></li>
+<li><p>Razão de incidência = 0.2 / 0.15 = 1.333</p></li>
+<li><p>A interpretação é: existem mais Orcs que não lutam quando são expostos ao alcool.</p></li>
+</ul>
+<hr>
+<p>Respondendo a pergunta: <strong>Se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?</strong></p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -645,7 +745,7 @@ $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 1
 </div>
 <hr></section></section></section><section id="links-que-podem-ser-úteis" class="level1"><h1>Links que podem ser úteis:</h1>
 <ul>
-<li><p>Apostial sobre bioestatística: https://www.fcav.unesp.br/Home/departamentos/cienciasexatas/alanrodrigopanosso/apostila_bioestatistica_2019.pdf</p></li>
+<li><p>Apostila sobre bioestatística: https://www.fcav.unesp.br/Home/departamentos/cienciasexatas/alanrodrigopanosso/apostila_bioestatistica_2019.pdf</p></li>
 <li><p>Apostila curta sobre intervalo de confiança: https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf</p></li>
 <li><p>Interpretação do boxplot: https://fernandafperes.com.br/blog/interpretacao-boxplot/</p></li>
 </ul></section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">

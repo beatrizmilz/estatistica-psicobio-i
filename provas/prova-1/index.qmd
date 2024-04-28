@@ -334,13 +334,10 @@ A variável independente é o tipo de escola (pública/privada). Portanto é uma
 
 A variável dependente é a quantidade de palavras lembradas antes do treino de motrocidade. Essa variável apresenta distribuição próxima à normal (baseado nos resultados do teste Shapiro-Wilk, p = 0.77), porém não apresenta homogeneidade das variâncias (baseado nos resultados do teste de Levenne, p = 0.01).
 
-Podemos usar o teste Wilcoxon, um teste não paramétrico.
+Podemos usar o teste-t independente, um teste paramétrico.  Nesse caso, é importante realizar a correção de Welch devido à não-homogeneidade das variâncias.
 
-::: callout
-Não pode ser wilcoxon, pq esse é para medidas pareadas!
-:::
+Os resultados do teste-t independente (t = 6,87) apontam que existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas antes do treino de motrocidade.
 
-Os resultados do teste de wilcoxon (W = 2,22) apontam que não existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas antes do treino de motrocidade.
 
 ## Questão 12
 
@@ -354,9 +351,7 @@ Podemos usar o teste t-independente, um teste paramétrico.
 
 Os resultados do teste t independente (T = 5,59) apontam que existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas depois do treino de motrocidade.
 
-::: callout
-Dado que estamos comparando, não seria melhor usar o mesmo teste nessas duas questões? (11 e 12)
-:::
+
 
 ## Questão 13
 
@@ -370,9 +365,8 @@ Considerando apenas as crianças de escola privada:
 
 Podemos usar o teste t-pareado.
 
-::: callout
-Ver o mauchly!
-:::
+Como se trata de um teste de medidas repetidas, é importante checar a esfericidade, o que pode ser verificado com o teste de Mauchly. Como não temos a informação considerando apenas para crianças de escolas privadas, considerei o valor total, que apresentou esfericidade (p = 0,61).
+
 
 Os resultados do teste t pareado (T = 4,98) apontam que existe diferença entre os tempos (antes e depois do treino) na média de palavras lembradas pelas crianças.
 
@@ -388,9 +382,7 @@ Considerando apenas as crianças de escola pública:
 
 Podemos usar o teste t-pareado.
 
-::: callout
-Ver o mauchly!
-:::
+Como se trata de um teste de medidas repetidas, é importante checar a esfericidade, o que pode ser verificado com o teste de Mauchly. Como não temos a informação considerando apenas para crianças de escolas públicas, considerei o valor total, que apresentou esfericidade (p = 0,61).
 
 Os resultados do teste t pareado (T = 3,59) apontam que não existe diferença entre os tempos (antes e depois do treino) na média de palavras lembradas pelas crianças.
 
@@ -398,7 +390,7 @@ Os resultados do teste t pareado (T = 3,59) apontam que não existe diferença e
 
 ## Questão 15
 
-O Banco de dados para responder a questão abaixo pode ser encontrado aqui: https://bit.ly/2XC89jN
+O Banco de dados para responder a questão abaixo pode ser encontrado aqui: <https://bit.ly/2XC89jN>
 
 ```{r}
 dados_hipertensao <- readr::read_delim("Hipertensao.csv", 
@@ -406,10 +398,97 @@ dados_hipertensao <- readr::read_delim("Hipertensao.csv",
 
 dplyr::glimpse(dados_hipertensao)
 ```
+```{r}
+hipertensao <- dados_hipertensao |> 
+  janitor::clean_names() |> 
+  tidyr::pivot_longer(cols = -paciente, names_to = "droga", values_to = "pressao_arterial")
+```
 
 ![](images/clipboard-885151021.png)
 
 **15- Faça as análises estatísticas que julgar necessárias para verificar qual é o melhor tratamento. Faça um texto com as suas análises passo a passo e escreva sua conclusão como o faria para submeter um artigo para publicação. ESCREVA UM PARÁGRAFO DE ANÁLISE ESTATÍSTICA (Como na seção de métodos de um artigo) ONDE DEVEM SER APRESENTADAS - Qual a pergunta de pesquisa, VD e VI, Hipótese Nula e Alternativa e os testes estatísticos adotados e seus pré-requisitos caso seja necessário. ALÉM DISSO ESCREVA OUTRO PARÁGRAFO COM A ANÁLISE DOS DADOS - Resultados, notação dos testes, onde estão as diferenças entre os grupos/medidas e tamanhos do efeito. Utilize esse exercício como um treino para escrever seus próprios resultados daqui pra frente! Utilize o banco de dados apresentado no link acima. Fique a vontade para adicionar mais variáveis caso ache necessário**
+
+```{r}
+hipertensao
+min(hipertensao$pressao_arterial, na.rm = TRUE)
+max(hipertensao$pressao_arterial, na.rm = TRUE)
+```
+
+```{r}
+shapiro.test(hipertensao$pressao_arterial)
+```
+
+```{r}
+car::leveneTest(hipertensao$pressao_arterial ~ hipertensao$droga)
+```
+
+```{r}
+hipertensao |> 
+  ggplot() +
+  aes(x = pressao_arterial, y = droga) + 
+  geom_boxplot() + 
+  geom_point(color = "blue") + 
+  theme_minimal()
+```
+
+```{r}
+aov(pressao_arterial ~ droga, data = hipertensao) |> 
+  broom::tidy()
+```
+
+- **Materiais e métodos: Análise estatística**
+
+Nesta pesquisa, buscamos responder a seguinte pergunta: Qual medicamento (droga A, B ou C) apresenta o melhor tratamento para a hipertensão (ou seja, apresenta maior diminuição de pressão arterial)?
+
+A variável independente é a droga utilizada para o tratamento (droga A, B ou C). É uma variável categórica nominal.
+
+A variável dependente é a pressão arterial, uma variável numérica discreta, apresentando valores entre 159 e 194.
+
+A hipótese nula é de que a média da pressão arterial (Mpa) para a droga A é igual à Mpa para a droga B, e igual para a Mpa para a droga C:
+
+`Mpa_drogaA = Mpa_drogaB = Mpa_drogaC`
+
+A hipótese alternativa é de que as médias da pressão arterial são diferente entre os grupos:
+
+`Mpa_drogaA != Mpa_drogaB != Mpa_drogaC`
+
+
+O teste de Shapiro-Wilk foi utilizado para testar a normalidade da variável dependente (pressão arterial). O resultado apontou para a normalidade da variável (p-valor = 0.58).
+
+O teste de Levenne foi utilizado para testar se existe homogeneidade das variâncias para a variável dependente. O resultado apontou que existe homogeneidade das variâncias (p-valor = 0.08).
+
+Portanto, teste estatístico escolhido foi a ANOVA (análise de variância).
+
+As análises de dados foram realizas utilizando o software R (R Core Team, 2024), e os seguintes pacotes: stats (R Core Team, 2024), car (Fox & Weisberg, 2019), tidyverse (Wickham et al., 2019).
+
+- **Resultados: Análise dos dados**
+
+A análise de variância apresentou F = 8.3, com p-valor < 0.05, o que aponta que existe uma diferença significativa entre os grupos.
+
+Para encontrar quais são os grupos com diferenças significativas, foi realizado um teste post-hoc: 
+
+::: callout
+TAMANHO DE EFEITO??? VER O FINAL DA AULA QUE FALTA!
+:::
+
+- **Referências**
+
+Fox J, Weisberg S (2019). _An R Companion to Applied Regression_, Third
+  edition. Sage, Thousand Oaks CA.
+  <https://socialsciences.mcmaster.ca/jfox/Books/Companion/>.
+
+R Core Team (2024). _R: A Language and Environment for Statistical
+  Computing_. R Foundation for Statistical Computing, Vienna, Austria.
+  <https://www.R-project.org/>.
+
+Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R,
+  Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E,
+  Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K,
+  Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.”
+  _Journal of Open Source Software_, *4*(43), 1686.
+  doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
+  
+  
 
 ## Questão 16
 
@@ -535,11 +614,58 @@ est_coorte |> knitr::kable()
 
 Será que a bebida AJUDA os orcs a lutarem melhor?
 
--   razão de prevalencia p/ transversal
+Neste caso, consideramos que a exposição é beber ou não, e o desfecho é lutar ou não lutar. 
 
--   odds ratio p/ caso-controle
+Exposto (Orcs Bebem) - Desfecho: lutam  | Exposto (Orcs Bebem) - Desfecho: não lutam
+________________________________________________________________________________
+Não-exposto (Orcs abstêmios) - Desfecho: lutam  | Não-exposto (Orcs não bebem) - Desfecho: não lutam
 
--   risco relativo p/ coorte
+
+
+
+Com os resultados do estudo transversal, podemos calcular a razão de prevalências:
+
+- Prevalência de Orcs que não lutam, dentre os expostos (beberam) = 200 / 200+300 = 0.4
+
+- Prevalência de Orcs que não lutam, dentre os não-expostos (abstêmios) = 1500 / 1500+3500 = 0.3
+
+- Razão de prevalências: 0.4/0.3 = 1.33
+
+Esse resultado aponta que existe associação entre desfecho "não lutar" e a exposição ao álcool. A interpretação dos resultados sugere que existe mais Orcs que não lutam quando são expostos (bebem).
+
+---
+
+Com os resultados do estudo caso-controle, podemos calcular a razão de chances (*odds-ratio*).
+
+O que eu espero? Que Orcs que bebem, lutem. E que os Orcs que não bebem, não lutem.
+
+- Chance de acontecer o que eu espero: orcs_bebem_lutam * orcs_abstemios_nao_lutam = 400 * 50 = 20000
+
+- Chance de acontecer o que eu NÃO espero: orcs_bebem_nao_lutam * orcs_abstemios_lutam = 100 * 450 = 45000
+
+- Razão de chances: 20000/45000 = 20/45 = 0.44
+
+Interpretação: existe uma associação - não espero. **MELHORAR ISSO**
+
+Entendo que existe uma chance maior de orcs que bebem não lutarem, e orcs abstêmios lutarem.
+
+---
+
+Com os resultados do Coorte, podemos calcular a razão de incidência (risco relativo):
+
+- Incidência dos orcs que "NÃO LUTAM" dentre os expostos: 200/200+800 = 0.2
+
+- Incidência dos orcs que "NÃO LUTAM" dentre os não-expostos: 300/300+1700 = 0.15
+
+- Razão de incidência = 0.2 / 0.15 = 1.333
+
+- A interpretação é: existem mais Orcs que não lutam quando são expostos ao alcool.
+
+---
+
+Respondendo a pergunta: **Se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?**
+
+
 
 ::: callout
 Pensar!
@@ -549,7 +675,7 @@ Pensar!
 
 # Links que podem ser úteis:
 
--   Apostial sobre bioestatística: https://www.fcav.unesp.br/Home/departamentos/cienciasexatas/alanrodrigopanosso/apostila_bioestatistica_2019.pdf
+-   Apostila sobre bioestatística: https://www.fcav.unesp.br/Home/departamentos/cienciasexatas/alanrodrigopanosso/apostila_bioestatistica_2019.pdf
 
 -   Apostila curta sobre intervalo de confiança: https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf
 
