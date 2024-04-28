@@ -118,10 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li>
 <a href="#quest%C3%A3o-20" id="toc-questão-20" class="nav-link" data-scroll-target="#quest%C3%A3o-20">Questão 20</a>
   <ul class="collapse">
-<li><a href="#a-estudo-transversal" id="toc-a-estudo-transversal" class="nav-link" data-scroll-target="#a-estudo-transversal">A) Estudo transversal</a></li>
-  <li><a href="#b-estudo-caso-controle" id="toc-b-estudo-caso-controle" class="nav-link" data-scroll-target="#b-estudo-caso-controle">B) Estudo Caso-controle</a></li>
-  <li><a href="#c-coorte" id="toc-c-coorte" class="nav-link" data-scroll-target="#c-coorte">C) Coorte</a></li>
-  <li><a href="#resposta" id="toc-resposta" class="nav-link" data-scroll-target="#resposta">Resposta</a></li>
+<li><a href="#resposta" id="toc-resposta" class="nav-link" data-scroll-target="#resposta">Resposta</a></li>
   </ul>
 </li>
   </ul>
@@ -536,7 +533,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>A variável dependente é a pressão arterial, uma variável numérica discreta, apresentando valores entre 159 e 194.</p>
 <p>A hipótese nula é de que a média da pressão arterial (Mpa) para a droga A é igual à Mpa para a droga B, e igual para a Mpa para a droga C:</p>
 <p><code>Mpa_drogaA = Mpa_drogaB = Mpa_drogaC</code></p>
-<p>A hipótese alternativa é de que as médias da pressão arterial são diferente entre os grupos:</p>
+<p>A hipótese alternativa é de que as médias da pressão arterial são diferentes entre os grupos:</p>
 <p><code>Mpa_drogaA != Mpa_drogaB != Mpa_drogaC</code></p>
 <p>O teste de Shapiro-Wilk foi utilizado para testar a normalidade da variável dependente (pressão arterial). O resultado apontou para a normalidade da variável (p-valor = 0.58).</p>
 <p>O teste de Levenne foi utilizado para testar se existe homogeneidade das variâncias para a variável dependente. O resultado apontou que existe homogeneidade das variâncias (p-valor = 0.08).</p>
@@ -607,143 +604,41 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Olhando os dados das tabelas A,B,C e fazendo os calculos necessários das medidas de associação, é possível dizer que se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?</p>
 <p>Justifique com base nos valores calculados e diga se os dados epidemiológicos podem ser valorizados como uma ferramenta valiosa na luta contra as ameaças à saúde do reino de Aragorn.</p>
 <p><img src="images/clipboard-2597700249.png" class="img-fluid"></p>
-<hr>
-<section id="a-estudo-transversal" class="level3"><h3 class="anchored" data-anchor-id="a-estudo-transversal">A) Estudo transversal</h3>
-<div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_transversal</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
-<span>  categoria <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Orcs Bebem"</span>, <span class="st">"Orcs Abstemios"</span><span class="op">)</span>,</span>
-<span>  nao_lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">1500</span><span class="op">)</span>,</span>
-<span>  lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">3500</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span>   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"categoria"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">est_transversal</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">nao_lutam</th>
-<th style="text-align: right;">lutam</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Orcs Bebem</td>
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">300</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Orcs Abstemios</td>
-<td style="text-align: right;">1500</td>
-<td style="text-align: right;">3500</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section><section id="b-estudo-caso-controle" class="level3"><h3 class="anchored" data-anchor-id="b-estudo-caso-controle">B) Estudo Caso-controle</h3>
-<div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_cc</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
-<span>  categoria <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Orcs Bebem"</span>, <span class="st">"Orcs Abstemios"</span><span class="op">)</span>,</span>
-<span>  nao_lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">50</span><span class="op">)</span>,</span>
-<span>  lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">450</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"categoria"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">est_cc</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">nao_lutam</th>
-<th style="text-align: right;">lutam</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Orcs Bebem</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">400</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Orcs Abstemios</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">450</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section><section id="c-coorte" class="level3"><h3 class="anchored" data-anchor-id="c-coorte">C) Coorte</h3>
-<div class="cell">
-<details open="" class="code-fold"><summary>Código</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">est_coorte</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
-<span>  categoria <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Orcs Bebem"</span>, <span class="st">"Orcs Abstemios"</span><span class="op">)</span>,</span>
-<span>  nao_lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">300</span><span class="op">)</span>,</span>
-<span>  lutam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">800</span>, <span class="fl">1700</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"categoria"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">est_coorte</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">nao_lutam</th>
-<th style="text-align: right;">lutam</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Orcs Bebem</td>
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">800</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Orcs Abstemios</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">1700</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section><section id="resposta" class="level3"><h3 class="anchored" data-anchor-id="resposta">Resposta</h3>
+<section id="resposta" class="level3"><h3 class="anchored" data-anchor-id="resposta">Resposta</h3>
 <p><strong>É possível dizer que se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?</strong></p>
-<p>Será que a bebida AJUDA os orcs a lutarem melhor?</p>
-<p>Neste caso, consideramos que a exposição é beber ou não, e o desfecho é lutar ou não lutar.</p>
-<p>Exposto (Orcs Bebem) - Desfecho: lutam | Exposto (Orcs Bebem) - Desfecho: não lutam ________________________________________________________________________________ Não-exposto (Orcs abstêmios) - Desfecho: lutam | Não-exposto (Orcs não bebem) - Desfecho: não lutam</p>
+<p>Neste caso, consideramos que a exposição é beber ou não, e o desfecho é lutar ou não lutar. O que esperamos é que o desfecho ao Orc NÃO SER EXPOSTO AO ALCOOL seja NÃO LUTAR, mas precisamos explorar os resultados das pesquisas e verificar se isso ocorre.</p>
+<hr>
 <p>Com os resultados do estudo transversal, podemos calcular a razão de prevalências:</p>
 <ul>
-<li><p>Prevalência de Orcs que não lutam, dentre os expostos (beberam) = 200 / 200+300 = 0.4</p></li>
-<li><p>Prevalência de Orcs que não lutam, dentre os não-expostos (abstêmios) = 1500 / 1500+3500 = 0.3</p></li>
+<li><p>Prevalência de Orcs que não lutam, dentre os expostos (beberam) = 200 / (200+300) = 0.4</p></li>
+<li><p>Prevalência de Orcs que não lutam, dentre os não-expostos (abstêmios) = 1500 / (1500+3500) = 0.3</p></li>
 <li><p>Razão de prevalências: 0.4/0.3 = 1.33</p></li>
 </ul>
 <p>Esse resultado aponta que existe associação entre desfecho “não lutar” e a exposição ao álcool. A interpretação dos resultados sugere que existe mais Orcs que não lutam quando são expostos (bebem).</p>
+<p>Esse tipo de estudo apresenta maior validade externa (nesse caso, o efeito é encontrado na população - Orcs do império de Sauron). A partir dos resultados deste estudo, <strong>não temos evidências</strong> de que atacar os barris de cerveja e vinho durante a noite ajudará a reduzir a capacidade dos Orcs lutarem no dia seguinte.</p>
 <hr>
 <p>Com os resultados do estudo caso-controle, podemos calcular a razão de chances (<em>odds-ratio</em>).</p>
-<p>O que eu espero? Que Orcs que bebem, lutem. E que os Orcs que não bebem, não lutem.</p>
+<p>O que eu espero? - Os Orcs que não bebem, não lutem. - Os Orcs que bebem, lutem.</p>
 <ul>
-<li><p>Chance de acontecer o que eu espero: orcs_bebem_lutam * orcs_abstemios_nao_lutam = 400 * 50 = 20000</p></li>
-<li><p>Chance de acontecer o que eu NÃO espero: orcs_bebem_nao_lutam * orcs_abstemios_lutam = 100 * 450 = 45000</p></li>
-<li><p>Razão de chances: 20000/45000 = 20/45 = 0.44</p></li>
+<li><p>Razão de chances: X/Y</p></li>
+<li><p>X: orcs_abstemios_nao_lutam * orcs_bebem_lutam = 50 * 400 = 20000</p></li>
+<li><p>Y: orcs_bebem_nao_lutam * orcs_abstemios_lutam = 100 * 450 = 45000</p></li>
+<li><p>Razão de chances: X/Y = 20000/45000 = 20/45 = 0.44</p></li>
 </ul>
-<p>Interpretação: existe uma associação - não espero. <strong>MELHORAR ISSO</strong></p>
-<p>Entendo que existe uma chance maior de orcs que bebem não lutarem, e orcs abstêmios lutarem.</p>
+<p>Neste caso, não temos evidências de que as chances dos Orcs beberem e lutarem, assim como os Orcs abstêmios não lutarem, são maiores que Orcs beberem e não lutarem, assim como os Orcs abstêmios lutarem. Esse tipo de estudo apresenta maior validade interna (nesse caso, o efeito é encontrado na amostra - Orcs capturados em batalhas anteriores). A partir dos resultados deste estudo, não temos evidências de que atacar os barris de cerveja e vinho durante a noite ajudará a reduzir a capacidade de reduzir a capacidade dos Orcs lutarem no dia seguinte.</p>
 <hr>
 <p>Com os resultados do Coorte, podemos calcular a razão de incidência (risco relativo):</p>
 <ul>
-<li><p>Incidência dos orcs que “NÃO LUTAM” dentre os expostos: 200/200+800 = 0.2</p></li>
-<li><p>Incidência dos orcs que “NÃO LUTAM” dentre os não-expostos: 300/300+1700 = 0.15</p></li>
+<li><p>Incidência dos orcs que “NÃO LUTAM” dentre os expostos (bebem): 200/(200+800) = 0.2</p></li>
+<li><p>Incidência dos orcs que “NÃO LUTAM” dentre os não-expostos (abstêmios): 300/(300+1700) = 0.15</p></li>
 <li><p>Razão de incidência = 0.2 / 0.15 = 1.333</p></li>
-<li><p>A interpretação é: existem mais Orcs que não lutam quando são expostos ao alcool.</p></li>
 </ul>
+<p>Neste caso, não temos evidências de que não beber traz maior incidência de não lutar.</p>
+<p>Esse tipo de estudo apresenta maior validade interna (nesse caso, o efeito é encontrado na amostra - Orcs que são prisioneiros de guerra).</p>
 <hr>
 <p>Respondendo a pergunta: <strong>Se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?</strong></p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Pensar!</p>
-</div>
-</div>
-</div>
-<hr></section></section></section><section id="links-que-podem-ser-úteis" class="level1"><h1>Links que podem ser úteis:</h1>
+<p>A partir dos resultados encontrados nos três estudos, é melhor que o Aragorn não ordene seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, pois beber menos não reduzirá a capacidade dos Orcs de lutarem no dia seguinte.</p>
+</section></section></section><section id="links-que-podem-ser-úteis" class="level1"><h1>Links que podem ser úteis:</h1>
 <ul>
 <li><p>Apostila sobre bioestatística: https://www.fcav.unesp.br/Home/departamentos/cienciasexatas/alanrodrigopanosso/apostila_bioestatistica_2019.pdf</p></li>
 <li><p>Apostila curta sobre intervalo de confiança: https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf</p></li>

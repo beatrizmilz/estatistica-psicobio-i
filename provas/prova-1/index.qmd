@@ -448,7 +448,7 @@ A hipótese nula é de que a média da pressão arterial (Mpa) para a droga A é
 
 `Mpa_drogaA = Mpa_drogaB = Mpa_drogaC`
 
-A hipótese alternativa é de que as médias da pressão arterial são diferente entre os grupos:
+A hipótese alternativa é de que as médias da pressão arterial são diferentes entre os grupos:
 
 `Mpa_drogaA != Mpa_drogaB != Mpa_drogaC`
 
@@ -570,108 +570,69 @@ Justifique com base nos valores calculados e diga se os dados epidemiológicos p
 
 ![](images/clipboard-2597700249.png)
 
-------------------------------------------------------------------------
-
-### A) Estudo transversal
-
-```{r}
-est_transversal <- tibble::tibble(
-  categoria = c("Orcs Bebem", "Orcs Abstemios"),
-  nao_lutam = c(200, 1500),
-  lutam = c(300, 3500)
-) |>   tibble::column_to_rownames("categoria")
-
-est_transversal |> knitr::kable()
-```
-
-### B) Estudo Caso-controle
-
-```{r}
-est_cc <- tibble::tibble(
-  categoria = c("Orcs Bebem", "Orcs Abstemios"),
-  nao_lutam = c(100, 50),
-  lutam = c(400, 450)
-) |> tibble::column_to_rownames("categoria")
-
-est_cc |> knitr::kable()
-```
-
-### C) Coorte
-
-```{r}
-est_coorte <- tibble::tibble(
-  categoria = c("Orcs Bebem", "Orcs Abstemios"),
-  nao_lutam = c(200, 300),
-  lutam = c(800, 1700)
-) |> tibble::column_to_rownames("categoria")
-
-est_coorte |> knitr::kable()
-```
 
 ### Resposta
 
 **É possível dizer que se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?**
 
-Será que a bebida AJUDA os orcs a lutarem melhor?
+Neste caso, consideramos que a exposição é beber ou não, e o desfecho é lutar ou não lutar.  O que esperamos é que o desfecho ao Orc NÃO SER EXPOSTO AO ALCOOL seja NÃO LUTAR, mas precisamos explorar os resultados das pesquisas e verificar se isso ocorre.
 
-Neste caso, consideramos que a exposição é beber ou não, e o desfecho é lutar ou não lutar. 
-
-Exposto (Orcs Bebem) - Desfecho: lutam  | Exposto (Orcs Bebem) - Desfecho: não lutam
-________________________________________________________________________________
-Não-exposto (Orcs abstêmios) - Desfecho: lutam  | Não-exposto (Orcs não bebem) - Desfecho: não lutam
-
-
+---
 
 
 Com os resultados do estudo transversal, podemos calcular a razão de prevalências:
 
-- Prevalência de Orcs que não lutam, dentre os expostos (beberam) = 200 / 200+300 = 0.4
+- Prevalência de Orcs que não lutam, dentre os expostos (beberam) = 200 / (200+300) = 0.4
 
-- Prevalência de Orcs que não lutam, dentre os não-expostos (abstêmios) = 1500 / 1500+3500 = 0.3
+- Prevalência de Orcs que não lutam, dentre os não-expostos (abstêmios) = 1500 / (1500+3500) = 0.3
 
 - Razão de prevalências: 0.4/0.3 = 1.33
 
 Esse resultado aponta que existe associação entre desfecho "não lutar" e a exposição ao álcool. A interpretação dos resultados sugere que existe mais Orcs que não lutam quando são expostos (bebem).
 
+Esse tipo de estudo apresenta maior validade externa (nesse caso, o efeito é encontrado na população - Orcs do império de Sauron). A partir dos resultados deste estudo, **não temos evidências** de que atacar os barris de cerveja e vinho durante a noite ajudará a reduzir a capacidade dos Orcs lutarem no dia seguinte.
+
 ---
 
 Com os resultados do estudo caso-controle, podemos calcular a razão de chances (*odds-ratio*).
 
-O que eu espero? Que Orcs que bebem, lutem. E que os Orcs que não bebem, não lutem.
+O que eu espero?
+- Os Orcs que não bebem, não lutem.
+- Os Orcs que bebem, lutem. 
 
-- Chance de acontecer o que eu espero: orcs_bebem_lutam * orcs_abstemios_nao_lutam = 400 * 50 = 20000
+- Razão de chances: X/Y 
 
-- Chance de acontecer o que eu NÃO espero: orcs_bebem_nao_lutam * orcs_abstemios_lutam = 100 * 450 = 45000
+- X: orcs_abstemios_nao_lutam * orcs_bebem_lutam = 50 * 400 = 20000
 
-- Razão de chances: 20000/45000 = 20/45 = 0.44
+- Y: orcs_bebem_nao_lutam * orcs_abstemios_lutam = 100 * 450 = 45000
 
-Interpretação: existe uma associação - não espero. **MELHORAR ISSO**
+- Razão de chances: X/Y = 20000/45000 = 20/45 = 0.44
 
-Entendo que existe uma chance maior de orcs que bebem não lutarem, e orcs abstêmios lutarem.
+Neste caso, não temos evidências de que as chances dos Orcs beberem e lutarem, assim como os Orcs abstêmios não lutarem, são maiores que Orcs beberem e não lutarem, assim como os Orcs abstêmios lutarem.
+Esse tipo de estudo apresenta maior validade interna (nesse caso, o efeito é encontrado na amostra - Orcs capturados em batalhas anteriores). A partir dos resultados deste estudo, não temos evidências de que atacar os barris de cerveja e vinho durante a noite ajudará a reduzir a capacidade de reduzir a capacidade dos Orcs lutarem no dia seguinte.
 
 ---
 
 Com os resultados do Coorte, podemos calcular a razão de incidência (risco relativo):
 
-- Incidência dos orcs que "NÃO LUTAM" dentre os expostos: 200/200+800 = 0.2
+- Incidência dos orcs que "NÃO LUTAM" dentre os expostos (bebem): 200/(200+800) = 0.2
 
-- Incidência dos orcs que "NÃO LUTAM" dentre os não-expostos: 300/300+1700 = 0.15
+- Incidência dos orcs que "NÃO LUTAM" dentre os não-expostos (abstêmios): 300/(300+1700) = 0.15
 
 - Razão de incidência = 0.2 / 0.15 = 1.333
 
-- A interpretação é: existem mais Orcs que não lutam quando são expostos ao alcool.
+Neste caso, não temos evidências de que não beber traz maior incidência de não lutar. 
+
+Esse tipo de estudo apresenta maior validade interna (nesse caso, o efeito é encontrado na amostra - Orcs que são prisioneiros de guerra). 
 
 ---
 
 Respondendo a pergunta: **Se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?**
 
 
+A partir dos resultados encontrados nos três estudos, é melhor que o Aragorn não ordene seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, pois beber menos não reduzirá a capacidade dos Orcs de lutarem no dia seguinte.
 
-::: callout
-Pensar!
-:::
 
-------------------------------------------------------------------------
 
 # Links que podem ser úteis:
 
