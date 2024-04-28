@@ -394,33 +394,28 @@ O Banco de dados para responder a questão abaixo pode ser encontrado aqui: <htt
 
 ```{r}
 dados_hipertensao <- readr::read_delim("Hipertensao.csv", 
-    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+    delim = ";", escape_double = FALSE, trim_ws = TRUE) |> 
+    janitor::clean_names() 
 
 dplyr::glimpse(dados_hipertensao)
 ```
+
+
+
+
 ```{r}
 hipertensao <- dados_hipertensao |> 
-  janitor::clean_names() |> 
-  tidyr::pivot_longer(cols = -paciente, names_to = "droga", values_to = "pressao_arterial")
+  tidyr::pivot_longer(cols = -paciente, names_to = "droga", values_to = "pressao_arterial") |> 
+  dplyr::mutate(
+    droga = as.factor(droga),
+    paciente = as.factor(paciente)
+  )
 ```
 
 ![](images/clipboard-885151021.png)
 
 **15- Faça as análises estatísticas que julgar necessárias para verificar qual é o melhor tratamento. Faça um texto com as suas análises passo a passo e escreva sua conclusão como o faria para submeter um artigo para publicação. ESCREVA UM PARÁGRAFO DE ANÁLISE ESTATÍSTICA (Como na seção de métodos de um artigo) ONDE DEVEM SER APRESENTADAS - Qual a pergunta de pesquisa, VD e VI, Hipótese Nula e Alternativa e os testes estatísticos adotados e seus pré-requisitos caso seja necessário. ALÉM DISSO ESCREVA OUTRO PARÁGRAFO COM A ANÁLISE DOS DADOS - Resultados, notação dos testes, onde estão as diferenças entre os grupos/medidas e tamanhos do efeito. Utilize esse exercício como um treino para escrever seus próprios resultados daqui pra frente! Utilize o banco de dados apresentado no link acima. Fique a vontade para adicionar mais variáveis caso ache necessário**
 
-```{r}
-hipertensao
-min(hipertensao$pressao_arterial, na.rm = TRUE)
-max(hipertensao$pressao_arterial, na.rm = TRUE)
-```
-
-```{r}
-shapiro.test(hipertensao$pressao_arterial)
-```
-
-```{r}
-car::leveneTest(hipertensao$pressao_arterial ~ hipertensao$droga)
-```
 
 ```{r}
 hipertensao |> 
@@ -429,11 +424,6 @@ hipertensao |>
   geom_boxplot() + 
   geom_point(color = "blue") + 
   theme_minimal()
-```
-
-```{r}
-aov(pressao_arterial ~ droga, data = hipertensao) |> 
-  broom::tidy()
 ```
 
 - **Materiais e métodos: Análise estatística**
@@ -453,29 +443,75 @@ A hipótese alternativa é de que as médias da pressão arterial são diferente
 `Mpa_drogaA != Mpa_drogaB != Mpa_drogaC`
 
 
-O teste de Shapiro-Wilk foi utilizado para testar a normalidade da variável dependente (pressão arterial). O resultado apontou para a normalidade da variável (p-valor = 0.58).
+O teste de Shapiro-Wilk foi utilizado para testar a normalidade da variável dependente (pressão arterial), considerando os três grupos. Os resultados apontaram para a normalidade da variável.
 
-O teste de Levenne foi utilizado para testar se existe homogeneidade das variâncias para a variável dependente. O resultado apontou que existe homogeneidade das variâncias (p-valor = 0.08).
+```{r}
+teste_normalidade <- hipertensao |> 
+  dplyr::group_by(droga) |> 
+  rstatix::shapiro_test(pressao_arterial) 
+```
 
-Portanto, teste estatístico escolhido foi a ANOVA (análise de variância).
+|droga   |variable         | statistic|         p|
+|:-------|:----------------|---------:|---------:|
+|droga_a |pressao_arterial | 0.9668705| 0.8754189|
+|droga_b |pressao_arterial | 0.9124930| 0.2296116|
+|droga_c |pressao_arterial | 0.9608470| 0.6180672|
 
-As análises de dados foram realizas utilizando o software R (R Core Team, 2024), e os seguintes pacotes: stats (R Core Team, 2024), car (Fox & Weisberg, 2019), tidyverse (Wickham et al., 2019).
+Portanto, teste estatístico escolhido foi a ANOVA (análise de variância) para medidas repetidas. Para realizar este teste, foi utilizado a função `anova_test()` do pacote `rstatix` em R. Essa função calcula automaticamente a esfericidade utilizando o teste de Mauchly, e caso a suposição de esfericidade não seja verdadeira, a função aplica automaticamente a correção de esfericidade de Greenhouse-Geisser (Kassambra, 2020). 
+
+```{r}
+resultado_anova <- rstatix::anova_test(data = hipertensao, dv = pressao_arterial,
+                    wid = paciente, within = droga)
+```
+Um ponto importante a ser considerado é: ao realizar a ANOVA para medidas repetidas, os pacientes que apresentaram valores faltantes foram removidos (neste caso, os pacientes: P13, P14, P15, P16, P17 e P18.
+
+```{r}
+# hipertensao |> 
+#   dplyr::filter(is.na(pressao_arterial)) |> 
+#   dplyr::distinct(paciente) |> 
+#   dplyr::pull()
+```
+
+O resultado do teste de Mauchly (realizado pela função `anova_test()`) para verificar a esfericidade apontou que existe existe esfericidade (p > 0.05):
+
+Mauchly's Test for Sphericity
+|Effect |     W|     p|p<.05 |
+|:------|-----:|-----:|:-----|
+|droga  | 0.619| 0.091|      |
+
+
+
+As análises de dados foram realizas utilizando o software R (R Core Team, 2024), e os seguintes pacotes: stats (R Core Team, 2024), car (Fox & Weisberg, 2019), tidyverse (Wickham et al., 2019), rstatix (Kassambra, 2023).
 
 - **Resultados: Análise dos dados**
 
-A análise de variância apresentou F = 8.3, com p-valor < 0.05, o que aponta que existe uma diferença significativa entre os grupos.
+A análise de variância para medidas repetidas apresentou F(2,22) = 11.645, com p-valor < 0.05, e tamanho de efeito geral = 0.368 (generalized effect size - ges), o que aponta que existe uma diferença significativa entre os grupos.
 
-Para encontrar quais são os grupos com diferenças significativas, foi realizado um teste post-hoc: 
 
-::: callout
-TAMANHO DE EFEITO??? VER O FINAL DA AULA QUE FALTA!
-:::
+ANOVA Table (type III tests)
+|Effect | DFn| DFd|      F|        p|p<.05 |   ges|
+|:------|---:|---:|------:|--------:|:-----|-----:|
+|droga  |   2|  22| 11.645| 0.000355|*     | 0.368|
+
+
+
+Para encontrar quais são os grupos com diferenças significativas, deve ser realizado um teste post-hoc Student–Newman–Keuls (SNK).
+
+Não consegui descobrir a tempo como realizar o SNK no R! Preciso explorar mais.
 
 - **Referências**
 
 Fox J, Weisberg S (2019). _An R Companion to Applied Regression_, Third
   edition. Sage, Thousand Oaks CA.
   <https://socialsciences.mcmaster.ca/jfox/Books/Companion/>.
+  
+  
+Kassambara A (2023). _rstatix: Pipe-Friendly Framework for Basic
+  Statistical Tests_. R package version 0.7.2,
+  <https://CRAN.R-project.org/package=rstatix>.  
+  
+  
+Kassambra A (2020). Repeated Measures ANOVA in R. Datanovia. <https://www.datanovia.com/en/lessons/repeated-measures-anova-in-r/>  
 
 R Core Team (2024). _R: A Language and Environment for Statistical
   Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -487,6 +523,8 @@ Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R,
   Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome to the tidyverse.”
   _Journal of Open Source Software_, *4*(43), 1686.
   doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
+  
+
   
   
 
@@ -623,7 +661,6 @@ Com os resultados do Coorte, podemos calcular a razão de incidência (risco rel
 
 Neste caso, não temos evidências de que não beber traz maior incidência de não lutar. 
 
-Esse tipo de estudo apresenta maior validade interna (nesse caso, o efeito é encontrado na amostra - Orcs que são prisioneiros de guerra). 
 
 ---
 
