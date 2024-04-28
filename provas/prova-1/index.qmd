@@ -66,12 +66,9 @@ Variável independente: categoria de TTS (variável categórica, com 2 categoria
 
 Variável dependente: tempo em minutos (em minutos, variável numérica).
 
-Neste caso, consideramos apenas o grupo de pessoas com depressão, e utilizamos um teste-t pareado.
+Neste caso, consideramos apenas o grupo de pessoas com depressão, e utilizamos um teste-t pareado. 
 
-:::callout
-Conversar mais:
-Precisamos testar o mauchly - Esfericidade. Usar o total?
-:::
+Como se trata de um teste de medidas repetidas, é importante checar a esfericidade, o que pode ser verificado com o teste de Mauchly. Como não temos a informação considerando apenas para pessoas com depressão, considerei o valor total, que apresentou esfericidade (p = 0,61).
 
 O resultado obtido foi T=7,22, sendo maior que o valor crítico (T=3,96) para considerar o valor p \< 0.05.
 
@@ -87,10 +84,7 @@ Variável dependente: tempo em minutos (em minutos, variável numérica).
 
 Neste caso, consideramos apenas o grupo de pessoas sem depressão, e utilizamos um teste-t pareado.
 
-:::callout
-Conversar mais:
-Precisamos testar o mauchly - Esfericidade. Usar o total?
-:::
+Como se trata de um teste de medidas repetidas, é importante checar a esfericidade, o que pode ser verificado com o teste de Mauchly. Como não temos a informação considerando apenas para pessoas sem depressão, considerei o valor total, que apresentou esfericidade (p = 0,61).
 
 O resultado obtido foi T=3,09, sendo menor que o valor crítico (T=3,96) para considerar o valor p \< 0.05.
 
@@ -141,14 +135,17 @@ tab_media |>
   scale_y_continuous(limits = c(450, 500))
 ```
 
-
-:::callout
-Teste-t para uma amostra?
+::: callout
+Outra opção: Teste-t para uma amostra? O professor disse para não fazer conta alguma.
 :::
-
 
 **Podemos dizer que toda nossa amostra (independentemente da presença de depressão ou não) possui valor médio semelhante de tempo total de sono real em relação a média esperada populacional?**
 
+- Não é semelhante
+
+- A amostra possui valor médio de **sono menor** do que a média populacional
+
+- p-valor?
 
 **Alternativas**:
 
@@ -158,7 +155,7 @@ Teste-t para uma amostra?
 
 -   [x] **Não** com p menor que 5% A amostra possui valor médio de **sono menor** do que a média populacional
 
--   **Não** com p maior que 5%. A amostra possui valor médio de **sono menor** do que a média populacional
+-   [ ] **Não** com p maior que 5%. A amostra possui valor médio de **sono menor** do que a média populacional
 
 -   Não com p maior que 5%. A amostra possui valor médio de sono semelhante a média populacional
 
@@ -208,15 +205,9 @@ round((ic_pesquisa_antiacido[2]-ic_pesquisa_antiacido[1])*100)
 
 Faixa de erro: 38%. Muito erro!!!
 
--   O que 112% de proporção significa? É possível ter proporção maior que 100%?
+-   O que 112% de proporção significa? Não faz sentido ter proporção maior que 100%?
 
 -   O que o professor quer dizer com resultado fidedigno e reprodutível? Acredito que dependa do erro aceitável. Isso não está escrito na questão.
-
-
-:::callout
-Mandar no discord!
-:::
-
 
 **Alternativas**:
 
@@ -271,19 +262,23 @@ Respondi: 5859
 
 ![](images/clipboard-437422152.png)
 
-As três representações permite obter informações da distribuição dessa variável (chamada aqui de conjunto de dados).
+As três representações permitem obter informações da distribuição dessa variável (chamada aqui de conjunto de dados):
 
-Existe diferença na interpretação dos gráficos.
+- Boxplot: É uma forma mais sintética de ver a distribuição dos dados, permitindo ver a mediana e quartis.
 
-A - O boxplot possibilita visualizar os quartis da variável. Conseguimos ver que a mediana da variável é próxima de 25.
+- Histograma: Apresenta a distribuição dos dados com mais detalhes que o Boxplot, porém representados em faixas. Não apresenta medidas como mediana e quartis.
 
-B - O histograma possibilita visualizar a distribuição da variável. Conseguimos ver que a maior frequência dos valores estão entre 15 e 20.
+- Dotplot: Apresenta todos os valores do conjunto de dados. Não apresenta medidas como mediana e quartis.
 
-C - O dotplot permite ver cada um dos valores, e permite ver a concentração de dados entre os valores 10 e 20.
 
-::: callout
-Pensar em mais pontos!
-:::
+Existe diferença na interpretação dos gráficos:
+
+A - O boxplot possibilita visualizar os quartis da variável. Conseguimos ver que a mediana da variável é próxima de 25. 
+
+B - O histograma possibilita visualizar a distribuição da variável. Conseguimos ver que a maior frequência dos valores estão entre 15 e 20. É possível ver que a distribuição tem dois pontos de concentração dos dados.
+
+C - O dotplot permite ver cada um dos valores do conjunto de dados, e permite ver a concentração de dados entre os valores 10 e 20.  É possível ver que a distribuição tem dois pontos de concentração dos dados.
+
 
 ## Questão 9
 
@@ -313,10 +308,6 @@ O gráfico acima mostra dados de dois grupos apresentados como um gráfico de ba
 
 **10 - Com base na figura e nas informações acima, diga qual a alternativa CORRETA:**
 
-::: callout
-Para mim não ficou claro a diferença entre as duas linhas da tabela (equal/unequal).
-:::
-
 -   [ ] Os resultados do teste t refletem que os valores de p são semelhantes, independente da distribuição ou do tamanho da amostra entre os grupos
 
 -   [ ] Amostras bimodais geram vieses nos resultados do teste t
@@ -326,8 +317,6 @@ Para mim não ficou claro a diferença entre as duas linhas da tabela (equal/une
 -   [x] Amostras com tamanhos desiguais podem gerar vieses nos resultados do teste t.
 
 -   [ ] Todas estão corretas
-
-
 
 # Questões de 11 a 14
 
@@ -362,7 +351,6 @@ A variável independente é o tipo de escola (pública/privada). Portanto é uma
 A variável dependente é a quantidade de palavras lembradas depois do treino de motrocidade. Essa variável apresenta distribuição próxima à normal (baseado nos resultados do teste Shapiro-Wilk, p = 0.81), e apresenta homogeneidade das variâncias (baseado nos resultados do teste de Levenne, p = 0.30).
 
 Podemos usar o teste t-independente, um teste paramétrico.
-
 
 Os resultados do teste t independente (T = 5,59) apontam que existe diferença entre os grupos (escola pública e escola privada) na média de palavras lembradas depois do treino de motrocidade.
 
@@ -419,7 +407,6 @@ dados_hipertensao <- readr::read_delim("Hipertensao.csv",
 dplyr::glimpse(dados_hipertensao)
 ```
 
-
 ![](images/clipboard-885151021.png)
 
 **15- Faça as análises estatísticas que julgar necessárias para verificar qual é o melhor tratamento. Faça um texto com as suas análises passo a passo e escreva sua conclusão como o faria para submeter um artigo para publicação. ESCREVA UM PARÁGRAFO DE ANÁLISE ESTATÍSTICA (Como na seção de métodos de um artigo) ONDE DEVEM SER APRESENTADAS - Qual a pergunta de pesquisa, VD e VI, Hipótese Nula e Alternativa e os testes estatísticos adotados e seus pré-requisitos caso seja necessário. ALÉM DISSO ESCREVA OUTRO PARÁGRAFO COM A ANÁLISE DOS DADOS - Resultados, notação dos testes, onde estão as diferenças entre os grupos/medidas e tamanhos do efeito. Utilize esse exercício como um treino para escrever seus próprios resultados daqui pra frente! Utilize o banco de dados apresentado no link acima. Fique a vontade para adicionar mais variáveis caso ache necessário**
@@ -427,10 +414,6 @@ dplyr::glimpse(dados_hipertensao)
 ## Questão 16
 
 **16 - Qual das seguintes afirmações é VERDADEIRA sobre gráficos de barra e boxplots?**
-
-::: callout
-Confuso!
-:::
 
 -   [x] Gráficos de barra são mais adequados para comparar valores individuais entre diferentes grupos, enquanto boxplots são mais úteis para visualizar a distribuição dos dados dentro de um único grupo.
 
@@ -476,21 +459,15 @@ Confuso!
 
 19- Qual das seguintes afirmações é VERDADEIRA sobre o uso de intervalos de confiança para comparar diferenças entre um grupo em dois momentos diferentes no tempo?
 
-
 -   [ ] Os intervalos de confiança são usados apenas para descrever a precisão de uma estimativa, não para fazer inferências sobre a significância de uma diferença entre os momentos.
 
 -   Intervalos de confiança são mais úteis para comparar grupos independentes do que grupos pareados.
 
--   [x] Se o intervalo de confiança para a diferença entre os momentos incluir o valor zero, podemos concluir que não há diferença significativa entre os momentos. **Dezena acha que é essa! ela disse que o professor falou sobre isso na aula, rever**
-
+-   [x] Se o intervalo de confiança para a diferença entre os momentos incluir o valor zero, podemos concluir que não há diferença significativa entre os momentos. 
 -   O tamanho do intervalo de confiança é influenciado apenas pelo tamanho da amostra e não pela magnitude da diferença entre os momentos.
 
 -   Intervalos de confiança não fornecem informações sobre a direção da diferença entre os momentos, apenas sobre a magnitude da diferença.
 
-
-:::callout
-Ver referência: <https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf>
-:::
 
 ## Questão 20
 
@@ -514,10 +491,7 @@ Justifique com base nos valores calculados e diga se os dados epidemiológicos p
 
 ![](images/clipboard-2597700249.png)
 
-----
-
-
-
+------------------------------------------------------------------------
 
 ### A) Estudo transversal
 
@@ -555,21 +529,28 @@ est_coorte <- tibble::tibble(
 est_coorte |> knitr::kable()
 ```
 
-
 ### Resposta
 
 **É possível dizer que se Aragorn planejar sua estratégia de batalha baseado em ordenar que seus soldados ataquem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte, será bem sucedido?**
 
-
 Será que a bebida AJUDA os orcs a lutarem melhor?
 
+-   razão de prevalencia p/ transversal
 
-- razão de prevalencia p/ transversal
+-   odds ratio p/ caso-controle
 
-- odds ratio p/ caso-controle
-
-- risco relativo p/ coorte
+-   risco relativo p/ coorte
 
 ::: callout
 Pensar!
 :::
+
+------------------------------------------------------------------------
+
+# Links que podem ser úteis:
+
+-   Apostial sobre bioestatística: https://www.fcav.unesp.br/Home/departamentos/cienciasexatas/alanrodrigopanosso/apostila_bioestatistica_2019.pdf
+
+-   Apostila curta sobre intervalo de confiança: https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf
+
+-   Interpretação do boxplot: https://fernandafperes.com.br/blog/interpretacao-boxplot/

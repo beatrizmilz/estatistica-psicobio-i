@@ -126,6 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
   </ul>
 </li>
+  <li><a href="#links-que-podem-ser-%C3%BAteis" id="toc-links-que-podem-ser-úteis" class="nav-link" data-scroll-target="#links-que-podem-ser-%C3%BAteis">Links que podem ser úteis:</a></li>
   </ul></nav>
 </div>
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -179,16 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Variável independente: categoria de TTS (variável categórica, com 2 categorias: TTS dito pelo paciente/TTS real).</p>
 <p>Variável dependente: tempo em minutos (em minutos, variável numérica).</p>
 <p>Neste caso, consideramos apenas o grupo de pessoas com depressão, e utilizamos um teste-t pareado.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Conversar mais: Precisamos testar o mauchly - Esfericidade. Usar o total?</p>
-</div>
-</div>
-</div>
+<p>Como se trata de um teste de medidas repetidas, é importante checar a esfericidade, o que pode ser verificado com o teste de Mauchly. Como não temos a informação considerando apenas para pessoas com depressão, considerei o valor total, que apresentou esfericidade (p = 0,61).</p>
 <p>O resultado obtido foi T=7,22, sendo maior que o valor crítico (T=3,96) para considerar o valor p &lt; 0.05.</p>
 <p>Portanto, para as pessoas com depressão, existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para os pacientes com depressão.</p>
 </section><section id="questão-4" class="level2"><h2 class="anchored" data-anchor-id="questão-4">Questão 4</h2>
@@ -196,16 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Variável independente: categoria de TTS (variável categórica, com 2 categorias: TTS dito pelo paciente/TTS real).</p>
 <p>Variável dependente: tempo em minutos (em minutos, variável numérica).</p>
 <p>Neste caso, consideramos apenas o grupo de pessoas sem depressão, e utilizamos um teste-t pareado.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Conversar mais: Precisamos testar o mauchly - Esfericidade. Usar o total?</p>
-</div>
-</div>
-</div>
+<p>Como se trata de um teste de medidas repetidas, é importante checar a esfericidade, o que pode ser verificado com o teste de Mauchly. Como não temos a informação considerando apenas para pessoas sem depressão, considerei o valor total, que apresentou esfericidade (p = 0,61).</p>
 <p>O resultado obtido foi T=3,09, sendo menor que o valor crítico (T=3,96) para considerar o valor p &lt; 0.05.</p>
 <p>Portanto, para as pessoas com depressão, não existe diferença estatística entre o tempo de sono dito pelo paciente e o tempo de sono real para os pacientes com depressão.</p>
 </section><section id="questão-5" class="level2"><h2 class="anchored" data-anchor-id="questão-5">Questão 5</h2>
@@ -284,17 +267,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Teste-t para uma amostra?</p>
+<p>Outra opção: Teste-t para uma amostra? O professor disse para não fazer conta alguma.</p>
 </div>
 </div>
 </div>
 <p><strong>Podemos dizer que toda nossa amostra (independentemente da presença de depressão ou não) possui valor médio semelhante de tempo total de sono real em relação a média esperada populacional?</strong></p>
+<ul>
+<li><p>Não é semelhante</p></li>
+<li><p>A amostra possui valor médio de <strong>sono menor</strong> do que a média populacional</p></li>
+<li><p>p-valor?</p></li>
+</ul>
 <p><strong>Alternativas</strong>:</p>
 <ul>
 <li><p>Sim com p menor que 5%. A amostra possui valor médio de sono semelhante a média populacional</p></li>
 <li><p>Sim com p maior que 5%. A amostra possui valor médio de sono maior do que a média populacional</p></li>
 <li><p><label><input type="checkbox" checked=""><strong>Não</strong> com p menor que 5% A amostra possui valor médio de <strong>sono menor</strong> do que a média populacional</label></p></li>
-<li><p><strong>Não</strong> com p maior que 5%. A amostra possui valor médio de <strong>sono menor</strong> do que a média populacional</p></li>
+<li><p><label><input type="checkbox"><strong>Não</strong> com p maior que 5%. A amostra possui valor médio de <strong>sono menor</strong> do que a média populacional</label></p></li>
 <li><p>Não com p maior que 5%. A amostra possui valor médio de sono semelhante a média populacional</p></li>
 <li><p>Sim com p maior que 5%. A amostra possui valor médio de sono menor do que a média populacional</p></li>
 <li><p>Não temos informações suficientes</p></li>
@@ -338,19 +326,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Faixa de erro: 38%. Muito erro!!!</p>
 <ul>
-<li><p>O que 112% de proporção significa? É possível ter proporção maior que 100%?</p></li>
+<li><p>O que 112% de proporção significa? Não faz sentido ter proporção maior que 100%?</p></li>
 <li><p>O que o professor quer dizer com resultado fidedigno e reprodutível? Acredito que dependa do erro aceitável. Isso não está escrito na questão.</p></li>
 </ul>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Mandar no discord!</p>
-</div>
-</div>
-</div>
 <p><strong>Alternativas</strong>:</p>
 <ul>
 <li><p>O resultado 93% - IC95% [74-112%] é fidedigno e reprodutível com base no Intervalo de Confiança</p></li>
@@ -389,21 +367,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="questão-8" class="level2"><h2 class="anchored" data-anchor-id="questão-8">Questão 8</h2>
 <p><strong>8- A figura abaixo representa 3 formas (A - boxplot, B - histograma, C - dotplot) de descrever o mesmo conjunto de dados (N=30). Existe diferença na interpretação dos dados por meio da análise de diferentes gráficos, mesmo utilizando os mesmos dados? Faça uma descrição detalhada das limitações e vantagens de cada apresentação gráfica:</strong></p>
 <p><img src="images/clipboard-437422152.png" class="img-fluid"></p>
-<p>As três representações permite obter informações da distribuição dessa variável (chamada aqui de conjunto de dados).</p>
-<p>Existe diferença na interpretação dos gráficos.</p>
+<p>As três representações permitem obter informações da distribuição dessa variável (chamada aqui de conjunto de dados):</p>
+<ul>
+<li><p>Boxplot: É uma forma mais sintética de ver a distribuição dos dados, permitindo ver a mediana e quartis.</p></li>
+<li><p>Histograma: Apresenta a distribuição dos dados com mais detalhes que o Boxplot, porém representados em faixas. Não apresenta medidas como mediana e quartis.</p></li>
+<li><p>Dotplot: Apresenta todos os valores do conjunto de dados. Não apresenta medidas como mediana e quartis.</p></li>
+</ul>
+<p>Existe diferença na interpretação dos gráficos:</p>
 <p>A - O boxplot possibilita visualizar os quartis da variável. Conseguimos ver que a mediana da variável é próxima de 25.</p>
-<p>B - O histograma possibilita visualizar a distribuição da variável. Conseguimos ver que a maior frequência dos valores estão entre 15 e 20.</p>
-<p>C - O dotplot permite ver cada um dos valores, e permite ver a concentração de dados entre os valores 10 e 20.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Pensar em mais pontos!</p>
-</div>
-</div>
-</div>
+<p>B - O histograma possibilita visualizar a distribuição da variável. Conseguimos ver que a maior frequência dos valores estão entre 15 e 20. É possível ver que a distribuição tem dois pontos de concentração dos dados.</p>
+<p>C - O dotplot permite ver cada um dos valores do conjunto de dados, e permite ver a concentração de dados entre os valores 10 e 20. É possível ver que a distribuição tem dois pontos de concentração dos dados.</p>
 </section><section id="questão-9" class="level2"><h2 class="anchored" data-anchor-id="questão-9">Questão 9</h2>
 <p><strong>9- O gráfico abaixo mostra 3 grupos de dados com tamanhos de amostra diferentes (3, 10 e 30, respectivamente). Responda qual a opção CORRETA.</strong></p>
 <p><img src="images/clipboard-939251875.png" class="img-fluid"></p>
@@ -419,16 +392,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>O gráfico acima mostra dados de dois grupos apresentados como um gráfico de barras (a esquerda). Além disso, foram simuladas 4 tipos de distribuição diferentes dos supostos dados e apresentados como gráficos de pontos (grupos simétricos, com outlier em um dos grupos, com amostras bimodais e com N desiguais). Logo abaixo são apresentados dados referentes a testes t independentes realizados em cada uma das condições, tendo os valores de p apresentados.</p>
 <p><img src="images/clipboard-1542198701.png" class="img-fluid"></p>
 <p><strong>10 - Com base na figura e nas informações acima, diga qual a alternativa CORRETA:</strong></p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Para mim não ficou claro a diferença entre as duas linhas da tabela (equal/unequal).</p>
-</div>
-</div>
-</div>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Os resultados do teste t refletem que os valores de p são semelhantes, independente da distribuição ou do tamanho da amostra entre os grupos</label></p></li>
 <li><p><label><input type="checkbox">Amostras bimodais geram vieses nos resultados do teste t</label></p></li>
@@ -526,16 +489,6 @@ $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 1
 <p><strong>15- Faça as análises estatísticas que julgar necessárias para verificar qual é o melhor tratamento. Faça um texto com as suas análises passo a passo e escreva sua conclusão como o faria para submeter um artigo para publicação. ESCREVA UM PARÁGRAFO DE ANÁLISE ESTATÍSTICA (Como na seção de métodos de um artigo) ONDE DEVEM SER APRESENTADAS - Qual a pergunta de pesquisa, VD e VI, Hipótese Nula e Alternativa e os testes estatísticos adotados e seus pré-requisitos caso seja necessário. ALÉM DISSO ESCREVA OUTRO PARÁGRAFO COM A ANÁLISE DOS DADOS - Resultados, notação dos testes, onde estão as diferenças entre os grupos/medidas e tamanhos do efeito. Utilize esse exercício como um treino para escrever seus próprios resultados daqui pra frente! Utilize o banco de dados apresentado no link acima. Fique a vontade para adicionar mais variáveis caso ache necessário</strong></p>
 </section><section id="questão-16" class="level2"><h2 class="anchored" data-anchor-id="questão-16">Questão 16</h2>
 <p><strong>16 - Qual das seguintes afirmações é VERDADEIRA sobre gráficos de barra e boxplots?</strong></p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Confuso!</p>
-</div>
-</div>
-</div>
 <ul class="task-list">
 <li><p><label><input type="checkbox" checked="">Gráficos de barra são mais adequados para comparar valores individuais entre diferentes grupos, enquanto boxplots são mais úteis para visualizar a distribuição dos dados dentro de um único grupo.</label></p></li>
 <li><p><label><input type="checkbox">Boxplots são mais úteis para comparar valores individuais entre diferentes grupos, enquanto gráficos de barra são mais adequados para visualizar a distribuição dos dados dentro de um único grupo.</label></p></li>
@@ -564,21 +517,10 @@ $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 1
 <ul>
 <li><p><label><input type="checkbox">Os intervalos de confiança são usados apenas para descrever a precisão de uma estimativa, não para fazer inferências sobre a significância de uma diferença entre os momentos.</label></p></li>
 <li><p>Intervalos de confiança são mais úteis para comparar grupos independentes do que grupos pareados.</p></li>
-<li><p><label><input type="checkbox" checked="">Se o intervalo de confiança para a diferença entre os momentos incluir o valor zero, podemos concluir que não há diferença significativa entre os momentos. <strong>Dezena acha que é essa! ela disse que o professor falou sobre isso na aula, rever</strong></label></p></li>
+<li><p><label><input type="checkbox" checked="">Se o intervalo de confiança para a diferença entre os momentos incluir o valor zero, podemos concluir que não há diferença significativa entre os momentos.</label></p></li>
 <li><p>O tamanho do intervalo de confiança é influenciado apenas pelo tamanho da amostra e não pela magnitude da diferença entre os momentos.</p></li>
 <li><p>Intervalos de confiança não fornecem informações sobre a direção da diferença entre os momentos, apenas sobre a magnitude da diferença.</p></li>
-</ul>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Ver referência: <a href="https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf" class="uri">https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf</a></p>
-</div>
-</div>
-</div>
-</section><section id="questão-20" class="level2"><h2 class="anchored" data-anchor-id="questão-20">Questão 20</h2>
+</ul></section><section id="questão-20" class="level2"><h2 class="anchored" data-anchor-id="questão-20">Questão 20</h2>
 <p>20- Era uma vez um guerreiro chamado Aragorn, que vivia em um reino ameaçado por um exército de Orcs liderados por um temível inimigo chamado Sauron. Aragorn sabia que a única maneira de vencer Sauron e salvar o reino era descobrir uma fraqueza em seu exército e explorá-la.</p>
 <p>Aragorn sabia que Sauron era um grande consumidor de bebidas alcoólicas, então ele decidiu estudar os efeitos do álcool na saúde dos Orcs. Ele recrutou uma equipe de pesquisadores e coletou dados sobre a exposição dos Orcs ao álcool e a ocorrência de doenças em um determinado período.</p>
 <p>Aragorn quer usar essas informações para desenvolver uma estratégia de batalha. Caso exista associações interessantes, ele ordenará que seus soldados atacassem os barris de cerveja e vinho dos Orcs durante a noite, com a esperança de reduzir sua capacidade de lutar no dia seguinte. Ele quer saber se os Orcs que não bebem alcool antes da batalha, não conseguem lutar.</p>
@@ -701,7 +643,12 @@ $ `DROGA C` &lt;dbl&gt; 180, 185, 173, 174, 165, 175, 175, 174, 180, 175, 178, 1
 </div>
 </div>
 </div>
-</section></section></section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
+<hr></section></section></section><section id="links-que-podem-ser-úteis" class="level1"><h1>Links que podem ser úteis:</h1>
+<ul>
+<li><p>Apostial sobre bioestatística: https://www.fcav.unesp.br/Home/departamentos/cienciasexatas/alanrodrigopanosso/apostila_bioestatistica_2019.pdf</p></li>
+<li><p>Apostila curta sobre intervalo de confiança: https://midia.atp.usp.br/plc/plc0503/impressos/plc0503_04.pdf</p></li>
+<li><p>Interpretação do boxplot: https://fernandafperes.com.br/blog/interpretacao-boxplot/</p></li>
+</ul></section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
